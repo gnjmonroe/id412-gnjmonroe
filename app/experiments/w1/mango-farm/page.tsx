@@ -15,6 +15,7 @@ import {
 } from "./farm";
 import styles from "./page.module.css";
 import { AdminPanel } from "./AdminPanel";
+import { canopyPath } from "./shapes";
 import { HEIGHT, settings, VARIETIES, WIDTH } from "./settings";
 
 // The mango farm from farm.ts, drawn top-down on a canvas.
@@ -36,18 +37,6 @@ const RADIUS = {
 	fruiting: 22,
 	senescent: 18,
 };
-
-// Canopy outline as an SVG path: a circle, or a wavy shape with `lobes` bumps.
-// The canvas draws it with Path2D and the legend draws it with <svg>, so both look the same.
-function canopyPath(x: number, y: number, r: number, lobes: number) {
-	let path = "";
-	for (let i = 0; i < 72; i++) {
-		const angle = (i / 72) * Math.PI * 2;
-		const radius = lobes < 1 ? r : r * (0.8 + 0.2 * Math.cos(angle * lobes));
-		path += `${i === 0 ? "M" : "L"}${(x + Math.cos(angle) * radius).toFixed(2)} ${(y + Math.sin(angle) * radius).toFixed(2)}`;
-	}
-	return path + "Z";
-}
 
 // A farmer seen from above: a wide hat around a small head, with feet that step while walking.
 // Walking to a tree: a faint trail to it. Cutting: a filling wedge shows progress.
@@ -199,7 +188,9 @@ function drawTree(ctx: CanvasRenderingContext2D, tree: Tree) {
 		return;
 	}
 	ctx.fillStyle = tree.stage === "senescent" ? colors.oldLeaf : variety.leaf;
-	ctx.fill(new Path2D(canopyPath(tree.x, tree.y, r, variety.lobes)));
+	ctx.fill(
+		new Path2D(canopyPath(tree.x, tree.y, r, variety.shape, variety.lobes)),
+	);
 
 	tree.fruits.forEach((fruit, i) => {
 		const angle = (i / tree.fruits.length) * Math.PI * 2;
@@ -381,7 +372,13 @@ export default function MangoFarm() {
 						<span key={name}>
 							<svg viewBox="-8 -8 16 16">
 								<path
-									d={canopyPath(0, 0, 8, settings.varieties[name].lobes)}
+									d={canopyPath(
+										0,
+										0,
+										8,
+										settings.varieties[name].shape,
+										settings.varieties[name].lobes,
+									)}
 									fill={settings.varieties[name].leaf}
 								/>
 							</svg>
@@ -390,7 +387,10 @@ export default function MangoFarm() {
 					))}
 					<span>
 						<svg viewBox="-8 -8 16 16">
-							<path d={canopyPath(0, 0, 8, 4)} fill={settings.colors.oldLeaf} />
+							<path
+								d={canopyPath(0, 0, 8, 1, 4)}
+								fill={settings.colors.oldLeaf}
+							/>
 						</svg>
 						seedlings {counts.seedlings ?? 0}
 					</span>

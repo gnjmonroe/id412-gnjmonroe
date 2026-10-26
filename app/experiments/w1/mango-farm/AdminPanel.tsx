@@ -26,6 +26,7 @@ const VARIETY_RANGES: Record<string, [number, number, number]> = {
 	ripenDays: [10, 200, 1],
 	alternate: [0, 1, 1],
 	trueSeed: [0, 1, 1],
+	shape: [0, 5, 1],
 	lobes: [0, 12, 1],
 };
 

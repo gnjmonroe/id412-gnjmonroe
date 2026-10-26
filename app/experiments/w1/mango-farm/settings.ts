@@ -43,7 +43,8 @@ export const settings = {
 	//   fruit: fruit per season          growth: how fast it ages (1 = normal)
 	//   ripenDays: green → ripe          alternate: 1 = heavy and light years take turns
 	//   trueSeed: 1 = its seeds grow the same variety (polyembryonic), 0 = each seed is a new seedling variety
-	//   lobes: canopy outline (0 = round)   leaf: canopy fill colour   ripe: ripe fruit colour
+	//   shape: kind of canopy outline (see SHAPES in shapes.ts)   lobes: its number of points or bumps
+	//   leaf: canopy fill colour   ripe: ripe fruit colour
 	varieties: {
 		Keitt: {
 			fruit: 4,
@@ -51,6 +52,7 @@ export const settings = {
 			ripenDays: 90,
 			alternate: 0,
 			trueSeed: 0,
+			shape: 0, // round
 			lobes: 0,
 			leaf: "#00a0e0", // cyan
 			ripe: "#ffd400",
@@ -61,6 +63,7 @@ export const settings = {
 			ripenDays: 70,
 			alternate: 0,
 			trueSeed: 0,
+			shape: 2, // star
 			lobes: 5,
 			leaf: "#e6007e", // magenta
 			ripe: "#1f3fd1",
@@ -71,7 +74,8 @@ export const settings = {
 			ripenDays: 50,
 			alternate: 1,
 			trueSeed: 0,
-			lobes: 9,
+			shape: 4, // petals
+			lobes: 4,
 			leaf: "#ff4f1f", // red-orange
 			ripe: "#00a0e0",
 		},
@@ -81,6 +85,7 @@ export const settings = {
 			ripenDays: 60,
 			alternate: 0,
 			trueSeed: 1,
+			shape: 3, // polygon
 			lobes: 3,
 			leaf: "#ffd400", // yellow
 			ripe: "#e2001a",
@@ -91,7 +96,8 @@ export const settings = {
 			ripenDays: 65,
 			alternate: 0,
 			trueSeed: 1,
-			lobes: 6,
+			shape: 5, // rounded square
+			lobes: 4,
 			leaf: "#1f3fd1", // ultramarine
 			ripe: "#ff7a00",
 		},
