@@ -47,8 +47,8 @@ export const settings = {
 			alternate: 0,
 			trueSeed: 0,
 			lobes: 0,
-			leaf: "#2e7d32",
-			ripe: "#a4d65e",
+			leaf: "#00a0e0", // cyan
+			ripe: "#ffd400",
 		},
 		Kent: {
 			fruit: 6,
@@ -57,8 +57,8 @@ export const settings = {
 			alternate: 0,
 			trueSeed: 0,
 			lobes: 5,
-			leaf: "#7a8f1f",
-			ripe: "#d9482b",
+			leaf: "#e6007e", // magenta
+			ripe: "#1f3fd1",
 		},
 		Alphonso: {
 			fruit: 9,
@@ -67,8 +67,8 @@ export const settings = {
 			alternate: 1,
 			trueSeed: 0,
 			lobes: 9,
-			leaf: "#13665e",
-			ripe: "#f29d0c",
+			leaf: "#ff4f1f", // red-orange
+			ripe: "#00a0e0",
 		},
 		Ataulfo: {
 			fruit: 11,
@@ -77,8 +77,8 @@ export const settings = {
 			alternate: 0,
 			trueSeed: 1,
 			lobes: 3,
-			leaf: "#a8c43a",
-			ripe: "#f7d21e",
+			leaf: "#ffd400", // yellow
+			ripe: "#e2001a",
 		},
 		Carabao: {
 			fruit: 7,
@@ -87,20 +87,22 @@ export const settings = {
 			alternate: 0,
 			trueSeed: 1,
 			lobes: 6,
-			leaf: "#14402a",
-			ripe: "#ffe98a",
+			leaf: "#1f3fd1", // ultramarine
+			ripe: "#ff7a00",
 		},
 	},
+	// Printing inks on paper, after Karel Martens' overprinted monoprints. Canopies are drawn with a
+	// multiply blend, so where trees overlap their colours mix like overprinted ink.
 	colors: {
-		soil: "#6b4f33",
-		oldLeaf: "#8a7a4a",
-		seed: "#5b3a1e",
-		flower: "#f7b6d2",
-		green: "#9bc53d",
-		fallen: "#8a5a2b",
-		link: "#ffffff", // lines from a tree to its parent
-		farmer: "#f4d9a6",
-		hat: "#d8b04a",
+		soil: "#efece4", // paper
+		oldLeaf: "#b8b2a7",
+		seed: "#1d1d1b",
+		flower: "#ff9ec8",
+		green: "#00a651", // unripe fruit, cuttings and new grafts
+		fallen: "#8c8c8c",
+		link: "#1d1d1b", // lines from a tree to its parent, and the selection ring
+		farmer: "#efece4",
+		hat: "#1d1d1b",
 	},
 };
 

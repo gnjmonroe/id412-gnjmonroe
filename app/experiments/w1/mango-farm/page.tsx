@@ -89,12 +89,16 @@ function drawFarmer(ctx: CanvasRenderingContext2D, farm: Farm, farmer: Farmer) {
 	if (farmer.task === "resting") ctx.globalAlpha = 0.5;
 
 	// Feet: one ahead, one behind, swapping every few steps while walking.
-	const stride = walking ? Math.sin(farmer.walked * 0.5) * 4 : 0;
-	ctx.fillStyle = colors.seed;
-	ctx.beginPath();
-	ctx.arc(stride, -4, 2, 0, Math.PI * 2);
-	ctx.arc(-stride, 4, 2, 0, Math.PI * 2);
-	ctx.fill();
+	const stride = walking ? Math.sin(farmer.walked * 0.5) * 5 : 0;
+	ctx.fillStyle = colors.hat;
+	for (const [x, y] of [
+		[stride, -6],
+		[-stride, 6],
+	]) {
+		ctx.beginPath();
+		ctx.arc(x, y, 2.2, 0, Math.PI * 2);
+		ctx.fill();
+	}
 
 	ctx.fillStyle = colors.hat;
 	ctx.beginPath();
@@ -126,7 +130,7 @@ function drawFarmer(ctx: CanvasRenderingContext2D, farm: Farm, farmer: Farmer) {
 		ctx.fill();
 	}
 	if (farmer.task === "resting") {
-		ctx.fillStyle = colors.farmer;
+		ctx.fillStyle = colors.hat;
 		ctx.font = "10px monospace";
 		ctx.fillText("z", farmer.x + 7, farmer.y - 7);
 	}
@@ -196,13 +200,16 @@ function draw(
 	ctx.globalAlpha = 1;
 	ctx.setLineDash([]);
 
+	// Multiply: overlapping canopies and pulses mix like overprinted ink.
+	ctx.globalCompositeOperation = "multiply";
 	drawGraftPulses(ctx, farm);
 	for (const tree of farm.trees) drawTree(ctx, tree);
+	ctx.globalCompositeOperation = "source-over";
 	for (const farmer of farm.farmers) drawFarmer(ctx, farm, farmer);
 
 	const selected = farm.trees.find((tree) => tree.id === selectedId);
 	if (selected) {
-		ctx.strokeStyle = "white";
+		ctx.strokeStyle = settings.colors.link;
 		ctx.lineWidth = 2;
 		ctx.beginPath();
 		ctx.arc(selected.x, selected.y, RADIUS[selected.stage] + 6, 0, Math.PI * 2);
@@ -344,7 +351,7 @@ export default function MangoFarm() {
 					))}
 					<span>
 						<svg viewBox="-8 -8 16 16">
-							<path d={canopyPath(0, 0, 8, 4)} fill="#9e9e9e" />
+							<path d={canopyPath(0, 0, 8, 4)} fill={settings.colors.oldLeaf} />
 						</svg>
 						seedlings {counts.seedlings ?? 0}
 					</span>

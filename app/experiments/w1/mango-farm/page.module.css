@@ -1,7 +1,7 @@
 .container {
 	position: fixed;
 	inset: 0;
-	background: #6b4f33;
+	background: #efece4;
 }
 
 .canvas {
@@ -20,8 +20,7 @@
 	gap: 8px;
 	font-family: ui-monospace, Menlo, monospace;
 	font-size: 12px;
-	color: white;
-	text-shadow: 0 1px 2px black;
+	color: #1d1d1b;
 }
 
 .controls {
@@ -32,15 +31,16 @@
 
 .controls button {
 	font: inherit;
-	color: white;
-	background: rgba(0, 0, 0, 0.45);
-	border: 1px solid rgba(255, 255, 255, 0.4);
+	color: #1d1d1b;
+	background: transparent;
+	border: 1px solid #1d1d1b;
 	padding: 2px 8px;
 	cursor: pointer;
 }
 
 .controls .active {
-	background: rgba(255, 255, 255, 0.3);
+	color: #efece4;
+	background: #1d1d1b;
 }
 
 .admin {
