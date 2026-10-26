@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import styles from "./page.module.css";
-import { resetSettings, settings } from "./settings";
+import { resetSettings, settings, VARIETIES } from "./settings";
 
 // Toggleable panel that edits `settings` while the farm runs. Rules and colours apply at once;
 // "start trees" and "random seed" apply when you press restart.
@@ -17,7 +17,17 @@ type Slider = {
 	step: number;
 };
 
-const { rules, stageDays, colors } = settings;
+const { rules, stageDays, colors, varieties } = settings;
+
+// Slider range for each number a variety has.
+const VARIETY_RANGES: Record<string, [number, number, number]> = {
+	fruit: [0, 20, 1],
+	growth: [0.3, 2, 0.05],
+	ripenDays: [10, 200, 1],
+	alternate: [0, 1, 1],
+	trueSeed: [0, 1, 1],
+	lobes: [0, 12, 1],
+};
 
 const SLIDERS: { title: string; items: Slider[] }[] = [
 	{
@@ -37,14 +47,6 @@ const SLIDERS: { title: string; items: Slider[] }[] = [
 		title: "Fruit and propagation",
 		items: [
 			{
-				label: "fruit per tree",
-				group: rules,
-				key: "fruitPerTree",
-				min: 0,
-				max: 20,
-				step: 1,
-			},
-			{
 				label: "rest days",
 				group: rules,
 				key: "restDays",
@@ -58,14 +60,6 @@ const SLIDERS: { title: string; items: Slider[] }[] = [
 				key: "flowerDays",
 				min: 1,
 				max: 60,
-				step: 1,
-			},
-			{
-				label: "green days",
-				group: rules,
-				key: "greenDays",
-				min: 1,
-				max: 200,
 				step: 1,
 			},
 			{
@@ -195,6 +189,43 @@ export function AdminPanel({ onRestart }: { onRestart: () => void }) {
 					))}
 				</section>
 			))}
+
+			{VARIETIES.map((name) => {
+				const variety = varieties[name] as Record<string, number | string>;
+				return (
+					<section key={name}>
+						<h3>{name}</h3>
+						{Object.entries(variety).map(([key, value]) => (
+							<label key={key} className={styles.row}>
+								<span>{key}</span>
+								{typeof value === "number" ? (
+									<input
+										type="range"
+										min={VARIETY_RANGES[key][0]}
+										max={VARIETY_RANGES[key][1]}
+										step={VARIETY_RANGES[key][2]}
+										value={value}
+										onChange={(event) => {
+											variety[key] = Number(event.target.value);
+											redraw((n) => n + 1);
+										}}
+									/>
+								) : (
+									<input
+										type="color"
+										value={value}
+										onChange={(event) => {
+											variety[key] = event.target.value;
+											redraw((n) => n + 1);
+										}}
+									/>
+								)}
+								<output>{value}</output>
+							</label>
+						))}
+					</section>
+				);
+			})}
 
 			<section>
 				<h3>Colours</h3>

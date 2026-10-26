@@ -3,15 +3,12 @@
 
 export const WIDTH = 1000; // farm size in farm units; the canvas scales it to fit
 export const HEIGHT = 640;
-export const CULTIVARS = ["Keitt", "Kent"]; // each has a ripe fruit colour in settings.colors
 
 export const settings = {
 	rules: {
 		minSpacing: 56, // closest two trunks may be
-		fruitPerTree: 6,
 		restDays: 120, // days with no fruit between two seasons
 		flowerDays: 15,
-		greenDays: 60,
 		ripeDays: 10, // ripe fruit waits this long to be picked or to fall
 		harvestShare: 0.8, // share of ripe fruit that is picked; the rest falls
 		seedChance: 0.3, // chance that a fallen fruit grows a new seed
@@ -30,19 +27,76 @@ export const settings = {
 		fruiting: 900,
 		senescent: 60,
 	},
+	// Mango varieties. Each one grows, fruits and spreads differently, and looks different.
+	//   fruit: fruit per season          growth: how fast it ages (1 = normal)
+	//   ripenDays: green → ripe          alternate: 1 = heavy and light years take turns
+	//   trueSeed: 1 = its seeds grow the same variety (polyembryonic), 0 = a seedling may be any variety
+	//   lobes: canopy outline (0 = round)   leaf, ripe: canopy and ripe fruit colour
+	varieties: {
+		Keitt: {
+			fruit: 4,
+			growth: 0.8,
+			ripenDays: 90,
+			alternate: 0,
+			trueSeed: 0,
+			lobes: 0,
+			leaf: "#2f7d32",
+			ripe: "#a4d65e",
+		},
+		Kent: {
+			fruit: 6,
+			growth: 1,
+			ripenDays: 70,
+			alternate: 0,
+			trueSeed: 0,
+			lobes: 5,
+			leaf: "#3d8c3a",
+			ripe: "#d9482b",
+		},
+		Alphonso: {
+			fruit: 9,
+			growth: 1.1,
+			ripenDays: 50,
+			alternate: 1,
+			trueSeed: 0,
+			lobes: 9,
+			leaf: "#22603a",
+			ripe: "#f29d0c",
+		},
+		Ataulfo: {
+			fruit: 11,
+			growth: 1,
+			ripenDays: 60,
+			alternate: 0,
+			trueSeed: 1,
+			lobes: 3,
+			leaf: "#4f9a3c",
+			ripe: "#f7d21e",
+		},
+		Carabao: {
+			fruit: 7,
+			growth: 1.25,
+			ripenDays: 65,
+			alternate: 0,
+			trueSeed: 1,
+			lobes: 6,
+			leaf: "#5d8a2a",
+			ripe: "#ffe98a",
+		},
+	},
 	colors: {
 		soil: "#6b4f33",
-		leaf: "#2f7d32",
 		oldLeaf: "#8a7a4a",
 		seed: "#5b3a1e",
 		flower: "#f7b6d2",
 		green: "#9bc53d",
 		fallen: "#8a5a2b",
 		link: "#ffffff", // lines from a tree to its parent
-		Keitt: "#e8a317", // ripe fruit, one colour per cultivar
-		Kent: "#d9482b",
 	},
 };
+
+export type Variety = keyof typeof settings.varieties;
+export const VARIETIES = Object.keys(settings.varieties) as Variety[];
 
 const defaults = structuredClone(settings);
 
@@ -50,4 +104,6 @@ export function resetSettings() {
 	Object.assign(settings.rules, defaults.rules);
 	Object.assign(settings.stageDays, defaults.stageDays);
 	Object.assign(settings.colors, defaults.colors);
+	for (const name of VARIETIES)
+		Object.assign(settings.varieties[name], defaults.varieties[name]);
 }

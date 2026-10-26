@@ -1,5 +1,5 @@
 // The mango farm as plain data. No React, no canvas: page.tsx only reads this and draws it.
-import { CULTIVARS, HEIGHT, settings, WIDTH } from "./settings";
+import { HEIGHT, settings, VARIETIES, WIDTH, type Variety } from "./settings";
 
 // Life of a tree, in order. A senescent tree is removed when its time is up.
 export const STAGES = [
@@ -26,9 +26,10 @@ export type Tree = {
 	age: number; // days spent in this stage
 	origin: "start" | "seed" | "graft"; // how this tree began
 	parentId?: number;
-	cultivar: string; // one of CULTIVARS
-	vigor: number;
+	variety: Variety;
+	vigor: number; // this tree's own growth speed, on top of its variety's
 	rest: number; // days since the last fruit season
+	seasons: number; // fruit seasons so far
 	fruits: Fruit[];
 };
 
@@ -63,9 +64,10 @@ function addTree(farm: Farm, x: number, y: number, fields: Partial<Tree>) {
 		stage: "seed",
 		age: 0,
 		origin: "seed",
-		cultivar: "Keitt",
+		variety: "Keitt",
 		vigor: 1,
 		rest: settings.rules.restDays,
+		seasons: 0,
 		fruits: [],
 		...fields,
 	};
@@ -81,7 +83,6 @@ export function createFarm(): Farm {
 		nextId: 1,
 		random: settings.rules.seed,
 	};
-	const names = CULTIVARS;
 	for (
 		let i = 0;
 		i < settings.rules.startTrees * 20 &&
@@ -94,26 +95,32 @@ export function createFarm(): Farm {
 		addTree(farm, x, y, {
 			stage: "mature",
 			origin: "start",
-			cultivar: names[farm.trees.length % names.length],
+			variety: VARIETIES[farm.trees.length % VARIETIES.length],
 		});
 	}
 	return farm;
 }
 
+function randomVariety(farm: Farm) {
+	return VARIETIES[Math.floor(random(farm) * VARIETIES.length)];
+}
+
 // Propagation by seed: a new tree starts as a seed, with a vigor a little different from its parent.
+// A true-seed variety grows the same variety; any other seed may become any variety and varies twice as much.
 export function plant(farm: Farm, x: number, y: number, parent?: Tree) {
 	if (!isFree(farm, x, y)) return null;
-	const names = CULTIVARS;
-	const vigor = parent
-		? parent.vigor + (random(farm) - 0.5) * 2 * settings.rules.vigorJitter
-		: 1;
+	if (!parent)
+		return addTree(farm, x, y, {
+			origin: "seed",
+			variety: randomVariety(farm),
+		});
+	const trueSeed = settings.varieties[parent.variety].trueSeed === 1;
+	const jitter = settings.rules.vigorJitter * (trueSeed ? 1 : 2);
 	return addTree(farm, x, y, {
 		origin: "seed",
-		parentId: parent?.id,
-		cultivar: parent
-			? parent.cultivar
-			: names[Math.floor(random(farm) * names.length)],
-		vigor: Math.max(0.5, vigor),
+		parentId: parent.id,
+		variety: trueSeed ? parent.variety : randomVariety(farm),
+		vigor: Math.max(0.5, parent.vigor + (random(farm) - 0.5) * 2 * jitter),
 	});
 }
 
@@ -125,7 +132,7 @@ export function graft(farm: Farm, parentId: number, x: number, y: number) {
 		stage: "sapling",
 		origin: "graft",
 		parentId,
-		cultivar: parent.cultivar,
+		variety: parent.variety,
 		vigor: parent.vigor,
 	});
 }
@@ -154,7 +161,7 @@ function tick(farm: Farm, dt: number) {
 }
 
 function growTree(tree: Tree, dt: number) {
-	tree.age += dt * tree.vigor;
+	tree.age += dt * tree.vigor * settings.varieties[tree.variety].growth;
 	const next = STAGES[STAGES.indexOf(tree.stage) + 1];
 	if (next && tree.age >= settings.stageDays[tree.stage]) {
 		tree.stage = next;
@@ -163,11 +170,16 @@ function growTree(tree: Tree, dt: number) {
 }
 
 function growFruits(farm: Farm, tree: Tree, dt: number) {
+	const variety = settings.varieties[tree.variety];
 	if (tree.stage === "fruiting" && tree.fruits.length === 0) {
 		tree.rest += dt;
 		if (tree.rest >= settings.rules.restDays) {
 			tree.rest = 0;
-			for (let i = 0; i < settings.rules.fruitPerTree; i++)
+			tree.seasons++;
+			// Alternate bearing: every second season is a light one, with half the fruit.
+			const light = variety.alternate === 1 && tree.seasons % 2 === 0;
+			const count = light ? Math.floor(variety.fruit / 2) : variety.fruit;
+			for (let i = 0; i < count; i++)
 				tree.fruits.push({ stage: "flower", age: 0 });
 		}
 	}
@@ -182,10 +194,7 @@ function growFruits(farm: Farm, tree: Tree, dt: number) {
 		) {
 			fruit.stage = "green";
 			fruit.age = 0;
-		} else if (
-			fruit.stage === "green" &&
-			fruit.age >= settings.rules.greenDays
-		) {
+		} else if (fruit.stage === "green" && fruit.age >= variety.ripenDays) {
 			fruit.stage = "ripe";
 			fruit.age = 0;
 		} else if (fruit.stage === "ripe" && fruit.age >= settings.rules.ripeDays) {
@@ -219,6 +228,17 @@ export function stats(farm: Farm) {
 		Stage,
 		number
 	>;
-	for (const tree of farm.trees) trees[tree.stage]++;
-	return { day: Math.floor(farm.day), trees, harvested: farm.harvested };
+	const varieties = Object.fromEntries(
+		VARIETIES.map((name) => [name, 0]),
+	) as Record<Variety, number>;
+	for (const tree of farm.trees) {
+		trees[tree.stage]++;
+		varieties[tree.variety]++;
+	}
+	return {
+		day: Math.floor(farm.day),
+		trees,
+		varieties,
+		harvested: farm.harvested,
+	};
 }
