@@ -21,7 +21,7 @@ export const settings = {
 		graftDays: 5, // days a farmer spends taking a cutting
 		farmerRestDays: 30, // days a farmer rests after each graft
 		promisingFruit: 8, // a seedling variety with at least this much fruit is worth grafting
-		startTrees: 4, // used when the farm restarts
+		startTrees: 5, // one of each variety (they take turns); used when the farm restarts
 		farmers: 2, // used when the farm restarts
 		bats: 3, // used when the farm restarts
 		batSpeed: 40, // farm units a bat flies per day (slow enough to watch at 1×)
