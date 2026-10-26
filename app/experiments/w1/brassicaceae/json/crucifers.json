@@ -1,5 +1,5 @@
 {
-	"description": "Ancestry of the cruciferous vegetables as a graph. Every node is a clade, a species, a crop lineage (a branch of cultivated forms inside a species) or a vegetable; every edge points from ancestor to descendant. Edge types: `descent` (branching between clades and species, from the Open Tree of Life), `hybrid-parent` (a species formed by two parent species combining genomes: the Triangle of U and ×Raphanobrassica), `domestication` (a cultivated branch inside a species), `selection` (a crop selected from that branch) and `cross` (a crop bred from two crops). Hybrids and crosses have two parents, so this is a network, not a single tree. Each vegetable has `lineage`: every path from the family root to it, written out. `confidence` marks how settled a step is: established, likely or debated. Genomes: A = B. rapa, B = black mustard, C = B. oleracea, R = radish.",
+	"description": "Ancestry of the cruciferous vegetables as a graph. Every node is a clade, a species, a crop lineage (a branch of cultivated forms inside a species) or a vegetable; every edge points from ancestor to descendant. Edge types: `descent` (branching between clades and species, from the Open Tree of Life), `hybrid-parent` (a species formed by two parent species combining genomes: the Triangle of U and ×Raphanobrassica), `domestication` (a cultivated branch inside a species), `selection` (a crop selected from that branch) and `cross` (a crop bred from two crops). Hybrids and crosses have two parents, so this is a network, not a single tree. Each vegetable has `lineage`: every path from the family root to it, written out. `confidence` marks how settled a step is: established, likely or debated. Genomes: A = B. rapa, B = black mustard, C = B. oleracea, R = radish. Every node also has `genome`: `state` (its chromosome make-up: karyotype, genome letters, 2n, ploidy), `change` (what changed on the branch into it, with confidence), `events` (all changes inherited from the family root, through both parents for hybrids) and `signature` (a compact code of the path; unique for each vegetable). Genome letters: A = B. rapa, B = black mustard, C = B. oleracea, R = radish. ACK = Ancestral Crucifer Karyotype (n = 8); PCK = Proto-Calepineae Karyotype (n = 7); WGT = whole-genome triplication of tribe Brassiceae.",
 	"sources": [
 		"Open Tree of Life synthetic tree opentree16.1 (branching order between clades and species; CC0)",
 		"World Flora Online Plant List 2026-06 via species.json (names, authors, tribes; CC0)",
@@ -7,7 +7,11 @@
 		"Karpechenko, G. D. (1928). ×Raphanobrassica",
 		"Chalhoub, B. et al. (2014). Early allopolyploid evolution in the post-Neolithic Brassica napus oilseed genome. Science 345: 950–953",
 		"McAlvay, A. C. et al. (2021). Brassica rapa domestication: untangling wild and feral forms and convergence of crop morphotypes. Molecular Biology and Evolution 38: 3358–3372",
-		"Standard crop history for cultivar groups, places and dates (marked with confidence)"
+		"Standard crop history for cultivar groups, places and dates (marked with confidence)",
+		"Schranz, M. E., Lysak, M. A. & Mitchell-Olds, T. (2006). The ABC's of comparative genomics in the Brassicaceae. Trends in Plant Science 11: 535–542 (Ancestral Crucifer Karyotype)",
+		"Mandáková, T. & Lysak, M. A. (2008). Chromosomal phylogeny and karyotype evolution in x = 7 crucifer species (Brassicaceae). Plant Cell 20: 2559–2570 (PCK)",
+		"Lysak, M. A. et al. (2005). Chromosome triplication found across the tribe Brassiceae. Genome Research 15: 516–525",
+		"Cheng, F. et al. (2016). Subgenome parallel selection is associated with morphotype diversification and convergent crop domestication in Brassica rapa and Brassica oleracea. Nature Genetics 48: 1218–1224"
 	],
 	"built": "2026-10-26",
 	"root": "brassicaceae",
@@ -23,81 +27,229 @@
 			"id": "brassicaceae",
 			"kind": "clade",
 			"name": "Brassicaceae (core)",
-			"note": "The mustard family. Aethionema, sister to all others, has no vegetables and is left out here."
+			"note": "The mustard family. Aethionema, sister to all others, has no vegetables and is left out here.",
+			"genome": {
+				"state": "Ancestral Crucifer Karyotype (ACK): x = 8, 24 conserved genomic blocks (A–X)",
+				"change": "At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+				"confidence": "established",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)"
+				],
+				"signature": "At-α"
+			}
 		},
 		{
 			"id": "camelinodae",
 			"kind": "clade",
 			"name": "Camelinodae (lineage I)",
-			"rank": "supertribe"
+			"rank": "supertribe",
+			"genome": {
+				"state": "ACK, x = 8, largely kept",
+				"change": null,
+				"note": "lineage I keeps the ancestral n = 8 karyotype in many genera (Arabidopsis thaliana's n = 5 is a later reduction)",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)"
+				],
+				"signature": "At-α › ACK"
+			}
 		},
 		{
 			"id": "brassicodae",
 			"kind": "clade",
 			"name": "Brassicodae (lineage II)",
-			"rank": "supertribe"
+			"rank": "supertribe",
+			"genome": {
+				"state": "Proto-Calepineae Karyotype (PCK): n = 7",
+				"change": "ACK rearranged into PCK (n = 8 → 7) in the ancestor of lineage II",
+				"confidence": "established",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Brassicodae (lineage II): ACK rearranged into PCK (n = 8 → 7) in the ancestor of lineage II"
+				],
+				"signature": "At-α › PCK"
+			}
 		},
 		{
 			"id": "horseradish-cress-clade",
 			"kind": "clade",
 			"name": "horseradish + cresses clade",
-			"note": "Open Tree groups horseradish with Lepidium; WFO puts horseradish in tribe Cardamineae with watercress and land cress, so this grouping is uncertain."
+			"note": "Open Tree groups horseradish with Lepidium; WFO puts horseradish in tribe Cardamineae with watercress and land cress, so this grouping is uncertain.",
+			"genome": {
+				"state": "x = 8",
+				"change": null,
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)"
+				],
+				"signature": "At-α › ACK"
+			}
 		},
 		{
 			"id": "lepidieae",
 			"kind": "clade",
 			"name": "Lepidieae",
-			"rank": "tribe"
+			"rank": "tribe",
+			"genome": {
+				"state": "x = 8; polyploidy common",
+				"change": "repeated polyploidy within the tribe",
+				"confidence": "likely",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Lepidieae: repeated polyploidy within the tribe"
+				],
+				"signature": "At-α › ACK › Lepidieae"
+			}
 		},
 		{
 			"id": "cardamineae",
 			"kind": "clade",
 			"name": "Cardamineae (watercress + land cress)",
-			"rank": "tribe"
+			"rank": "tribe",
+			"genome": {
+				"state": "x = 8; polyploidy common",
+				"change": null,
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)"
+				],
+				"signature": "At-α › ACK › Cardamineae"
+			}
 		},
 		{
 			"id": "brassiceae",
 			"kind": "clade",
 			"name": "Brassiceae",
 			"rank": "tribe",
-			"note": "The cabbage tribe: almost all major crucifer crops."
+			"note": "The cabbage tribe: almost all major crucifer crops.",
+			"genome": {
+				"state": "mesohexaploid: three PCK-like subgenomes (LF, MF1, MF2), since diploidized",
+				"change": "whole-genome triplication, then gene loss and chromosome fusions (diploidization)",
+				"confidence": "established",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Brassicodae (lineage II): ACK rearranged into PCK (n = 8 → 7) in the ancestor of lineage II",
+					"Brassiceae: whole-genome triplication, then gene loss and chromosome fusions (diploidization)"
+				],
+				"signature": "At-α › PCK › WGT"
+			}
 		},
 		{
 			"id": "nigra-lineage",
 			"kind": "clade",
 			"name": "Nigra lineage (B genome)",
-			"note": "Black mustard's branch, split from the rest of Brassiceae, which is why WFO now puts it in its own genus, Mutarda."
+			"note": "Black mustard's branch, split from the rest of Brassiceae, which is why WFO now puts it in its own genus, Mutarda.",
+			"genome": {
+				"state": "B-genome lineage",
+				"change": "the Nigra lineage splits from the Rapa/Oleracea lineage",
+				"confidence": "established",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Brassicodae (lineage II): ACK rearranged into PCK (n = 8 → 7) in the ancestor of lineage II",
+					"Brassiceae: whole-genome triplication, then gene loss and chromosome fusions (diploidization)",
+					"Nigra lineage (B genome): the Nigra lineage splits from the Rapa/Oleracea lineage"
+				],
+				"signature": "At-α › PCK › WGT › Nigra"
+			}
 		},
 		{
 			"id": "rapa-oleracea-side",
 			"kind": "clade",
-			"name": "Rapa/Oleracea side of Brassiceae"
+			"name": "Rapa/Oleracea side of Brassiceae",
+			"genome": {
+				"state": "Rapa/Oleracea lineage",
+				"change": "the Rapa/Oleracea lineage splits from the Nigra lineage",
+				"confidence": "established",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Brassicodae (lineage II): ACK rearranged into PCK (n = 8 → 7) in the ancestor of lineage II",
+					"Brassiceae: whole-genome triplication, then gene loss and chromosome fusions (diploidization)",
+					"Rapa/Oleracea side of Brassiceae: the Rapa/Oleracea lineage splits from the Nigra lineage"
+				],
+				"signature": "At-α › PCK › WGT › Rapa/Oleracea"
+			}
 		},
 		{
 			"id": "rocket-and-brassica",
 			"kind": "clade",
-			"name": "rockets + mustards + Brassica"
+			"name": "rockets + mustards + Brassica",
+			"genome": {
+				"state": "diploidized hexaploid",
+				"change": null,
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Brassicodae (lineage II): ACK rearranged into PCK (n = 8 → 7) in the ancestor of lineage II",
+					"Brassiceae: whole-genome triplication, then gene loss and chromosome fusions (diploidization)",
+					"Rapa/Oleracea side of Brassiceae: the Rapa/Oleracea lineage splits from the Nigra lineage"
+				],
+				"signature": "At-α › PCK › WGT › Rapa/Oleracea"
+			}
 		},
 		{
 			"id": "rockets",
 			"kind": "clade",
-			"name": "rockets (Eruca + Diplotaxis)"
+			"name": "rockets (Eruca + Diplotaxis)",
+			"genome": {
+				"state": "x = 11 in the rockets",
+				"change": "chromosome number settles at x = 11",
+				"confidence": "likely",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Brassicodae (lineage II): ACK rearranged into PCK (n = 8 → 7) in the ancestor of lineage II",
+					"Brassiceae: whole-genome triplication, then gene loss and chromosome fusions (diploidization)",
+					"Rapa/Oleracea side of Brassiceae: the Rapa/Oleracea lineage splits from the Nigra lineage",
+					"rockets (Eruca + Diplotaxis): chromosome number settles at x = 11"
+				],
+				"signature": "At-α › PCK › WGT › Rapa/Oleracea"
+			}
 		},
 		{
 			"id": "white-mustard-and-brassica",
 			"kind": "clade",
-			"name": "white mustard + radish + Brassica"
+			"name": "white mustard + radish + Brassica",
+			"genome": {
+				"state": "diploidized hexaploid",
+				"change": null,
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Brassicodae (lineage II): ACK rearranged into PCK (n = 8 → 7) in the ancestor of lineage II",
+					"Brassiceae: whole-genome triplication, then gene loss and chromosome fusions (diploidization)",
+					"Rapa/Oleracea side of Brassiceae: the Rapa/Oleracea lineage splits from the Nigra lineage"
+				],
+				"signature": "At-α › PCK › WGT › Rapa/Oleracea"
+			}
 		},
 		{
 			"id": "radish-and-brassica",
 			"kind": "clade",
-			"name": "radish + Brassica (R, A, C genomes)"
+			"name": "radish + Brassica (R, A, C genomes)",
+			"genome": {
+				"state": "diploidized hexaploid",
+				"change": null,
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Brassicodae (lineage II): ACK rearranged into PCK (n = 8 → 7) in the ancestor of lineage II",
+					"Brassiceae: whole-genome triplication, then gene loss and chromosome fusions (diploidization)",
+					"Rapa/Oleracea side of Brassiceae: the Rapa/Oleracea lineage splits from the Nigra lineage"
+				],
+				"signature": "At-α › PCK › WGT › Rapa/Oleracea"
+			}
 		},
 		{
 			"id": "brassica-ac",
 			"kind": "clade",
 			"name": "Brassica A + C genomes",
-			"note": "B. rapa (A) and B. oleracea (C) split from a common ancestor a few million years ago; their genomes are still similar enough to combine in hybrids."
+			"note": "B. rapa (A) and B. oleracea (C) split from a common ancestor a few million years ago; their genomes are still similar enough to combine in hybrids.",
+			"genome": {
+				"state": "common ancestor of the A and C genomes",
+				"change": "A and C genomes diverge, a few million years ago",
+				"confidence": "established",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Brassicodae (lineage II): ACK rearranged into PCK (n = 8 → 7) in the ancestor of lineage II",
+					"Brassiceae: whole-genome triplication, then gene loss and chromosome fusions (diploidization)",
+					"Rapa/Oleracea side of Brassiceae: the Rapa/Oleracea lineage splits from the Nigra lineage",
+					"Brassica A + C genomes: A and C genomes diverge, a few million years ago"
+				],
+				"signature": "At-α › PCK › WGT › Rapa/Oleracea › A/C"
+			}
 		},
 		{
 			"id": "oleracea",
@@ -106,7 +258,20 @@
 			"author": "L.",
 			"tribe": "Brassiceae",
 			"common": "wild cabbage",
-			"genome": "CC",
+			"genome": {
+				"state": "CC, 2n = 18, diploid",
+				"change": "C genome: x = 9",
+				"confidence": "established",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Brassicodae (lineage II): ACK rearranged into PCK (n = 8 → 7) in the ancestor of lineage II",
+					"Brassiceae: whole-genome triplication, then gene loss and chromosome fusions (diploidization)",
+					"Rapa/Oleracea side of Brassiceae: the Rapa/Oleracea lineage splits from the Nigra lineage",
+					"Brassica A + C genomes: A and C genomes diverge, a few million years ago",
+					"Brassica oleracea: C genome: x = 9"
+				],
+				"signature": "At-α › PCK › WGT › Rapa/Oleracea › A/C › CC"
+			},
 			"chromosomes2n": 18
 		},
 		{
@@ -116,7 +281,20 @@
 			"author": "L.",
 			"tribe": "Brassiceae",
 			"common": "field mustard, turnip",
-			"genome": "AA",
+			"genome": {
+				"state": "AA, 2n = 20, diploid",
+				"change": "A genome: x = 10",
+				"confidence": "established",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Brassicodae (lineage II): ACK rearranged into PCK (n = 8 → 7) in the ancestor of lineage II",
+					"Brassiceae: whole-genome triplication, then gene loss and chromosome fusions (diploidization)",
+					"Rapa/Oleracea side of Brassiceae: the Rapa/Oleracea lineage splits from the Nigra lineage",
+					"Brassica A + C genomes: A and C genomes diverge, a few million years ago",
+					"Brassica rapa: A genome: x = 10"
+				],
+				"signature": "At-α › PCK › WGT › Rapa/Oleracea › A/C › AA"
+			},
 			"chromosomes2n": 20
 		},
 		{
@@ -129,7 +307,19 @@
 			"synonyms": [
 				"Brassica nigra"
 			],
-			"genome": "BB",
+			"genome": {
+				"state": "BB, 2n = 16, diploid",
+				"change": "B genome: x = 8",
+				"confidence": "established",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Brassicodae (lineage II): ACK rearranged into PCK (n = 8 → 7) in the ancestor of lineage II",
+					"Brassiceae: whole-genome triplication, then gene loss and chromosome fusions (diploidization)",
+					"Nigra lineage (B genome): the Nigra lineage splits from the Rapa/Oleracea lineage",
+					"Mutarda nigra: B genome: x = 8"
+				],
+				"signature": "At-α › PCK › WGT › Nigra › BB"
+			},
 			"chromosomes2n": 16
 		},
 		{
@@ -139,7 +329,19 @@
 			"author": "L.",
 			"tribe": "Brassiceae",
 			"common": "radish",
-			"genome": "RR",
+			"genome": {
+				"state": "RR, 2n = 18, diploid",
+				"change": "R genome: x = 9 (radish genome may carry input from both Brassiceae lineages)",
+				"confidence": "established",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Brassicodae (lineage II): ACK rearranged into PCK (n = 8 → 7) in the ancestor of lineage II",
+					"Brassiceae: whole-genome triplication, then gene loss and chromosome fusions (diploidization)",
+					"Rapa/Oleracea side of Brassiceae: the Rapa/Oleracea lineage splits from the Nigra lineage",
+					"Raphanus sativus: R genome: x = 9 (radish genome may carry input from both Brassiceae lineages)"
+				],
+				"signature": "At-α › PCK › WGT › Rapa/Oleracea › RR"
+			},
 			"chromosomes2n": 18
 		},
 		{
@@ -148,7 +350,20 @@
 			"name": "Sinapis alba",
 			"author": "L.",
 			"tribe": "Brassiceae",
-			"common": "white mustard"
+			"common": "white mustard",
+			"genome": {
+				"state": "2n = 24, diploid",
+				"change": "x = 12",
+				"confidence": "established",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Brassicodae (lineage II): ACK rearranged into PCK (n = 8 → 7) in the ancestor of lineage II",
+					"Brassiceae: whole-genome triplication, then gene loss and chromosome fusions (diploidization)",
+					"Rapa/Oleracea side of Brassiceae: the Rapa/Oleracea lineage splits from the Nigra lineage",
+					"Sinapis alba: x = 12"
+				],
+				"signature": "At-α › PCK › WGT › Rapa/Oleracea › 2n=24"
+			}
 		},
 		{
 			"id": "eruca",
@@ -159,7 +374,21 @@
 			"common": "rocket, arugula",
 			"synonyms": [
 				"Eruca sativa"
-			]
+			],
+			"genome": {
+				"state": "2n = 22, diploid",
+				"change": "x = 11",
+				"confidence": "established",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Brassicodae (lineage II): ACK rearranged into PCK (n = 8 → 7) in the ancestor of lineage II",
+					"Brassiceae: whole-genome triplication, then gene loss and chromosome fusions (diploidization)",
+					"Rapa/Oleracea side of Brassiceae: the Rapa/Oleracea lineage splits from the Nigra lineage",
+					"rockets (Eruca + Diplotaxis): chromosome number settles at x = 11",
+					"Eruca vesicaria: x = 11"
+				],
+				"signature": "At-α › PCK › WGT › Rapa/Oleracea › 2n=22"
+			}
 		},
 		{
 			"id": "diplotaxis",
@@ -167,7 +396,21 @@
 			"name": "Diplotaxis tenuifolia",
 			"author": "(L.) DC.",
 			"tribe": "Brassiceae",
-			"common": "wild rocket"
+			"common": "wild rocket",
+			"genome": {
+				"state": "2n = 22, diploid",
+				"change": "x = 11",
+				"confidence": "established",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Brassicodae (lineage II): ACK rearranged into PCK (n = 8 → 7) in the ancestor of lineage II",
+					"Brassiceae: whole-genome triplication, then gene loss and chromosome fusions (diploidization)",
+					"Rapa/Oleracea side of Brassiceae: the Rapa/Oleracea lineage splits from the Nigra lineage",
+					"rockets (Eruca + Diplotaxis): chromosome number settles at x = 11",
+					"Diplotaxis tenuifolia: x = 11"
+				],
+				"signature": "At-α › PCK › WGT › Rapa/Oleracea › 2n=22·Dt"
+			}
 		},
 		{
 			"id": "crambe",
@@ -175,7 +418,20 @@
 			"name": "Crambe maritima",
 			"author": "L.",
 			"tribe": "Brassiceae",
-			"common": "sea kale"
+			"common": "sea kale",
+			"genome": {
+				"state": "2n = 60, polyploid",
+				"change": "polyploidy on top of the triplication",
+				"confidence": "likely",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Brassicodae (lineage II): ACK rearranged into PCK (n = 8 → 7) in the ancestor of lineage II",
+					"Brassiceae: whole-genome triplication, then gene loss and chromosome fusions (diploidization)",
+					"Rapa/Oleracea side of Brassiceae: the Rapa/Oleracea lineage splits from the Nigra lineage",
+					"Crambe maritima: polyploidy on top of the triplication"
+				],
+				"signature": "At-α › PCK › WGT › Rapa/Oleracea › 2n=60"
+			}
 		},
 		{
 			"id": "eutrema",
@@ -183,7 +439,18 @@
 			"name": "Eutrema japonicum",
 			"author": "(Miq.) Koidz.",
 			"tribe": "Eutremeae",
-			"common": "wasabi"
+			"common": "wasabi",
+			"genome": {
+				"state": "2n = 28, tetraploid",
+				"change": "tetraploid (4x, x = 7)",
+				"confidence": "likely",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Brassicodae (lineage II): ACK rearranged into PCK (n = 8 → 7) in the ancestor of lineage II",
+					"Eutrema japonicum: tetraploid (4x, x = 7)"
+				],
+				"signature": "At-α › PCK › 2n=28"
+			}
 		},
 		{
 			"id": "armoracia",
@@ -191,7 +458,17 @@
 			"name": "Armoracia rusticana",
 			"author": "G.Gaertn., B.Mey. & Scherb.",
 			"tribe": "Cardamineae",
-			"common": "horseradish"
+			"common": "horseradish",
+			"genome": {
+				"state": "2n = 32, tetraploid",
+				"change": "tetraploid (4x, x = 8); grown from root cuttings, rarely sets seed",
+				"confidence": "likely",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Armoracia rusticana: tetraploid (4x, x = 8); grown from root cuttings, rarely sets seed"
+				],
+				"signature": "At-α › ACK › 2n=32·Ar"
+			}
 		},
 		{
 			"id": "lepidium",
@@ -199,7 +476,18 @@
 			"name": "Lepidium sativum",
 			"author": "L.",
 			"tribe": "Lepidieae",
-			"common": "garden cress"
+			"common": "garden cress",
+			"genome": {
+				"state": "2n = 16, diploid",
+				"change": "x = 8 (other counts reported)",
+				"confidence": "likely",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Lepidieae: repeated polyploidy within the tribe",
+					"Lepidium sativum: x = 8 (other counts reported)"
+				],
+				"signature": "At-α › ACK › Lepidieae › 2n=16·Ls"
+			}
 		},
 		{
 			"id": "maca",
@@ -207,7 +495,18 @@
 			"name": "Lepidium meyenii",
 			"author": "Walp.",
 			"tribe": "Lepidieae",
-			"common": "maca"
+			"common": "maca",
+			"genome": {
+				"state": "2n = 64, octoploid",
+				"change": "octoploid (8x, x = 8)",
+				"confidence": "established",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Lepidieae: repeated polyploidy within the tribe",
+					"Lepidium meyenii: octoploid (8x, x = 8)"
+				],
+				"signature": "At-α › ACK › Lepidieae › 2n=64"
+			}
 		},
 		{
 			"id": "nasturtium",
@@ -215,7 +514,17 @@
 			"name": "Nasturtium officinale",
 			"author": "R.Br.",
 			"tribe": "Cardamineae",
-			"common": "watercress"
+			"common": "watercress",
+			"genome": {
+				"state": "2n = 32, allotetraploid",
+				"change": "allotetraploid (4x, x = 8)",
+				"confidence": "established",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Nasturtium officinale: allotetraploid (4x, x = 8)"
+				],
+				"signature": "At-α › ACK › Cardamineae › 2n=32·No"
+			}
 		},
 		{
 			"id": "barbarea",
@@ -223,7 +532,17 @@
 			"name": "Barbarea verna",
 			"author": "(Mill.) Asch.",
 			"tribe": "Cardamineae",
-			"common": "land cress"
+			"common": "land cress",
+			"genome": {
+				"state": "2n = 16, diploid",
+				"change": "x = 8",
+				"confidence": "likely",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Barbarea verna: x = 8"
+				],
+				"signature": "At-α › ACK › Cardamineae › 2n=16·Bv"
+			}
 		},
 		{
 			"id": "juncea",
@@ -232,7 +551,23 @@
 			"author": "(L.) Czern.",
 			"tribe": "Brassiceae",
 			"common": "brown / Indian mustard",
-			"genome": "AABB",
+			"genome": {
+				"state": "AABB, 2n = 36, allotetraploid",
+				"change": "A genome (from B. rapa) + B genome (from black mustard) combined",
+				"confidence": "established",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Brassicodae (lineage II): ACK rearranged into PCK (n = 8 → 7) in the ancestor of lineage II",
+					"Brassiceae: whole-genome triplication, then gene loss and chromosome fusions (diploidization)",
+					"Rapa/Oleracea side of Brassiceae: the Rapa/Oleracea lineage splits from the Nigra lineage",
+					"Brassica A + C genomes: A and C genomes diverge, a few million years ago",
+					"Brassica rapa: A genome: x = 10",
+					"Nigra lineage (B genome): the Nigra lineage splits from the Rapa/Oleracea lineage",
+					"Mutarda nigra: B genome: x = 8",
+					"Brassica juncea: A genome (from B. rapa) + B genome (from black mustard) combined"
+				],
+				"signature": "[At-α › PCK › WGT › Rapa/Oleracea › A/C › AA] + [At-α › PCK › WGT › Nigra › BB] › AABB"
+			},
 			"chromosomes2n": 36,
 			"hybridOf": [
 				"rapa",
@@ -247,7 +582,22 @@
 			"author": "L.",
 			"tribe": "Brassiceae",
 			"common": "rapeseed, rutabaga",
-			"genome": "AACC",
+			"genome": {
+				"state": "AACC, 2n = 38, allotetraploid",
+				"change": "A genome (from B. rapa) + C genome (from B. oleracea) combined, ~7,500 years ago",
+				"confidence": "established",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Brassicodae (lineage II): ACK rearranged into PCK (n = 8 → 7) in the ancestor of lineage II",
+					"Brassiceae: whole-genome triplication, then gene loss and chromosome fusions (diploidization)",
+					"Rapa/Oleracea side of Brassiceae: the Rapa/Oleracea lineage splits from the Nigra lineage",
+					"Brassica A + C genomes: A and C genomes diverge, a few million years ago",
+					"Brassica rapa: A genome: x = 10",
+					"Brassica oleracea: C genome: x = 9",
+					"Brassica napus: A genome (from B. rapa) + C genome (from B. oleracea) combined, ~7,500 years ago"
+				],
+				"signature": "[At-α › PCK › WGT › Rapa/Oleracea › A/C › AA] + [At-α › PCK › WGT › Rapa/Oleracea › A/C › CC] › AACC"
+			},
 			"chromosomes2n": 38,
 			"hybridOf": [
 				"rapa",
@@ -262,7 +612,23 @@
 			"author": "(A.Braun) D.A.German",
 			"tribe": "Brassiceae",
 			"common": "Ethiopian mustard",
-			"genome": "BBCC",
+			"genome": {
+				"state": "BBCC, 2n = 34, allotetraploid",
+				"change": "B genome (from black mustard) + C genome (from B. oleracea) combined",
+				"confidence": "established",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Brassicodae (lineage II): ACK rearranged into PCK (n = 8 → 7) in the ancestor of lineage II",
+					"Brassiceae: whole-genome triplication, then gene loss and chromosome fusions (diploidization)",
+					"Nigra lineage (B genome): the Nigra lineage splits from the Rapa/Oleracea lineage",
+					"Mutarda nigra: B genome: x = 8",
+					"Rapa/Oleracea side of Brassiceae: the Rapa/Oleracea lineage splits from the Nigra lineage",
+					"Brassica A + C genomes: A and C genomes diverge, a few million years ago",
+					"Brassica oleracea: C genome: x = 9",
+					"Mutarda carinata: B genome (from black mustard) + C genome (from B. oleracea) combined"
+				],
+				"signature": "[At-α › PCK › WGT › Nigra › BB] + [At-α › PCK › WGT › Rapa/Oleracea › A/C › CC] › BBCC"
+			},
 			"chromosomes2n": 34,
 			"hybridOf": [
 				"nigra",
@@ -280,7 +646,22 @@
 			"author": null,
 			"tribe": "Brassiceae",
 			"common": "radish-cabbage hybrid",
-			"genome": "RRCC",
+			"genome": {
+				"state": "RRCC, 2n = 36, allotetraploid",
+				"change": "R genome (radish) + C genome (cabbage) combined by hand, 1928",
+				"confidence": "established",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Brassicodae (lineage II): ACK rearranged into PCK (n = 8 → 7) in the ancestor of lineage II",
+					"Brassiceae: whole-genome triplication, then gene loss and chromosome fusions (diploidization)",
+					"Rapa/Oleracea side of Brassiceae: the Rapa/Oleracea lineage splits from the Nigra lineage",
+					"Raphanus sativus: R genome: x = 9 (radish genome may carry input from both Brassiceae lineages)",
+					"Brassica A + C genomes: A and C genomes diverge, a few million years ago",
+					"Brassica oleracea: C genome: x = 9",
+					"×Raphanobrassica: R genome (radish) + C genome (cabbage) combined by hand, 1928"
+				],
+				"signature": "[At-α › PCK › WGT › Rapa/Oleracea › RR] + [At-α › PCK › WGT › Rapa/Oleracea › A/C › CC] › RRCC"
+			},
 			"chromosomes2n": 36,
 			"hybridOf": [
 				"raphanus",
@@ -296,7 +677,22 @@
 			"where": "Mediterranean / Europe",
 			"when": "by ~2,500 years ago (Greek and Roman writers)",
 			"confidence": "likely",
-			"note": "the earliest cultivated form of wild cabbage; the other oleracea crops branch from here"
+			"note": "the earliest cultivated form of wild cabbage; the other oleracea crops branch from here",
+			"genome": {
+				"state": "CC, 2n = 18, diploid",
+				"change": "domestication: the earliest, leafy gene pool",
+				"confidence": "likely",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Brassicodae (lineage II): ACK rearranged into PCK (n = 8 → 7) in the ancestor of lineage II",
+					"Brassiceae: whole-genome triplication, then gene loss and chromosome fusions (diploidization)",
+					"Rapa/Oleracea side of Brassiceae: the Rapa/Oleracea lineage splits from the Nigra lineage",
+					"Brassica A + C genomes: A and C genomes diverge, a few million years ago",
+					"Brassica oleracea: C genome: x = 9",
+					"leafy kales: domestication: the earliest, leafy gene pool"
+				],
+				"signature": "At-α › PCK › WGT › Rapa/Oleracea › A/C › CC › leafy"
+			}
 		},
 		{
 			"id": "wild-cabbage",
@@ -307,7 +703,22 @@
 			"note": "still grows on sea cliffs in western Europe",
 			"lineage": [
 				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Brassica A + C genomes → Brassica oleracea → wild cabbage"
-			]
+			],
+			"genome": {
+				"state": "CC, 2n = 18, diploid",
+				"change": "wild populations; no crop selection",
+				"confidence": "established",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Brassicodae (lineage II): ACK rearranged into PCK (n = 8 → 7) in the ancestor of lineage II",
+					"Brassiceae: whole-genome triplication, then gene loss and chromosome fusions (diploidization)",
+					"Rapa/Oleracea side of Brassiceae: the Rapa/Oleracea lineage splits from the Nigra lineage",
+					"Brassica A + C genomes: A and C genomes diverge, a few million years ago",
+					"Brassica oleracea: C genome: x = 9",
+					"wild cabbage: wild populations; no crop selection"
+				],
+				"signature": "At-α › PCK › WGT › Rapa/Oleracea › A/C › CC › wild"
+			}
 		},
 		{
 			"id": "kale",
@@ -317,7 +728,23 @@
 			"part": "leaves",
 			"lineage": [
 				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Brassica A + C genomes → Brassica oleracea → leafy kales → kale"
-			]
+			],
+			"genome": {
+				"state": "CC, 2n = 18, diploid",
+				"change": "selected for large, often curled leaves; no head",
+				"confidence": "established",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Brassicodae (lineage II): ACK rearranged into PCK (n = 8 → 7) in the ancestor of lineage II",
+					"Brassiceae: whole-genome triplication, then gene loss and chromosome fusions (diploidization)",
+					"Rapa/Oleracea side of Brassiceae: the Rapa/Oleracea lineage splits from the Nigra lineage",
+					"Brassica A + C genomes: A and C genomes diverge, a few million years ago",
+					"Brassica oleracea: C genome: x = 9",
+					"leafy kales: domestication: the earliest, leafy gene pool",
+					"kale: selected for large, often curled leaves; no head"
+				],
+				"signature": "At-α › PCK › WGT › Rapa/Oleracea › A/C › CC › leafy › curled leaves"
+			}
 		},
 		{
 			"id": "collards",
@@ -327,7 +754,23 @@
 			"part": "leaves",
 			"lineage": [
 				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Brassica A + C genomes → Brassica oleracea → leafy kales → collard greens"
-			]
+			],
+			"genome": {
+				"state": "CC, 2n = 18, diploid",
+				"change": "selected for large, flat leaves; no head",
+				"confidence": "established",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Brassicodae (lineage II): ACK rearranged into PCK (n = 8 → 7) in the ancestor of lineage II",
+					"Brassiceae: whole-genome triplication, then gene loss and chromosome fusions (diploidization)",
+					"Rapa/Oleracea side of Brassiceae: the Rapa/Oleracea lineage splits from the Nigra lineage",
+					"Brassica A + C genomes: A and C genomes diverge, a few million years ago",
+					"Brassica oleracea: C genome: x = 9",
+					"leafy kales: domestication: the earliest, leafy gene pool",
+					"collard greens: selected for large, flat leaves; no head"
+				],
+				"signature": "At-α › PCK › WGT › Rapa/Oleracea › A/C › CC › leafy › flat leaves"
+			}
 		},
 		{
 			"id": "tronchuda",
@@ -338,7 +781,23 @@
 			"confidence": "likely",
 			"lineage": [
 				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Brassica A + C genomes → Brassica oleracea → leafy kales → Portuguese cabbage"
-			]
+			],
+			"genome": {
+				"state": "CC, 2n = 18, diploid",
+				"change": "selected for thick leaf midribs and a loose head",
+				"confidence": "likely",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Brassicodae (lineage II): ACK rearranged into PCK (n = 8 → 7) in the ancestor of lineage II",
+					"Brassiceae: whole-genome triplication, then gene loss and chromosome fusions (diploidization)",
+					"Rapa/Oleracea side of Brassiceae: the Rapa/Oleracea lineage splits from the Nigra lineage",
+					"Brassica A + C genomes: A and C genomes diverge, a few million years ago",
+					"Brassica oleracea: C genome: x = 9",
+					"leafy kales: domestication: the earliest, leafy gene pool",
+					"Portuguese cabbage: selected for thick leaf midribs and a loose head"
+				],
+				"signature": "At-α › PCK › WGT › Rapa/Oleracea › A/C › CC › leafy › thick ribs"
+			}
 		},
 		{
 			"id": "headed-cabbages",
@@ -347,7 +806,23 @@
 			"where": "northern and western Europe",
 			"when": "medieval, widespread by ~1200 CE",
 			"confidence": "likely",
-			"note": "selection for a tight terminal bud"
+			"note": "selection for a tight terminal bud",
+			"genome": {
+				"state": "CC, 2n = 18, diploid",
+				"change": "heading alleles: inward-curving leaves form a head",
+				"confidence": "likely",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Brassicodae (lineage II): ACK rearranged into PCK (n = 8 → 7) in the ancestor of lineage II",
+					"Brassiceae: whole-genome triplication, then gene loss and chromosome fusions (diploidization)",
+					"Rapa/Oleracea side of Brassiceae: the Rapa/Oleracea lineage splits from the Nigra lineage",
+					"Brassica A + C genomes: A and C genomes diverge, a few million years ago",
+					"Brassica oleracea: C genome: x = 9",
+					"leafy kales: domestication: the earliest, leafy gene pool",
+					"headed cabbages: heading alleles: inward-curving leaves form a head"
+				],
+				"signature": "At-α › PCK › WGT › Rapa/Oleracea › A/C › CC › leafy › heading"
+			}
 		},
 		{
 			"id": "cabbage",
@@ -357,7 +832,24 @@
 			"part": "terminal bud (head)",
 			"lineage": [
 				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Brassica A + C genomes → Brassica oleracea → leafy kales → headed cabbages → cabbage"
-			]
+			],
+			"genome": {
+				"state": "CC, 2n = 18, diploid",
+				"change": "heading at the terminal bud",
+				"confidence": "established",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Brassicodae (lineage II): ACK rearranged into PCK (n = 8 → 7) in the ancestor of lineage II",
+					"Brassiceae: whole-genome triplication, then gene loss and chromosome fusions (diploidization)",
+					"Rapa/Oleracea side of Brassiceae: the Rapa/Oleracea lineage splits from the Nigra lineage",
+					"Brassica A + C genomes: A and C genomes diverge, a few million years ago",
+					"Brassica oleracea: C genome: x = 9",
+					"leafy kales: domestication: the earliest, leafy gene pool",
+					"headed cabbages: heading alleles: inward-curving leaves form a head",
+					"cabbage: heading at the terminal bud"
+				],
+				"signature": "At-α › PCK › WGT › Rapa/Oleracea › A/C › CC › leafy › heading › terminal head"
+			}
 		},
 		{
 			"id": "savoy",
@@ -367,7 +859,24 @@
 			"part": "terminal bud, crinkled leaves",
 			"lineage": [
 				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Brassica A + C genomes → Brassica oleracea → leafy kales → headed cabbages → savoy cabbage"
-			]
+			],
+			"genome": {
+				"state": "CC, 2n = 18, diploid",
+				"change": "heading plus blistered (savoyed) leaf texture",
+				"confidence": "established",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Brassicodae (lineage II): ACK rearranged into PCK (n = 8 → 7) in the ancestor of lineage II",
+					"Brassiceae: whole-genome triplication, then gene loss and chromosome fusions (diploidization)",
+					"Rapa/Oleracea side of Brassiceae: the Rapa/Oleracea lineage splits from the Nigra lineage",
+					"Brassica A + C genomes: A and C genomes diverge, a few million years ago",
+					"Brassica oleracea: C genome: x = 9",
+					"leafy kales: domestication: the earliest, leafy gene pool",
+					"headed cabbages: heading alleles: inward-curving leaves form a head",
+					"savoy cabbage: heading plus blistered (savoyed) leaf texture"
+				],
+				"signature": "At-α › PCK › WGT › Rapa/Oleracea › A/C › CC › leafy › heading › savoyed head"
+			}
 		},
 		{
 			"id": "brussels",
@@ -381,7 +890,24 @@
 			"note": "the head habit moved to the side buds",
 			"lineage": [
 				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Brassica A + C genomes → Brassica oleracea → leafy kales → headed cabbages → Brussels sprouts"
-			]
+			],
+			"genome": {
+				"state": "CC, 2n = 18, diploid",
+				"change": "the heading habit moved to the side buds of a tall stem",
+				"confidence": "established",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Brassicodae (lineage II): ACK rearranged into PCK (n = 8 → 7) in the ancestor of lineage II",
+					"Brassiceae: whole-genome triplication, then gene loss and chromosome fusions (diploidization)",
+					"Rapa/Oleracea side of Brassiceae: the Rapa/Oleracea lineage splits from the Nigra lineage",
+					"Brassica A + C genomes: A and C genomes diverge, a few million years ago",
+					"Brassica oleracea: C genome: x = 9",
+					"leafy kales: domestication: the earliest, leafy gene pool",
+					"headed cabbages: heading alleles: inward-curving leaves form a head",
+					"Brussels sprouts: the heading habit moved to the side buds of a tall stem"
+				],
+				"signature": "At-α › PCK › WGT › Rapa/Oleracea › A/C › CC › leafy › heading › axillary heads"
+			}
 		},
 		{
 			"id": "kohlrabi",
@@ -394,7 +920,23 @@
 			"confidence": "likely",
 			"lineage": [
 				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Brassica A + C genomes → Brassica oleracea → leafy kales → kohlrabi"
-			]
+			],
+			"genome": {
+				"state": "CC, 2n = 18, diploid",
+				"change": "selected for a swollen, tuber-like stem",
+				"confidence": "established",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Brassicodae (lineage II): ACK rearranged into PCK (n = 8 → 7) in the ancestor of lineage II",
+					"Brassiceae: whole-genome triplication, then gene loss and chromosome fusions (diploidization)",
+					"Rapa/Oleracea side of Brassiceae: the Rapa/Oleracea lineage splits from the Nigra lineage",
+					"Brassica A + C genomes: A and C genomes diverge, a few million years ago",
+					"Brassica oleracea: C genome: x = 9",
+					"leafy kales: domestication: the earliest, leafy gene pool",
+					"kohlrabi: selected for a swollen, tuber-like stem"
+				],
+				"signature": "At-α › PCK › WGT › Rapa/Oleracea › A/C › CC › leafy › swollen stem"
+			}
 		},
 		{
 			"id": "flower-head-types",
@@ -403,7 +945,23 @@
 			"where": "Italy / eastern Mediterranean",
 			"when": "Roman era to 16th century",
 			"confidence": "likely",
-			"note": "selection for enlarged flower buds"
+			"note": "selection for enlarged flower buds",
+			"genome": {
+				"state": "CC, 2n = 18, diploid",
+				"change": "enlarged, proliferating inflorescences",
+				"confidence": "likely",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Brassicodae (lineage II): ACK rearranged into PCK (n = 8 → 7) in the ancestor of lineage II",
+					"Brassiceae: whole-genome triplication, then gene loss and chromosome fusions (diploidization)",
+					"Rapa/Oleracea side of Brassiceae: the Rapa/Oleracea lineage splits from the Nigra lineage",
+					"Brassica A + C genomes: A and C genomes diverge, a few million years ago",
+					"Brassica oleracea: C genome: x = 9",
+					"leafy kales: domestication: the earliest, leafy gene pool",
+					"flower-head types: enlarged, proliferating inflorescences"
+				],
+				"signature": "At-α › PCK › WGT › Rapa/Oleracea › A/C › CC › leafy › inflorescence"
+			}
 		},
 		{
 			"id": "broccoli",
@@ -413,7 +971,24 @@
 			"part": "flower buds and stalks",
 			"lineage": [
 				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Brassica A + C genomes → Brassica oleracea → leafy kales → flower-head types → broccoli"
-			]
+			],
+			"genome": {
+				"state": "CC, 2n = 18, diploid",
+				"change": "enlarged, branched flower heads with green buds",
+				"confidence": "established",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Brassicodae (lineage II): ACK rearranged into PCK (n = 8 → 7) in the ancestor of lineage II",
+					"Brassiceae: whole-genome triplication, then gene loss and chromosome fusions (diploidization)",
+					"Rapa/Oleracea side of Brassiceae: the Rapa/Oleracea lineage splits from the Nigra lineage",
+					"Brassica A + C genomes: A and C genomes diverge, a few million years ago",
+					"Brassica oleracea: C genome: x = 9",
+					"leafy kales: domestication: the earliest, leafy gene pool",
+					"flower-head types: enlarged, proliferating inflorescences",
+					"broccoli: enlarged, branched flower heads with green buds"
+				],
+				"signature": "At-α › PCK › WGT › Rapa/Oleracea › A/C › CC › leafy › inflorescence › green buds"
+			}
 		},
 		{
 			"id": "cauliflower",
@@ -425,7 +1000,24 @@
 			"confidence": "likely",
 			"lineage": [
 				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Brassica A + C genomes → Brassica oleracea → leafy kales → flower-head types → cauliflower"
-			]
+			],
+			"genome": {
+				"state": "CC, 2n = 18, diploid",
+				"change": "curd: flower development arrested before buds form; linked to a non-functional CAULIFLOWER (BoCAL) allele",
+				"confidence": "likely",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Brassicodae (lineage II): ACK rearranged into PCK (n = 8 → 7) in the ancestor of lineage II",
+					"Brassiceae: whole-genome triplication, then gene loss and chromosome fusions (diploidization)",
+					"Rapa/Oleracea side of Brassiceae: the Rapa/Oleracea lineage splits from the Nigra lineage",
+					"Brassica A + C genomes: A and C genomes diverge, a few million years ago",
+					"Brassica oleracea: C genome: x = 9",
+					"leafy kales: domestication: the earliest, leafy gene pool",
+					"flower-head types: enlarged, proliferating inflorescences",
+					"cauliflower: curd: flower development arrested before buds form; linked to a non-functional CAULIFLOWER (BoCAL) allele"
+				],
+				"signature": "At-α › PCK › WGT › Rapa/Oleracea › A/C › CC › leafy › inflorescence › curd·BoCAL"
+			}
 		},
 		{
 			"id": "romanesco",
@@ -438,7 +1030,25 @@
 			"confidence": "likely",
 			"lineage": [
 				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Brassica A + C genomes → Brassica oleracea → leafy kales → flower-head types → cauliflower → Romanesco"
-			]
+			],
+			"genome": {
+				"state": "CC, 2n = 18, diploid",
+				"change": "curd with self-similar spiral (fractal) meristems from altered meristem timing",
+				"confidence": "likely",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Brassicodae (lineage II): ACK rearranged into PCK (n = 8 → 7) in the ancestor of lineage II",
+					"Brassiceae: whole-genome triplication, then gene loss and chromosome fusions (diploidization)",
+					"Rapa/Oleracea side of Brassiceae: the Rapa/Oleracea lineage splits from the Nigra lineage",
+					"Brassica A + C genomes: A and C genomes diverge, a few million years ago",
+					"Brassica oleracea: C genome: x = 9",
+					"leafy kales: domestication: the earliest, leafy gene pool",
+					"flower-head types: enlarged, proliferating inflorescences",
+					"cauliflower: curd: flower development arrested before buds form; linked to a non-functional CAULIFLOWER (BoCAL) allele",
+					"Romanesco: curd with self-similar spiral (fractal) meristems from altered meristem timing"
+				],
+				"signature": "At-α › PCK › WGT › Rapa/Oleracea › A/C › CC › leafy › inflorescence › curd·BoCAL › fractal curd"
+			}
 		},
 		{
 			"id": "gai-lan",
@@ -451,7 +1061,23 @@
 			"confidence": "debated",
 			"lineage": [
 				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Brassica A + C genomes → Brassica oleracea → leafy kales → Chinese broccoli (gai lan)"
-			]
+			],
+			"genome": {
+				"state": "CC, 2n = 18, diploid",
+				"change": "East Asian gene pool, distinct from European oleracea; thick flowering stems",
+				"confidence": "likely",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Brassicodae (lineage II): ACK rearranged into PCK (n = 8 → 7) in the ancestor of lineage II",
+					"Brassiceae: whole-genome triplication, then gene loss and chromosome fusions (diploidization)",
+					"Rapa/Oleracea side of Brassiceae: the Rapa/Oleracea lineage splits from the Nigra lineage",
+					"Brassica A + C genomes: A and C genomes diverge, a few million years ago",
+					"Brassica oleracea: C genome: x = 9",
+					"leafy kales: domestication: the earliest, leafy gene pool",
+					"Chinese broccoli (gai lan): East Asian gene pool, distinct from European oleracea; thick flowering stems"
+				],
+				"signature": "At-α › PCK › WGT › Rapa/Oleracea › A/C › CC › leafy › Alboglabra"
+			}
 		},
 		{
 			"id": "broccolini",
@@ -468,7 +1094,26 @@
 			"lineage": [
 				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Brassica A + C genomes → Brassica oleracea → leafy kales → flower-head types → broccoli → broccolini",
 				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Brassica A + C genomes → Brassica oleracea → leafy kales → Chinese broccoli (gai lan) → broccolini"
-			]
+			],
+			"genome": {
+				"state": "CC, 2n = 18, diploid",
+				"change": "hybrid genome: broccoli × gai lan",
+				"confidence": "established",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Brassicodae (lineage II): ACK rearranged into PCK (n = 8 → 7) in the ancestor of lineage II",
+					"Brassiceae: whole-genome triplication, then gene loss and chromosome fusions (diploidization)",
+					"Rapa/Oleracea side of Brassiceae: the Rapa/Oleracea lineage splits from the Nigra lineage",
+					"Brassica A + C genomes: A and C genomes diverge, a few million years ago",
+					"Brassica oleracea: C genome: x = 9",
+					"leafy kales: domestication: the earliest, leafy gene pool",
+					"flower-head types: enlarged, proliferating inflorescences",
+					"broccoli: enlarged, branched flower heads with green buds",
+					"Chinese broccoli (gai lan): East Asian gene pool, distinct from European oleracea; thick flowering stems",
+					"broccolini: hybrid genome: broccoli × gai lan"
+				],
+				"signature": "[At-α › PCK › WGT › Rapa/Oleracea › A/C › CC › leafy › inflorescence › green buds] + [At-α › PCK › WGT › Rapa/Oleracea › A/C › CC › leafy › Alboglabra] › F1 Italica×Alboglabra"
+			}
 		},
 		{
 			"id": "kalettes",
@@ -485,7 +1130,26 @@
 			"lineage": [
 				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Brassica A + C genomes → Brassica oleracea → leafy kales → headed cabbages → Brussels sprouts → kalettes / flower sprouts",
 				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Brassica A + C genomes → Brassica oleracea → leafy kales → kale → kalettes / flower sprouts"
-			]
+			],
+			"genome": {
+				"state": "CC, 2n = 18, diploid",
+				"change": "hybrid genome: Brussels sprouts × kale",
+				"confidence": "established",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Brassicodae (lineage II): ACK rearranged into PCK (n = 8 → 7) in the ancestor of lineage II",
+					"Brassiceae: whole-genome triplication, then gene loss and chromosome fusions (diploidization)",
+					"Rapa/Oleracea side of Brassiceae: the Rapa/Oleracea lineage splits from the Nigra lineage",
+					"Brassica A + C genomes: A and C genomes diverge, a few million years ago",
+					"Brassica oleracea: C genome: x = 9",
+					"leafy kales: domestication: the earliest, leafy gene pool",
+					"headed cabbages: heading alleles: inward-curving leaves form a head",
+					"Brussels sprouts: the heading habit moved to the side buds of a tall stem",
+					"kale: selected for large, often curled leaves; no head",
+					"kalettes / flower sprouts: hybrid genome: Brussels sprouts × kale"
+				],
+				"signature": "[At-α › PCK › WGT › Rapa/Oleracea › A/C › CC › leafy › heading › axillary heads] + [At-α › PCK › WGT › Rapa/Oleracea › A/C › CC › leafy › curled leaves] › Gemmifera×Acephala"
+			}
 		},
 		{
 			"id": "rapa-early",
@@ -494,14 +1158,45 @@
 			"where": "Central Asia (Hindu Kush)",
 			"when": "~3,500–5,000 years ago",
 			"confidence": "debated",
-			"note": "after McAlvay et al. 2021; spread west to Europe and east to China"
+			"note": "after McAlvay et al. 2021; spread west to Europe and east to China",
+			"genome": {
+				"state": "AA, 2n = 20, diploid",
+				"change": "domestication of B. rapa (Central Asia)",
+				"confidence": "debated",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Brassicodae (lineage II): ACK rearranged into PCK (n = 8 → 7) in the ancestor of lineage II",
+					"Brassiceae: whole-genome triplication, then gene loss and chromosome fusions (diploidization)",
+					"Rapa/Oleracea side of Brassiceae: the Rapa/Oleracea lineage splits from the Nigra lineage",
+					"Brassica A + C genomes: A and C genomes diverge, a few million years ago",
+					"Brassica rapa: A genome: x = 10",
+					"early rapa crops (turnips + oilseeds): domestication of B. rapa (Central Asia)"
+				],
+				"signature": "At-α › PCK › WGT › Rapa/Oleracea › A/C › AA › rapa-dom"
+			}
 		},
 		{
 			"id": "rapa-european",
 			"kind": "crop-lineage",
 			"name": "European rapas",
 			"where": "Europe",
-			"confidence": "likely"
+			"confidence": "likely",
+			"genome": {
+				"state": "AA, 2n = 20, diploid",
+				"change": "European gene pool",
+				"confidence": "likely",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Brassicodae (lineage II): ACK rearranged into PCK (n = 8 → 7) in the ancestor of lineage II",
+					"Brassiceae: whole-genome triplication, then gene loss and chromosome fusions (diploidization)",
+					"Rapa/Oleracea side of Brassiceae: the Rapa/Oleracea lineage splits from the Nigra lineage",
+					"Brassica A + C genomes: A and C genomes diverge, a few million years ago",
+					"Brassica rapa: A genome: x = 10",
+					"early rapa crops (turnips + oilseeds): domestication of B. rapa (Central Asia)",
+					"European rapas: European gene pool"
+				],
+				"signature": "At-α › PCK › WGT › Rapa/Oleracea › A/C › AA › rapa-dom › Europe"
+			}
 		},
 		{
 			"id": "turnip",
@@ -511,7 +1206,24 @@
 			"part": "swollen root and hypocotyl",
 			"lineage": [
 				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Brassica A + C genomes → Brassica rapa → early rapa crops (turnips + oilseeds) → European rapas → turnip"
-			]
+			],
+			"genome": {
+				"state": "AA, 2n = 20, diploid",
+				"change": "selected for a swollen root and hypocotyl",
+				"confidence": "established",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Brassicodae (lineage II): ACK rearranged into PCK (n = 8 → 7) in the ancestor of lineage II",
+					"Brassiceae: whole-genome triplication, then gene loss and chromosome fusions (diploidization)",
+					"Rapa/Oleracea side of Brassiceae: the Rapa/Oleracea lineage splits from the Nigra lineage",
+					"Brassica A + C genomes: A and C genomes diverge, a few million years ago",
+					"Brassica rapa: A genome: x = 10",
+					"early rapa crops (turnips + oilseeds): domestication of B. rapa (Central Asia)",
+					"European rapas: European gene pool",
+					"turnip: selected for a swollen root and hypocotyl"
+				],
+				"signature": "At-α › PCK › WGT › Rapa/Oleracea › A/C › AA › rapa-dom › Europe › swollen root"
+			}
 		},
 		{
 			"id": "rapini",
@@ -523,14 +1235,47 @@
 			"confidence": "likely",
 			"lineage": [
 				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Brassica A + C genomes → Brassica rapa → early rapa crops (turnips + oilseeds) → European rapas → rapini / broccoli rabe"
-			]
+			],
+			"genome": {
+				"state": "AA, 2n = 20, diploid",
+				"change": "selected for early, abundant flowering shoots",
+				"confidence": "established",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Brassicodae (lineage II): ACK rearranged into PCK (n = 8 → 7) in the ancestor of lineage II",
+					"Brassiceae: whole-genome triplication, then gene loss and chromosome fusions (diploidization)",
+					"Rapa/Oleracea side of Brassiceae: the Rapa/Oleracea lineage splits from the Nigra lineage",
+					"Brassica A + C genomes: A and C genomes diverge, a few million years ago",
+					"Brassica rapa: A genome: x = 10",
+					"early rapa crops (turnips + oilseeds): domestication of B. rapa (Central Asia)",
+					"European rapas: European gene pool",
+					"rapini / broccoli rabe: selected for early, abundant flowering shoots"
+				],
+				"signature": "At-α › PCK › WGT › Rapa/Oleracea › A/C › AA › rapa-dom › Europe › flowering shoots"
+			}
 		},
 		{
 			"id": "rapa-oilseeds",
 			"kind": "crop-lineage",
 			"name": "rapa oilseeds",
 			"where": "South Asia and Europe",
-			"confidence": "likely"
+			"confidence": "likely",
+			"genome": {
+				"state": "AA, 2n = 20, diploid",
+				"change": "oilseed gene pool",
+				"confidence": "likely",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Brassicodae (lineage II): ACK rearranged into PCK (n = 8 → 7) in the ancestor of lineage II",
+					"Brassiceae: whole-genome triplication, then gene loss and chromosome fusions (diploidization)",
+					"Rapa/Oleracea side of Brassiceae: the Rapa/Oleracea lineage splits from the Nigra lineage",
+					"Brassica A + C genomes: A and C genomes diverge, a few million years ago",
+					"Brassica rapa: A genome: x = 10",
+					"early rapa crops (turnips + oilseeds): domestication of B. rapa (Central Asia)",
+					"rapa oilseeds: oilseed gene pool"
+				],
+				"signature": "At-α › PCK › WGT › Rapa/Oleracea › A/C › AA › rapa-dom › oilseed"
+			}
 		},
 		{
 			"id": "turnip-rape",
@@ -540,7 +1285,24 @@
 			"part": "seeds (oil)",
 			"lineage": [
 				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Brassica A + C genomes → Brassica rapa → early rapa crops (turnips + oilseeds) → rapa oilseeds → turnip rape / sarson"
-			]
+			],
+			"genome": {
+				"state": "AA, 2n = 20, diploid",
+				"change": "selected for oil-rich seeds",
+				"confidence": "established",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Brassicodae (lineage II): ACK rearranged into PCK (n = 8 → 7) in the ancestor of lineage II",
+					"Brassiceae: whole-genome triplication, then gene loss and chromosome fusions (diploidization)",
+					"Rapa/Oleracea side of Brassiceae: the Rapa/Oleracea lineage splits from the Nigra lineage",
+					"Brassica A + C genomes: A and C genomes diverge, a few million years ago",
+					"Brassica rapa: A genome: x = 10",
+					"early rapa crops (turnips + oilseeds): domestication of B. rapa (Central Asia)",
+					"rapa oilseeds: oilseed gene pool",
+					"turnip rape / sarson: selected for oil-rich seeds"
+				],
+				"signature": "At-α › PCK › WGT › Rapa/Oleracea › A/C › AA › rapa-dom › oilseed › oil seeds"
+			}
 		},
 		{
 			"id": "rapa-east-asian",
@@ -548,7 +1310,23 @@
 			"name": "East Asian leafy rapas",
 			"where": "China",
 			"when": "~2,000 years ago onward",
-			"confidence": "likely"
+			"confidence": "likely",
+			"genome": {
+				"state": "AA, 2n = 20, diploid",
+				"change": "East Asian leafy gene pool",
+				"confidence": "likely",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Brassicodae (lineage II): ACK rearranged into PCK (n = 8 → 7) in the ancestor of lineage II",
+					"Brassiceae: whole-genome triplication, then gene loss and chromosome fusions (diploidization)",
+					"Rapa/Oleracea side of Brassiceae: the Rapa/Oleracea lineage splits from the Nigra lineage",
+					"Brassica A + C genomes: A and C genomes diverge, a few million years ago",
+					"Brassica rapa: A genome: x = 10",
+					"early rapa crops (turnips + oilseeds): domestication of B. rapa (Central Asia)",
+					"East Asian leafy rapas: East Asian leafy gene pool"
+				],
+				"signature": "At-α › PCK › WGT › Rapa/Oleracea › A/C › AA › rapa-dom › East Asia"
+			}
 		},
 		{
 			"id": "bok-choy",
@@ -559,7 +1337,24 @@
 			"note": "one of the oldest Chinese leaf vegetables",
 			"lineage": [
 				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Brassica A + C genomes → Brassica rapa → early rapa crops (turnips + oilseeds) → East Asian leafy rapas → bok choy"
-			]
+			],
+			"genome": {
+				"state": "AA, 2n = 20, diploid",
+				"change": "non-heading; thick white leaf stalks",
+				"confidence": "established",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Brassicodae (lineage II): ACK rearranged into PCK (n = 8 → 7) in the ancestor of lineage II",
+					"Brassiceae: whole-genome triplication, then gene loss and chromosome fusions (diploidization)",
+					"Rapa/Oleracea side of Brassiceae: the Rapa/Oleracea lineage splits from the Nigra lineage",
+					"Brassica A + C genomes: A and C genomes diverge, a few million years ago",
+					"Brassica rapa: A genome: x = 10",
+					"early rapa crops (turnips + oilseeds): domestication of B. rapa (Central Asia)",
+					"East Asian leafy rapas: East Asian leafy gene pool",
+					"bok choy: non-heading; thick white leaf stalks"
+				],
+				"signature": "At-α › PCK › WGT › Rapa/Oleracea › A/C › AA › rapa-dom › East Asia › white petioles"
+			}
 		},
 		{
 			"id": "tatsoi",
@@ -570,7 +1365,25 @@
 			"confidence": "likely",
 			"lineage": [
 				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Brassica A + C genomes → Brassica rapa → early rapa crops (turnips + oilseeds) → East Asian leafy rapas → bok choy → tatsoi"
-			]
+			],
+			"genome": {
+				"state": "AA, 2n = 20, diploid",
+				"change": "flat rosette of dark, spoon-shaped leaves",
+				"confidence": "established",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Brassicodae (lineage II): ACK rearranged into PCK (n = 8 → 7) in the ancestor of lineage II",
+					"Brassiceae: whole-genome triplication, then gene loss and chromosome fusions (diploidization)",
+					"Rapa/Oleracea side of Brassiceae: the Rapa/Oleracea lineage splits from the Nigra lineage",
+					"Brassica A + C genomes: A and C genomes diverge, a few million years ago",
+					"Brassica rapa: A genome: x = 10",
+					"early rapa crops (turnips + oilseeds): domestication of B. rapa (Central Asia)",
+					"East Asian leafy rapas: East Asian leafy gene pool",
+					"bok choy: non-heading; thick white leaf stalks",
+					"tatsoi: flat rosette of dark, spoon-shaped leaves"
+				],
+				"signature": "At-α › PCK › WGT › Rapa/Oleracea › A/C › AA › rapa-dom › East Asia › white petioles › rosette"
+			}
 		},
 		{
 			"id": "napa",
@@ -586,7 +1399,27 @@
 				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Brassica A + C genomes → Brassica rapa → early rapa crops (turnips + oilseeds) → East Asian leafy rapas → napa cabbage (baechu)",
 				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Brassica A + C genomes → Brassica rapa → early rapa crops (turnips + oilseeds) → European rapas → turnip → napa cabbage (baechu)",
 				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Brassica A + C genomes → Brassica rapa → early rapa crops (turnips + oilseeds) → East Asian leafy rapas → bok choy → napa cabbage (baechu)"
-			]
+			],
+			"genome": {
+				"state": "AA, 2n = 20, diploid",
+				"change": "heading alleles in the A genome, selected in parallel with cabbage's (C genome)",
+				"confidence": "likely",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Brassicodae (lineage II): ACK rearranged into PCK (n = 8 → 7) in the ancestor of lineage II",
+					"Brassiceae: whole-genome triplication, then gene loss and chromosome fusions (diploidization)",
+					"Rapa/Oleracea side of Brassiceae: the Rapa/Oleracea lineage splits from the Nigra lineage",
+					"Brassica A + C genomes: A and C genomes diverge, a few million years ago",
+					"Brassica rapa: A genome: x = 10",
+					"early rapa crops (turnips + oilseeds): domestication of B. rapa (Central Asia)",
+					"East Asian leafy rapas: East Asian leafy gene pool",
+					"European rapas: European gene pool",
+					"turnip: selected for a swollen root and hypocotyl",
+					"bok choy: non-heading; thick white leaf stalks",
+					"napa cabbage (baechu): heading alleles in the A genome, selected in parallel with cabbage's (C genome)"
+				],
+				"signature": "At-α › PCK › WGT › Rapa/Oleracea › A/C › AA › rapa-dom › East Asia › A-genome head"
+			}
 		},
 		{
 			"id": "komatsuna",
@@ -598,7 +1431,24 @@
 			"confidence": "likely",
 			"lineage": [
 				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Brassica A + C genomes → Brassica rapa → early rapa crops (turnips + oilseeds) → East Asian leafy rapas → komatsuna"
-			]
+			],
+			"genome": {
+				"state": "AA, 2n = 20, diploid",
+				"change": "Japanese leafy type with smooth green leaves",
+				"confidence": "established",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Brassicodae (lineage II): ACK rearranged into PCK (n = 8 → 7) in the ancestor of lineage II",
+					"Brassiceae: whole-genome triplication, then gene loss and chromosome fusions (diploidization)",
+					"Rapa/Oleracea side of Brassiceae: the Rapa/Oleracea lineage splits from the Nigra lineage",
+					"Brassica A + C genomes: A and C genomes diverge, a few million years ago",
+					"Brassica rapa: A genome: x = 10",
+					"early rapa crops (turnips + oilseeds): domestication of B. rapa (Central Asia)",
+					"East Asian leafy rapas: East Asian leafy gene pool",
+					"komatsuna: Japanese leafy type with smooth green leaves"
+				],
+				"signature": "At-α › PCK › WGT › Rapa/Oleracea › A/C › AA › rapa-dom › East Asia › Perviridis"
+			}
 		},
 		{
 			"id": "mizuna",
@@ -610,14 +1460,48 @@
 			"confidence": "likely",
 			"lineage": [
 				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Brassica A + C genomes → Brassica rapa → early rapa crops (turnips + oilseeds) → East Asian leafy rapas → mizuna"
-			]
+			],
+			"genome": {
+				"state": "AA, 2n = 20, diploid",
+				"change": "Japanese leafy type with deeply dissected leaves",
+				"confidence": "established",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Brassicodae (lineage II): ACK rearranged into PCK (n = 8 → 7) in the ancestor of lineage II",
+					"Brassiceae: whole-genome triplication, then gene loss and chromosome fusions (diploidization)",
+					"Rapa/Oleracea side of Brassiceae: the Rapa/Oleracea lineage splits from the Nigra lineage",
+					"Brassica A + C genomes: A and C genomes diverge, a few million years ago",
+					"Brassica rapa: A genome: x = 10",
+					"early rapa crops (turnips + oilseeds): domestication of B. rapa (Central Asia)",
+					"East Asian leafy rapas: East Asian leafy gene pool",
+					"mizuna: Japanese leafy type with deeply dissected leaves"
+				],
+				"signature": "At-α › PCK › WGT › Rapa/Oleracea › A/C › AA › rapa-dom › East Asia › dissected leaves"
+			}
 		},
 		{
 			"id": "napus-oilseed",
 			"kind": "crop-lineage",
 			"name": "oilseed rape",
 			"where": "Europe",
-			"confidence": "likely"
+			"confidence": "likely",
+			"genome": {
+				"state": "AACC, 2n = 38, allotetraploid",
+				"change": "oilseed rape gene pool",
+				"confidence": "likely",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Brassicodae (lineage II): ACK rearranged into PCK (n = 8 → 7) in the ancestor of lineage II",
+					"Brassiceae: whole-genome triplication, then gene loss and chromosome fusions (diploidization)",
+					"Rapa/Oleracea side of Brassiceae: the Rapa/Oleracea lineage splits from the Nigra lineage",
+					"Brassica A + C genomes: A and C genomes diverge, a few million years ago",
+					"Brassica rapa: A genome: x = 10",
+					"Brassica oleracea: C genome: x = 9",
+					"Brassica napus: A genome (from B. rapa) + C genome (from B. oleracea) combined, ~7,500 years ago",
+					"oilseed rape: oilseed rape gene pool"
+				],
+				"signature": "[At-α › PCK › WGT › Rapa/Oleracea › A/C › AA] + [At-α › PCK › WGT › Rapa/Oleracea › A/C › CC] › AACC › oilseed"
+			}
 		},
 		{
 			"id": "canola",
@@ -631,7 +1515,25 @@
 			"lineage": [
 				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Brassica A + C genomes → Brassica rapa → Brassica napus → oilseed rape → canola",
 				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Brassica A + C genomes → Brassica oleracea → Brassica napus → oilseed rape → canola"
-			]
+			],
+			"genome": {
+				"state": "AACC, 2n = 38, allotetraploid",
+				"change": "\"double low\": loss-of-function FAE1 alleles in both A and C copies (low erucic acid) and low seed glucosinolates",
+				"confidence": "established",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Brassicodae (lineage II): ACK rearranged into PCK (n = 8 → 7) in the ancestor of lineage II",
+					"Brassiceae: whole-genome triplication, then gene loss and chromosome fusions (diploidization)",
+					"Rapa/Oleracea side of Brassiceae: the Rapa/Oleracea lineage splits from the Nigra lineage",
+					"Brassica A + C genomes: A and C genomes diverge, a few million years ago",
+					"Brassica rapa: A genome: x = 10",
+					"Brassica oleracea: C genome: x = 9",
+					"Brassica napus: A genome (from B. rapa) + C genome (from B. oleracea) combined, ~7,500 years ago",
+					"oilseed rape: oilseed rape gene pool",
+					"canola: \"double low\": loss-of-function FAE1 alleles in both A and C copies (low erucic acid) and low seed glucosinolates"
+				],
+				"signature": "[At-α › PCK › WGT › Rapa/Oleracea › A/C › AA] + [At-α › PCK › WGT › Rapa/Oleracea › A/C › CC] › AACC › oilseed › 00: FAE1⁻ low-GSL"
+			}
 		},
 		{
 			"id": "rutabaga",
@@ -645,7 +1547,24 @@
 			"lineage": [
 				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Brassica A + C genomes → Brassica rapa → Brassica napus → rutabaga / swede",
 				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Brassica A + C genomes → Brassica oleracea → Brassica napus → rutabaga / swede"
-			]
+			],
+			"genome": {
+				"state": "AACC, 2n = 38, allotetraploid",
+				"change": "selected for a swollen root; a distinct swede gene pool",
+				"confidence": "likely",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Brassicodae (lineage II): ACK rearranged into PCK (n = 8 → 7) in the ancestor of lineage II",
+					"Brassiceae: whole-genome triplication, then gene loss and chromosome fusions (diploidization)",
+					"Rapa/Oleracea side of Brassiceae: the Rapa/Oleracea lineage splits from the Nigra lineage",
+					"Brassica A + C genomes: A and C genomes diverge, a few million years ago",
+					"Brassica rapa: A genome: x = 10",
+					"Brassica oleracea: C genome: x = 9",
+					"Brassica napus: A genome (from B. rapa) + C genome (from B. oleracea) combined, ~7,500 years ago",
+					"rutabaga / swede: selected for a swollen root; a distinct swede gene pool"
+				],
+				"signature": "[At-α › PCK › WGT › Rapa/Oleracea › A/C › AA] + [At-α › PCK › WGT › Rapa/Oleracea › A/C › CC] › AACC › swede root"
+			}
 		},
 		{
 			"id": "siberian-kale",
@@ -656,14 +1575,49 @@
 			"lineage": [
 				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Brassica A + C genomes → Brassica rapa → Brassica napus → Siberian / Hanover kale",
 				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Brassica A + C genomes → Brassica oleracea → Brassica napus → Siberian / Hanover kale"
-			]
+			],
+			"genome": {
+				"state": "AACC, 2n = 38, allotetraploid",
+				"change": "leafy napus type (Pabularia)",
+				"confidence": "established",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Brassicodae (lineage II): ACK rearranged into PCK (n = 8 → 7) in the ancestor of lineage II",
+					"Brassiceae: whole-genome triplication, then gene loss and chromosome fusions (diploidization)",
+					"Rapa/Oleracea side of Brassiceae: the Rapa/Oleracea lineage splits from the Nigra lineage",
+					"Brassica A + C genomes: A and C genomes diverge, a few million years ago",
+					"Brassica rapa: A genome: x = 10",
+					"Brassica oleracea: C genome: x = 9",
+					"Brassica napus: A genome (from B. rapa) + C genome (from B. oleracea) combined, ~7,500 years ago",
+					"Siberian / Hanover kale: leafy napus type (Pabularia)"
+				],
+				"signature": "[At-α › PCK › WGT › Rapa/Oleracea › A/C › AA] + [At-α › PCK › WGT › Rapa/Oleracea › A/C › CC] › AACC › leafy napus"
+			}
 		},
 		{
 			"id": "juncea-seed",
 			"kind": "crop-lineage",
 			"name": "seed mustards",
 			"where": "South Asia",
-			"confidence": "likely"
+			"confidence": "likely",
+			"genome": {
+				"state": "AABB, 2n = 36, allotetraploid",
+				"change": "South Asian seed-mustard gene pool",
+				"confidence": "likely",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Brassicodae (lineage II): ACK rearranged into PCK (n = 8 → 7) in the ancestor of lineage II",
+					"Brassiceae: whole-genome triplication, then gene loss and chromosome fusions (diploidization)",
+					"Rapa/Oleracea side of Brassiceae: the Rapa/Oleracea lineage splits from the Nigra lineage",
+					"Brassica A + C genomes: A and C genomes diverge, a few million years ago",
+					"Brassica rapa: A genome: x = 10",
+					"Nigra lineage (B genome): the Nigra lineage splits from the Rapa/Oleracea lineage",
+					"Mutarda nigra: B genome: x = 8",
+					"Brassica juncea: A genome (from B. rapa) + B genome (from black mustard) combined",
+					"seed mustards: South Asian seed-mustard gene pool"
+				],
+				"signature": "[At-α › PCK › WGT › Rapa/Oleracea › A/C › AA] + [At-α › PCK › WGT › Nigra › BB] › AABB › South Asia seed"
+			}
 		},
 		{
 			"id": "brown-mustard",
@@ -673,14 +1627,51 @@
 			"lineage": [
 				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Brassica A + C genomes → Brassica rapa → Brassica juncea → seed mustards → brown mustard seed",
 				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Nigra lineage (B genome) → Mutarda nigra → Brassica juncea → seed mustards → brown mustard seed"
-			]
+			],
+			"genome": {
+				"state": "AABB, 2n = 36, allotetraploid",
+				"change": "selected for seed (oil and condiment)",
+				"confidence": "established",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Brassicodae (lineage II): ACK rearranged into PCK (n = 8 → 7) in the ancestor of lineage II",
+					"Brassiceae: whole-genome triplication, then gene loss and chromosome fusions (diploidization)",
+					"Rapa/Oleracea side of Brassiceae: the Rapa/Oleracea lineage splits from the Nigra lineage",
+					"Brassica A + C genomes: A and C genomes diverge, a few million years ago",
+					"Brassica rapa: A genome: x = 10",
+					"Nigra lineage (B genome): the Nigra lineage splits from the Rapa/Oleracea lineage",
+					"Mutarda nigra: B genome: x = 8",
+					"Brassica juncea: A genome (from B. rapa) + B genome (from black mustard) combined",
+					"seed mustards: South Asian seed-mustard gene pool",
+					"brown mustard seed: selected for seed (oil and condiment)"
+				],
+				"signature": "[At-α › PCK › WGT › Rapa/Oleracea › A/C › AA] + [At-α › PCK › WGT › Nigra › BB] › AABB › South Asia seed › seed"
+			}
 		},
 		{
 			"id": "juncea-vegetable",
 			"kind": "crop-lineage",
 			"name": "East Asian vegetable mustards",
 			"where": "China, Korea, Japan",
-			"confidence": "likely"
+			"confidence": "likely",
+			"genome": {
+				"state": "AABB, 2n = 36, allotetraploid",
+				"change": "East Asian vegetable-mustard gene pool, genetically distinct from seed mustards",
+				"confidence": "likely",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Brassicodae (lineage II): ACK rearranged into PCK (n = 8 → 7) in the ancestor of lineage II",
+					"Brassiceae: whole-genome triplication, then gene loss and chromosome fusions (diploidization)",
+					"Rapa/Oleracea side of Brassiceae: the Rapa/Oleracea lineage splits from the Nigra lineage",
+					"Brassica A + C genomes: A and C genomes diverge, a few million years ago",
+					"Brassica rapa: A genome: x = 10",
+					"Nigra lineage (B genome): the Nigra lineage splits from the Rapa/Oleracea lineage",
+					"Mutarda nigra: B genome: x = 8",
+					"Brassica juncea: A genome (from B. rapa) + B genome (from black mustard) combined",
+					"East Asian vegetable mustards: East Asian vegetable-mustard gene pool, genetically distinct from seed mustards"
+				],
+				"signature": "[At-α › PCK › WGT › Rapa/Oleracea › A/C › AA] + [At-α › PCK › WGT › Nigra › BB] › AABB › East Asia veg"
+			}
 		},
 		{
 			"id": "mustard-greens",
@@ -691,7 +1682,26 @@
 			"lineage": [
 				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Brassica A + C genomes → Brassica rapa → Brassica juncea → East Asian vegetable mustards → mustard greens (gat)",
 				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Nigra lineage (B genome) → Mutarda nigra → Brassica juncea → East Asian vegetable mustards → mustard greens (gat)"
-			]
+			],
+			"genome": {
+				"state": "AABB, 2n = 36, allotetraploid",
+				"change": "leafy type",
+				"confidence": "established",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Brassicodae (lineage II): ACK rearranged into PCK (n = 8 → 7) in the ancestor of lineage II",
+					"Brassiceae: whole-genome triplication, then gene loss and chromosome fusions (diploidization)",
+					"Rapa/Oleracea side of Brassiceae: the Rapa/Oleracea lineage splits from the Nigra lineage",
+					"Brassica A + C genomes: A and C genomes diverge, a few million years ago",
+					"Brassica rapa: A genome: x = 10",
+					"Nigra lineage (B genome): the Nigra lineage splits from the Rapa/Oleracea lineage",
+					"Mutarda nigra: B genome: x = 8",
+					"Brassica juncea: A genome (from B. rapa) + B genome (from black mustard) combined",
+					"East Asian vegetable mustards: East Asian vegetable-mustard gene pool, genetically distinct from seed mustards",
+					"mustard greens (gat): leafy type"
+				],
+				"signature": "[At-α › PCK › WGT › Rapa/Oleracea › A/C › AA] + [At-α › PCK › WGT › Nigra › BB] › AABB › East Asia veg › leaf"
+			}
 		},
 		{
 			"id": "zha-cai",
@@ -702,7 +1712,26 @@
 			"lineage": [
 				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Brassica A + C genomes → Brassica rapa → Brassica juncea → East Asian vegetable mustards → zha cai (stem mustard)",
 				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Nigra lineage (B genome) → Mutarda nigra → Brassica juncea → East Asian vegetable mustards → zha cai (stem mustard)"
-			]
+			],
+			"genome": {
+				"state": "AABB, 2n = 36, allotetraploid",
+				"change": "swollen-stem type",
+				"confidence": "established",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Brassicodae (lineage II): ACK rearranged into PCK (n = 8 → 7) in the ancestor of lineage II",
+					"Brassiceae: whole-genome triplication, then gene loss and chromosome fusions (diploidization)",
+					"Rapa/Oleracea side of Brassiceae: the Rapa/Oleracea lineage splits from the Nigra lineage",
+					"Brassica A + C genomes: A and C genomes diverge, a few million years ago",
+					"Brassica rapa: A genome: x = 10",
+					"Nigra lineage (B genome): the Nigra lineage splits from the Rapa/Oleracea lineage",
+					"Mutarda nigra: B genome: x = 8",
+					"Brassica juncea: A genome (from B. rapa) + B genome (from black mustard) combined",
+					"East Asian vegetable mustards: East Asian vegetable-mustard gene pool, genetically distinct from seed mustards",
+					"zha cai (stem mustard): swollen-stem type"
+				],
+				"signature": "[At-α › PCK › WGT › Rapa/Oleracea › A/C › AA] + [At-α › PCK › WGT › Nigra › BB] › AABB › East Asia veg › swollen stem"
+			}
 		},
 		{
 			"id": "ethiopian-kale",
@@ -713,7 +1742,25 @@
 			"lineage": [
 				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Nigra lineage (B genome) → Mutarda nigra → Mutarda carinata → Ethiopian kale (gomenzer)",
 				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Brassica A + C genomes → Brassica oleracea → Mutarda carinata → Ethiopian kale (gomenzer)"
-			]
+			],
+			"genome": {
+				"state": "BBCC, 2n = 34, allotetraploid",
+				"change": "leafy and oilseed landraces",
+				"confidence": "likely",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Brassicodae (lineage II): ACK rearranged into PCK (n = 8 → 7) in the ancestor of lineage II",
+					"Brassiceae: whole-genome triplication, then gene loss and chromosome fusions (diploidization)",
+					"Nigra lineage (B genome): the Nigra lineage splits from the Rapa/Oleracea lineage",
+					"Mutarda nigra: B genome: x = 8",
+					"Rapa/Oleracea side of Brassiceae: the Rapa/Oleracea lineage splits from the Nigra lineage",
+					"Brassica A + C genomes: A and C genomes diverge, a few million years ago",
+					"Brassica oleracea: C genome: x = 9",
+					"Mutarda carinata: B genome (from black mustard) + C genome (from B. oleracea) combined",
+					"Ethiopian kale (gomenzer): leafy and oilseed landraces"
+				],
+				"signature": "[At-α › PCK › WGT › Nigra › BB] + [At-α › PCK › WGT › Rapa/Oleracea › A/C › CC] › BBCC › leaf/seed"
+			}
 		},
 		{
 			"id": "black-mustard",
@@ -722,14 +1769,42 @@
 			"part": "seeds (condiment)",
 			"lineage": [
 				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Nigra lineage (B genome) → Mutarda nigra → black mustard seed"
-			]
+			],
+			"genome": {
+				"state": "BB, 2n = 16, diploid",
+				"change": "seed crop with little domestication",
+				"confidence": "likely",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Brassicodae (lineage II): ACK rearranged into PCK (n = 8 → 7) in the ancestor of lineage II",
+					"Brassiceae: whole-genome triplication, then gene loss and chromosome fusions (diploidization)",
+					"Nigra lineage (B genome): the Nigra lineage splits from the Rapa/Oleracea lineage",
+					"Mutarda nigra: B genome: x = 8",
+					"black mustard seed: seed crop with little domestication"
+				],
+				"signature": "At-α › PCK › WGT › Nigra › BB › seed"
+			}
 		},
 		{
 			"id": "radish-western",
 			"kind": "crop-lineage",
 			"name": "Western small radishes",
 			"where": "Mediterranean / Europe",
-			"confidence": "likely"
+			"confidence": "likely",
+			"genome": {
+				"state": "RR, 2n = 18, diploid",
+				"change": "Western small-radish gene pool",
+				"confidence": "likely",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Brassicodae (lineage II): ACK rearranged into PCK (n = 8 → 7) in the ancestor of lineage II",
+					"Brassiceae: whole-genome triplication, then gene loss and chromosome fusions (diploidization)",
+					"Rapa/Oleracea side of Brassiceae: the Rapa/Oleracea lineage splits from the Nigra lineage",
+					"Raphanus sativus: R genome: x = 9 (radish genome may carry input from both Brassiceae lineages)",
+					"Western small radishes: Western small-radish gene pool"
+				],
+				"signature": "At-α › PCK › WGT › Rapa/Oleracea › RR › Western"
+			}
 		},
 		{
 			"id": "radish-east-asian",
@@ -737,7 +1812,21 @@
 			"name": "East Asian large radishes",
 			"where": "China, Korea, Japan",
 			"confidence": "likely",
-			"note": "genetically distinct from Western radishes; possibly a separate domestication"
+			"note": "genetically distinct from Western radishes; possibly a separate domestication",
+			"genome": {
+				"state": "RR, 2n = 18, diploid",
+				"change": "East Asian large-radish gene pool, genetically distinct from Western radishes",
+				"confidence": "likely",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Brassicodae (lineage II): ACK rearranged into PCK (n = 8 → 7) in the ancestor of lineage II",
+					"Brassiceae: whole-genome triplication, then gene loss and chromosome fusions (diploidization)",
+					"Rapa/Oleracea side of Brassiceae: the Rapa/Oleracea lineage splits from the Nigra lineage",
+					"Raphanus sativus: R genome: x = 9 (radish genome may carry input from both Brassiceae lineages)",
+					"East Asian large radishes: East Asian large-radish gene pool, genetically distinct from Western radishes"
+				],
+				"signature": "At-α › PCK › WGT › Rapa/Oleracea › RR › East Asian"
+			}
 		},
 		{
 			"id": "radish",
@@ -746,7 +1835,22 @@
 			"part": "swollen root and hypocotyl",
 			"lineage": [
 				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Raphanus sativus → Western small radishes → radish"
-			]
+			],
+			"genome": {
+				"state": "RR, 2n = 18, diploid",
+				"change": "small, fast swollen root",
+				"confidence": "established",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Brassicodae (lineage II): ACK rearranged into PCK (n = 8 → 7) in the ancestor of lineage II",
+					"Brassiceae: whole-genome triplication, then gene loss and chromosome fusions (diploidization)",
+					"Rapa/Oleracea side of Brassiceae: the Rapa/Oleracea lineage splits from the Nigra lineage",
+					"Raphanus sativus: R genome: x = 9 (radish genome may carry input from both Brassiceae lineages)",
+					"Western small radishes: Western small-radish gene pool",
+					"radish: small, fast swollen root"
+				],
+				"signature": "At-α › PCK › WGT › Rapa/Oleracea › RR › Western › small root"
+			}
 		},
 		{
 			"id": "daikon",
@@ -756,7 +1860,22 @@
 			"note": "Korean mu (무), used in kkakdugi",
 			"lineage": [
 				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Raphanus sativus → East Asian large radishes → daikon / Korean radish (mu)"
-			]
+			],
+			"genome": {
+				"state": "RR, 2n = 18, diploid",
+				"change": "large, long swollen root",
+				"confidence": "established",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Brassicodae (lineage II): ACK rearranged into PCK (n = 8 → 7) in the ancestor of lineage II",
+					"Brassiceae: whole-genome triplication, then gene loss and chromosome fusions (diploidization)",
+					"Rapa/Oleracea side of Brassiceae: the Rapa/Oleracea lineage splits from the Nigra lineage",
+					"Raphanus sativus: R genome: x = 9 (radish genome may carry input from both Brassiceae lineages)",
+					"East Asian large radishes: East Asian large-radish gene pool, genetically distinct from Western radishes",
+					"daikon / Korean radish (mu): large, long swollen root"
+				],
+				"signature": "At-α › PCK › WGT › Rapa/Oleracea › RR › East Asian › large root"
+			}
 		},
 		{
 			"id": "white-mustard",
@@ -765,7 +1884,21 @@
 			"part": "seeds (condiment)",
 			"lineage": [
 				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → Sinapis alba → white / yellow mustard seed"
-			]
+			],
+			"genome": {
+				"state": "2n = 24, diploid",
+				"change": "seed crop",
+				"confidence": "established",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Brassicodae (lineage II): ACK rearranged into PCK (n = 8 → 7) in the ancestor of lineage II",
+					"Brassiceae: whole-genome triplication, then gene loss and chromosome fusions (diploidization)",
+					"Rapa/Oleracea side of Brassiceae: the Rapa/Oleracea lineage splits from the Nigra lineage",
+					"Sinapis alba: x = 12",
+					"white / yellow mustard seed: seed crop"
+				],
+				"signature": "At-α › PCK › WGT › Rapa/Oleracea › 2n=24 › seed"
+			}
 		},
 		{
 			"id": "arugula",
@@ -774,7 +1907,22 @@
 			"part": "leaves",
 			"lineage": [
 				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → rockets (Eruca + Diplotaxis) → Eruca vesicaria → arugula / rocket"
-			]
+			],
+			"genome": {
+				"state": "2n = 22, diploid",
+				"change": "leaf crop",
+				"confidence": "established",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Brassicodae (lineage II): ACK rearranged into PCK (n = 8 → 7) in the ancestor of lineage II",
+					"Brassiceae: whole-genome triplication, then gene loss and chromosome fusions (diploidization)",
+					"Rapa/Oleracea side of Brassiceae: the Rapa/Oleracea lineage splits from the Nigra lineage",
+					"rockets (Eruca + Diplotaxis): chromosome number settles at x = 11",
+					"Eruca vesicaria: x = 11",
+					"arugula / rocket: leaf crop"
+				],
+				"signature": "At-α › PCK › WGT › Rapa/Oleracea › 2n=22 › leaf"
+			}
 		},
 		{
 			"id": "wild-rocket",
@@ -783,7 +1931,22 @@
 			"part": "leaves",
 			"lineage": [
 				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → rockets (Eruca + Diplotaxis) → Diplotaxis tenuifolia → wild rocket"
-			]
+			],
+			"genome": {
+				"state": "2n = 22, diploid",
+				"change": "leaf crop, perennial",
+				"confidence": "established",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Brassicodae (lineage II): ACK rearranged into PCK (n = 8 → 7) in the ancestor of lineage II",
+					"Brassiceae: whole-genome triplication, then gene loss and chromosome fusions (diploidization)",
+					"Rapa/Oleracea side of Brassiceae: the Rapa/Oleracea lineage splits from the Nigra lineage",
+					"rockets (Eruca + Diplotaxis): chromosome number settles at x = 11",
+					"Diplotaxis tenuifolia: x = 11",
+					"wild rocket: leaf crop, perennial"
+				],
+				"signature": "At-α › PCK › WGT › Rapa/Oleracea › 2n=22·Dt › leaf"
+			}
 		},
 		{
 			"id": "sea-kale",
@@ -792,7 +1955,21 @@
 			"part": "blanched shoots",
 			"lineage": [
 				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → Crambe maritima → sea kale"
-			]
+			],
+			"genome": {
+				"state": "2n = 60, polyploid",
+				"change": "blanched shoots",
+				"confidence": "established",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Brassicodae (lineage II): ACK rearranged into PCK (n = 8 → 7) in the ancestor of lineage II",
+					"Brassiceae: whole-genome triplication, then gene loss and chromosome fusions (diploidization)",
+					"Rapa/Oleracea side of Brassiceae: the Rapa/Oleracea lineage splits from the Nigra lineage",
+					"Crambe maritima: polyploidy on top of the triplication",
+					"sea kale: blanched shoots"
+				],
+				"signature": "At-α › PCK › WGT › Rapa/Oleracea › 2n=60 › shoots"
+			}
 		},
 		{
 			"id": "horseradish",
@@ -801,7 +1978,18 @@
 			"part": "root (condiment)",
 			"lineage": [
 				"Brassicaceae (core) → Camelinodae (lineage I) → horseradish + cresses clade → Armoracia rusticana → horseradish"
-			]
+			],
+			"genome": {
+				"state": "2n = 32, tetraploid",
+				"change": "root crop, clonal",
+				"confidence": "established",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Armoracia rusticana: tetraploid (4x, x = 8); grown from root cuttings, rarely sets seed",
+					"horseradish: root crop, clonal"
+				],
+				"signature": "At-α › ACK › 2n=32·Ar › root"
+			}
 		},
 		{
 			"id": "watercress",
@@ -810,7 +1998,18 @@
 			"part": "leaves and stems",
 			"lineage": [
 				"Brassicaceae (core) → Camelinodae (lineage I) → Cardamineae (watercress + land cress) → Nasturtium officinale → watercress"
-			]
+			],
+			"genome": {
+				"state": "2n = 32, allotetraploid",
+				"change": "aquatic leaf crop",
+				"confidence": "established",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Nasturtium officinale: allotetraploid (4x, x = 8)",
+					"watercress: aquatic leaf crop"
+				],
+				"signature": "At-α › ACK › Cardamineae › 2n=32·No › leaf"
+			}
 		},
 		{
 			"id": "land-cress",
@@ -819,7 +2018,18 @@
 			"part": "leaves",
 			"lineage": [
 				"Brassicaceae (core) → Camelinodae (lineage I) → Cardamineae (watercress + land cress) → Barbarea verna → land cress"
-			]
+			],
+			"genome": {
+				"state": "2n = 16, diploid",
+				"change": "leaf crop",
+				"confidence": "established",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Barbarea verna: x = 8",
+					"land cress: leaf crop"
+				],
+				"signature": "At-α › ACK › Cardamineae › 2n=16·Bv › leaf"
+			}
 		},
 		{
 			"id": "wasabi",
@@ -829,7 +2039,19 @@
 			"where": "Japan",
 			"lineage": [
 				"Brassicaceae (core) → Brassicodae (lineage II) → Eutrema japonicum → wasabi"
-			]
+			],
+			"genome": {
+				"state": "2n = 28, tetraploid",
+				"change": "rhizome crop, mostly clonal",
+				"confidence": "established",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Brassicodae (lineage II): ACK rearranged into PCK (n = 8 → 7) in the ancestor of lineage II",
+					"Eutrema japonicum: tetraploid (4x, x = 7)",
+					"wasabi: rhizome crop, mostly clonal"
+				],
+				"signature": "At-α › PCK › 2n=28 › rhizome"
+			}
 		},
 		{
 			"id": "garden-cress",
@@ -838,7 +2060,19 @@
 			"part": "seedlings and leaves",
 			"lineage": [
 				"Brassicaceae (core) → Camelinodae (lineage I) → horseradish + cresses clade → Lepidieae → Lepidium sativum → garden cress"
-			]
+			],
+			"genome": {
+				"state": "2n = 16, diploid",
+				"change": "leaf and sprout crop",
+				"confidence": "established",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Lepidieae: repeated polyploidy within the tribe",
+					"Lepidium sativum: x = 8 (other counts reported)",
+					"garden cress: leaf and sprout crop"
+				],
+				"signature": "At-α › ACK › Lepidieae › 2n=16·Ls › sprouts"
+			}
 		},
 		{
 			"id": "maca-root",
@@ -848,7 +2082,19 @@
 			"where": "Andes, Peru",
 			"lineage": [
 				"Brassicaceae (core) → Camelinodae (lineage I) → horseradish + cresses clade → Lepidieae → Lepidium meyenii → maca"
-			]
+			],
+			"genome": {
+				"state": "2n = 64, octoploid",
+				"change": "swollen hypocotyl crop of the high Andes",
+				"confidence": "established",
+				"events": [
+					"Brassicaceae (core): At-α whole-genome duplication near the origin of the family (on top of the older At-β and eudicot-wide γ events)",
+					"Lepidieae: repeated polyploidy within the tribe",
+					"Lepidium meyenii: octoploid (8x, x = 8)",
+					"maca: swollen hypocotyl crop of the high Andes"
+				],
+				"signature": "At-α › ACK › Lepidieae › 2n=64 › hypocotyl"
+			}
 		}
 	],
 	"edges": [

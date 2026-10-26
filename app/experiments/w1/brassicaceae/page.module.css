@@ -1,0 +1,17 @@
+.container {
+	position: fixed;
+	inset: 0;
+	background: #efece4;
+}
+
+.canvas {
+	width: 100%;
+	height: 100%;
+	display: block;
+	cursor: grab;
+	touch-action: none; /* let dragging pan the tree instead of scrolling the page */
+}
+
+.canvas:active {
+	cursor: grabbing;
+}

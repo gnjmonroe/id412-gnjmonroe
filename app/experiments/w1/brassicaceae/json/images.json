@@ -1,0 +1,156 @@
+{
+	"description": "One small photo per vegetable in crucifers.json, keyed by vegetable id. Edit `wikipedia` or `file` to change a photo, then run fetch-images.mjs. `src` is the local copy in public/; author, license and source are the credit the licence asks for.",
+	"source": "Wikimedia Commons, via the lead images of English Wikipedia articles",
+	"images": {
+		"wild-cabbage": {
+			"wikipedia": "Brassica oleracea",
+			"file": "Brassica_oleracea0.jpg",
+			"src": "/experiments/w1/brassicaceae/images/wild-cabbage.jpg",
+			"author": "MPF",
+			"license": "CC BY 2.5",
+			"licenseUrl": "https://creativecommons.org/licenses/by/2.5",
+			"source": "https://commons.wikimedia.org/wiki/File:Brassica_oleracea0.jpg"
+		},
+		"kale": {
+			"wikipedia": "Kale",
+			"file": "Boerenkool.jpg",
+			"src": "/experiments/w1/brassicaceae/images/kale.jpg",
+			"author": "Rasbak",
+			"license": "CC BY-SA 3.0",
+			"licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+			"source": "https://commons.wikimedia.org/wiki/File:Boerenkool.jpg"
+		},
+		"collards": {
+			"wikipedia": "Collard (plant)",
+			"file": "Collard-Greens-Bundle.jpg",
+			"src": "/experiments/w1/brassicaceae/images/collards.jpg",
+			"author": "Evan-Amos",
+			"license": "Public domain",
+			"licenseUrl": null,
+			"source": "https://commons.wikimedia.org/wiki/File:Collard-Greens-Bundle.jpg"
+		},
+		"tronchuda": {
+			"wikipedia": "Tronchuda cabbage"
+		},
+		"cabbage": {
+			"wikipedia": "Cabbage",
+			"file": "Cabbage_and_cross_section_on_white.jpg",
+			"src": "/experiments/w1/brassicaceae/images/cabbage.jpg",
+			"author": "fir0002 flagstaffotos [at] gmail.com Canon 20D + Sigma 150mm f/2.8",
+			"license": "GFDL 1.2",
+			"licenseUrl": "http://www.gnu.org/licenses/old-licenses/fdl-1.2.html",
+			"source": "https://commons.wikimedia.org/wiki/File:Cabbage_and_cross_section_on_white.jpg"
+		},
+		"savoy": {
+			"wikipedia": "Savoy cabbage"
+		},
+		"brussels": {
+			"wikipedia": "Brussels sprout"
+		},
+		"kohlrabi": {
+			"wikipedia": "Kohlrabi"
+		},
+		"broccoli": {
+			"wikipedia": "Broccoli"
+		},
+		"cauliflower": {
+			"wikipedia": "Cauliflower"
+		},
+		"romanesco": {
+			"wikipedia": "Romanesco broccoli"
+		},
+		"gai-lan": {
+			"wikipedia": "Gai lan"
+		},
+		"broccolini": {
+			"wikipedia": "Broccolini"
+		},
+		"kalettes": {
+			"wikipedia": "Kalette"
+		},
+		"turnip": {
+			"wikipedia": "Turnip"
+		},
+		"rapini": {
+			"wikipedia": "Rapini"
+		},
+		"turnip-rape": {
+			"wikipedia": "Field mustard"
+		},
+		"bok-choy": {
+			"wikipedia": "Bok choy"
+		},
+		"tatsoi": {
+			"wikipedia": "Tatsoi"
+		},
+		"napa": {
+			"wikipedia": "Napa cabbage"
+		},
+		"komatsuna": {
+			"wikipedia": "Komatsuna"
+		},
+		"mizuna": {
+			"wikipedia": "Mizuna"
+		},
+		"canola": {
+			"wikipedia": "Canola"
+		},
+		"rutabaga": {
+			"wikipedia": "Rutabaga"
+		},
+		"siberian-kale": {
+			"wikipedia": "Siberian kale"
+		},
+		"brown-mustard": {
+			"wikipedia": "Brassica juncea"
+		},
+		"mustard-greens": {
+			"wikipedia": "Mustard greens"
+		},
+		"zha-cai": {
+			"wikipedia": "Zha cai"
+		},
+		"ethiopian-kale": {
+			"wikipedia": "Brassica carinata"
+		},
+		"black-mustard": {
+			"wikipedia": "Brassica nigra"
+		},
+		"radish": {
+			"wikipedia": "Radish"
+		},
+		"daikon": {
+			"wikipedia": "Daikon"
+		},
+		"white-mustard": {
+			"wikipedia": "Sinapis alba"
+		},
+		"arugula": {
+			"wikipedia": "Eruca vesicaria"
+		},
+		"wild-rocket": {
+			"wikipedia": "Diplotaxis tenuifolia"
+		},
+		"sea-kale": {
+			"wikipedia": "Crambe maritima"
+		},
+		"horseradish": {
+			"wikipedia": "Horseradish"
+		},
+		"watercress": {
+			"wikipedia": "Watercress"
+		},
+		"land-cress": {
+			"wikipedia": "Barbarea verna"
+		},
+		"wasabi": {
+			"wikipedia": "Wasabi"
+		},
+		"garden-cress": {
+			"wikipedia": "Lepidium sativum"
+		},
+		"maca-root": {
+			"wikipedia": "Lepidium meyenii"
+		}
+	}
+}
