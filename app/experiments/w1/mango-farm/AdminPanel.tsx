@@ -27,6 +27,7 @@ const VARIETY_RANGES: Record<string, [number, number, number]> = {
 	alternate: [0, 1, 1],
 	trueSeed: [0, 1, 1],
 	shape: [0, 5, 1],
+	clusters: [0, 1, 1],
 	lobes: [0, 12, 1],
 };
 

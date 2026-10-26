@@ -204,6 +204,7 @@ function seedlingTraits(farm: Farm, mother: Traits): Traits {
 		trueSeed: 0,
 		// Now and then a seedling grows a different kind of canopy altogether.
 		shape: random(farm) < 0.3 ? Math.floor(random(farm) * 6) : mother.shape,
+		clusters: random(farm) < 0.5 ? 1 : 0,
 		lobes: Math.max(3, mother.lobes + Math.round((random(farm) - 0.5) * 4)),
 		leaf: shiftColor(farm, mother.leaf, 60),
 		ripe: shiftColor(farm, mother.ripe, 70),

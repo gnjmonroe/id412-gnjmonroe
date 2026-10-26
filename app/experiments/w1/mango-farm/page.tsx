@@ -198,28 +198,49 @@ function drawTree(ctx: CanvasRenderingContext2D, tree: Tree) {
 	);
 }
 
+// A fixed random number from 0 to 1 for a tree and a slot, the same every frame, so clustered
+// fruit stay put instead of jumping around.
+function jitter(treeId: number, slot: number) {
+	const n = Math.sin(treeId * 12.9898 + slot * 78.233) * 43758.5453;
+	return n - Math.floor(n);
+}
+
 // Mangoes are drawn after all canopies, without the multiply blend, so they keep their true colours.
 function drawFruits(ctx: CanvasRenderingContext2D, tree: Tree) {
 	const r = RADIUS[tree.stage];
 	const { colors } = settings;
 	const variety = traitsOf(tree);
+	const count = tree.fruits.length;
 	tree.fruits.forEach((fruit, i) => {
-		// Spread over the canopy like sunflower seeds (golden angle), so many fruit don't hide its shape.
-		// Fallen fruit lie on the ground around the tree.
-		const angle = i * 2.4;
-		const reach =
-			fruit.stage === "fallen"
-				? r + FRUIT_SIZE + 4
-				: r * 0.7 * Math.sqrt((i + 0.5) / tree.fruits.length);
+		let x: number;
+		let y: number;
+		if (fruit.stage === "fallen") {
+			// Fallen fruit lie on the ground around the tree.
+			const angle = (i / count) * Math.PI * 2;
+			x = tree.x + Math.cos(angle) * (r + FRUIT_SIZE + 4);
+			y = tree.y + Math.sin(angle) * (r + FRUIT_SIZE + 4);
+		} else if (variety.clusters === 0) {
+			// Orderly: an even ring.
+			const angle = (i / count) * Math.PI * 2;
+			x = tree.x + Math.cos(angle) * r * 0.6;
+			y = tree.y + Math.sin(angle) * r * 0.6;
+		} else {
+			// Clustered: bunches of up to three, each bunch at a random spot, each fruit jittered in it.
+			const bunch = Math.floor(i / 3);
+			const angle = jitter(tree.id, bunch) * Math.PI * 2;
+			const reach = r * (0.25 + 0.4 * jitter(tree.id, bunch + 50));
+			x =
+				tree.x +
+				Math.cos(angle) * reach +
+				(jitter(tree.id, i + 100) - 0.5) * FRUIT_SIZE * 2.5;
+			y =
+				tree.y +
+				Math.sin(angle) * reach +
+				(jitter(tree.id, i + 200) - 0.5) * FRUIT_SIZE * 2.5;
+		}
 		ctx.fillStyle = fruit.stage === "ripe" ? variety.ripe : colors[fruit.stage];
 		ctx.beginPath();
-		ctx.arc(
-			tree.x + Math.cos(angle) * reach,
-			tree.y + Math.sin(angle) * reach,
-			FRUIT_SIZE,
-			0,
-			Math.PI * 2,
-		);
+		ctx.arc(x, y, FRUIT_SIZE, 0, Math.PI * 2);
 		ctx.fill();
 	});
 }
