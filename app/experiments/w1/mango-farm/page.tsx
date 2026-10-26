@@ -21,6 +21,8 @@ import { HEIGHT, settings, VARIETIES, WIDTH } from "./settings";
 // The mango farm from farm.ts, drawn top-down on a canvas.
 // Click empty ground to plant a seed. Click a grown tree, then empty ground, to graft a copy.
 
+const FRUIT_SIZE = 6; // radius of a mango
+const BAT_SIZE = 1.8; // bats are drawn this many times their base size
 const SPEEDS = [1, 4, 16];
 const TASK_NAMES = {
 	idle: "looking",
@@ -135,6 +137,7 @@ function drawBat(ctx: CanvasRenderingContext2D, farm: Farm, bat: Bat) {
 	ctx.save();
 	ctx.translate(bat.x, bat.y);
 	ctx.rotate(bat.angle);
+	ctx.scale(BAT_SIZE, BAT_SIZE);
 	ctx.fillStyle = settings.colors.bat;
 
 	// Wings: each a triangle from the body out to a tip that swings forward and back.
@@ -191,16 +194,27 @@ function drawTree(ctx: CanvasRenderingContext2D, tree: Tree) {
 	ctx.fill(
 		new Path2D(canopyPath(tree.x, tree.y, r, variety.shape, variety.lobes)),
 	);
+}
 
+// Mangoes are drawn after all canopies, without the multiply blend, so they keep their true colours.
+function drawFruits(ctx: CanvasRenderingContext2D, tree: Tree) {
+	const r = RADIUS[tree.stage];
+	const { colors } = settings;
+	const variety = traitsOf(tree);
 	tree.fruits.forEach((fruit, i) => {
-		const angle = (i / tree.fruits.length) * Math.PI * 2;
-		const reach = fruit.stage === "fallen" ? r + 8 : r * 0.6;
+		// Spread over the canopy like sunflower seeds (golden angle), so many fruit don't hide its shape.
+		// Fallen fruit lie on the ground around the tree.
+		const angle = i * 2.4;
+		const reach =
+			fruit.stage === "fallen"
+				? r + FRUIT_SIZE + 4
+				: r * 0.7 * Math.sqrt((i + 0.5) / tree.fruits.length);
 		ctx.fillStyle = fruit.stage === "ripe" ? variety.ripe : colors[fruit.stage];
 		ctx.beginPath();
 		ctx.arc(
 			tree.x + Math.cos(angle) * reach,
 			tree.y + Math.sin(angle) * reach,
-			3.5,
+			FRUIT_SIZE,
 			0,
 			Math.PI * 2,
 		);
@@ -229,11 +243,12 @@ function draw(
 	ctx.globalAlpha = 1;
 	ctx.setLineDash([]);
 
-	// Multiply: overlapping canopies and pulses mix like overprinted ink.
+	// Multiply: overlapping canopies and pulses mix like overprinted ink. Fruit go on top in plain colour.
 	ctx.globalCompositeOperation = "multiply";
 	drawGraftPulses(ctx, farm);
 	for (const tree of farm.trees) drawTree(ctx, tree);
 	ctx.globalCompositeOperation = "source-over";
+	for (const tree of farm.trees) drawFruits(ctx, tree);
 	for (const farmer of farm.farmers) drawFarmer(ctx, farm, farmer);
 	for (const bat of farm.bats) drawBat(ctx, farm, bat);
 
