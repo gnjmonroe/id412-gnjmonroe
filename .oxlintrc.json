@@ -1,0 +1,19 @@
+{
+	"$schema": "./node_modules/oxlint/configuration_schema.json",
+	"plugins": ["react", "typescript", "nextjs"],
+	"categories": { "correctness": "error", "suspicious": "warn" },
+	"rules": {
+		"react/react-in-jsx-scope": "off",
+		"react/set-state-in-effect": "warn",
+		"react/immutability": "warn",
+		"react/use-memo": "warn"
+	},
+	"ignorePatterns": [
+		".next",
+		"out",
+		"public",
+		"docs",
+		"next-env.d.ts",
+		"app/lecture-materials"
+	]
+}

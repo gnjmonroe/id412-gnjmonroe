@@ -8,10 +8,11 @@ export const isRoad = (i: number) => i % ROAD_EVERY === 0;
 export const cellToWorld = (i: number) => (i - (GRID - 1) / 2) * LOT;
 
 // Angle of the sun around the city. It starts in the afternoon.
-export const sunAngle = (time: number) => (time / DAY_LENGTH + 0.3) * Math.PI * 2;
+export const sunAngle = (time: number) =>
+	(time / DAY_LENGTH + 0.3) * Math.PI * 2;
 
 // 0 in daylight, 1 at night, a short fade around sunset and sunrise.
 export function nightAmount(time: number) {
-  const sunHeight = Math.sin(sunAngle(time));
-  return Math.min(1, Math.max(0, 0.5 - sunHeight * 2.5));
+	const sunHeight = Math.sin(sunAngle(time));
+	return Math.min(1, Math.max(0, 0.5 - sunHeight * 2.5));
 }

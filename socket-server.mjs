@@ -16,44 +16,48 @@ const certPath = "certificates/localhost.pem";
 
 // In `pnpm dev:mobile` Next may still be generating the certificates.
 async function waitForCertificates(ms = 20_000) {
-  const until = Date.now() + ms;
-  while (Date.now() < until) {
-    if (existsSync(keyPath) && existsSync(certPath)) return true;
-    await new Promise((resolve) => setTimeout(resolve, 500));
-  }
-  return false;
+	const until = Date.now() + ms;
+	while (Date.now() < until) {
+		if (existsSync(keyPath) && existsSync(certPath)) return true;
+		await new Promise((resolve) => setTimeout(resolve, 500));
+	}
+	return false;
 }
 
 const handler = (req, res) => {
-  res.writeHead(200, { "content-type": "text/plain" });
-  res.end("socket relay ok\n");
+	res.writeHead(200, { "content-type": "text/plain" });
+	res.end("socket relay ok\n");
 };
 
-const secure = process.argv.includes("--https") && (await waitForCertificates());
+const secure =
+	process.argv.includes("--https") && (await waitForCertificates());
 const server = secure
-  ? createHttpsServer({ key: readFileSync(keyPath), cert: readFileSync(certPath) }, handler)
-  : createHttpServer(handler);
+	? createHttpsServer(
+			{ key: readFileSync(keyPath), cert: readFileSync(certPath) },
+			handler,
+		)
+	: createHttpServer(handler);
 
 const io = new Server(server, { cors: { origin: "*" } });
 
 io.on("connection", (socket) => {
-  socket.on("join", (room) => {
-    socket.data.room = String(room);
-    socket.join(socket.data.room);
-  });
+	socket.on("join", (room) => {
+		socket.data.room = String(room);
+		socket.join(socket.data.room);
+	});
 
-  socket.on("message", (message) => {
-    if (!socket.data.room) return;
-    socket.to(socket.data.room).emit("message", message);
-  });
+	socket.on("message", (message) => {
+		if (!socket.data.room) return;
+		socket.to(socket.data.room).emit("message", message);
+	});
 });
 
 server.listen(port, "0.0.0.0", () => {
-  const protocol = secure ? "https" : "http";
-  const lan = Object.values(networkInterfaces())
-    .flat()
-    .filter((net) => net && net.family === "IPv4" && !net.internal)
-    .map((net) => `${protocol}://${net.address}:${port}`);
-  console.log(`socket relay on ${protocol}://localhost:${port}`);
-  for (const url of lan) console.log(`  phone: ${url}`);
+	const protocol = secure ? "https" : "http";
+	const lan = Object.values(networkInterfaces())
+		.flat()
+		.filter((net) => net && net.family === "IPv4" && !net.internal)
+		.map((net) => `${protocol}://${net.address}:${port}`);
+	console.log(`socket relay on ${protocol}://localhost:${port}`);
+	for (const url of lan) console.log(`  phone: ${url}`);
 });

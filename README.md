@@ -15,12 +15,12 @@ Requires Node.js LTS (24 or newer) and pnpm.
 
 ## Scripts
 
-| Script            | What it does                                                                 |
-| ----------------- | ---------------------------------------------------------------------------- |
-| `pnpm dev`        | Next.js on http://localhost:3000. Enough for W1 and single-device work.      |
+| Script            | What it does                                                                  |
+| ----------------- | ----------------------------------------------------------------------------- |
+| `pnpm dev`        | Next.js on http://localhost:3000. Enough for W1 and single-device work.       |
 | `pnpm dev:mobile` | Next.js over HTTPS on all interfaces + socket relay on port 4000. For phones. |
-| `pnpm build`      | Production build (what Vercel runs).                                         |
-| `pnpm typecheck`  | `tsc --noEmit`.                                                              |
+| `pnpm build`      | Production build (what Vercel runs).                                          |
+| `pnpm typecheck`  | `tsc --noEmit`.                                                               |
 
 `pnpm dev:mobile` generates a self-signed certificate into `certificates/` on first run. On the phone, open both `https://<laptop-ip>:3000` and `https://<laptop-ip>:4000` once and pass the warning. See W2 notes, A3.
 

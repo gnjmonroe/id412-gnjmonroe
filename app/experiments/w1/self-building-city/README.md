@@ -8,6 +8,7 @@ A city that builds itself. Buildings rise floor by floor (the orange floor is th
 - Parameters: GRID, MAX_FLOORS, BUILD_SPEED, DAY_LENGTH, CAR_COUNT
 
 ## How it works
+
 - `City.tsx`: every floor of every building is one instance of a single `InstancedMesh` (~16k floors, one draw call). Each lot loops build → stand → demolish → empty.
 - Each frame `updateLot` moves a lot's `progress`; whole floors are drawn full size, the fractional floor drops in from above (build) or shrinks (demolish), unbuilt floors are scaled to 0.
 - Height falls off from the centre (`randomTarget`), so a downtown appears by itself.
@@ -15,7 +16,9 @@ A city that builds itself. Buildings rise floor by floor (the orange floor is th
 - `Cars.tsx`: one more `InstancedMesh`, cars wrap around along the roads. `Sky.tsx`: sun, sky colour and fog from `nightAmount` in `settings.ts`.
 
 ## Run
+
 pnpm dev → http://localhost:3000/experiments/w1/self-building-city
 
 ## Status / next
+
 Works. Next: click a lot to demolish it, or let the mouse decide where downtown is.

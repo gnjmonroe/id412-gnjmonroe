@@ -40,6 +40,7 @@ Everything is organised by what it belongs to. An experiment's code, styles, hel
 
 ## Always
 
+- `pnpm format` and `pnpm lint` run clean before you say you are done (oxfmt formats, oxlint checks; the lecture site is ignored).
 - `pnpm typecheck` passes before you say you are done. `pnpm build` passes before a push.
 - Check the route in the browser. The user usually has `pnpm dev` on http://localhost:3000; do not start a second server on that port. Phones use `pnpm dev:mobile`.
 - Report changes as a short list of files and what each does. Do not claim it works without checking.

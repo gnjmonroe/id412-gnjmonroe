@@ -7,8 +7,9 @@ type Message = { type: string; data?: unknown };
 type Handler = (type: string, data: unknown) => void;
 
 function getSocketUrl() {
-  if (process.env.NEXT_PUBLIC_SOCKET_URL) return process.env.NEXT_PUBLIC_SOCKET_URL;
-  return `${window.location.protocol}//${window.location.hostname}:4000`;
+	if (process.env.NEXT_PUBLIC_SOCKET_URL)
+		return process.env.NEXT_PUBLIC_SOCKET_URL;
+	return `${window.location.protocol}//${window.location.hostname}:4000`;
 }
 
 /**
@@ -17,36 +18,36 @@ function getSocketUrl() {
  * `onMessage(type, data)` is called for every message another device sent.
  */
 export function useSocket(room: string, onMessage?: Handler) {
-  const [connected, setConnected] = useState(false);
-  const socketRef = useRef<Socket | null>(null);
-  const handlerRef = useRef<Handler | undefined>(onMessage);
+	const [connected, setConnected] = useState(false);
+	const socketRef = useRef<Socket | null>(null);
+	const handlerRef = useRef<Handler | undefined>(onMessage);
 
-  useEffect(() => {
-    handlerRef.current = onMessage;
-  }, [onMessage]);
+	useEffect(() => {
+		handlerRef.current = onMessage;
+	}, [onMessage]);
 
-  useEffect(() => {
-    const socket = io(getSocketUrl());
-    socketRef.current = socket;
+	useEffect(() => {
+		const socket = io(getSocketUrl());
+		socketRef.current = socket;
 
-    socket.on("connect", () => {
-      socket.emit("join", room);
-      setConnected(true);
-    });
-    socket.on("disconnect", () => setConnected(false));
-    socket.on("message", (message: Message) => {
-      handlerRef.current?.(message.type, message.data);
-    });
+		socket.on("connect", () => {
+			socket.emit("join", room);
+			setConnected(true);
+		});
+		socket.on("disconnect", () => setConnected(false));
+		socket.on("message", (message: Message) => {
+			handlerRef.current?.(message.type, message.data);
+		});
 
-    return () => {
-      socket.disconnect();
-      socketRef.current = null;
-    };
-  }, [room]);
+		return () => {
+			socket.disconnect();
+			socketRef.current = null;
+		};
+	}, [room]);
 
-  const send = useCallback((type: string, data?: unknown) => {
-    socketRef.current?.emit("message", { type, data });
-  }, []);
+	const send = useCallback((type: string, data?: unknown) => {
+		socketRef.current?.emit("message", { type, data });
+	}, []);
 
-  return { send, connected };
+	return { send, connected };
 }

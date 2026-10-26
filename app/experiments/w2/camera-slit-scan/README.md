@@ -8,6 +8,7 @@ The phone is just a camera; the laptop turns its live video into a slit-scan. Ev
 - Parameters: SLICE (2 px per frame, screen), camera size 1280×720 (mobile)
 
 ## How it works
+
 - Video is too heavy for the socket. WebRTC sends it phone → laptop directly; the socket only carries the set-up messages, in the same room `camera-slit-scan`.
 - The set-up: phone sends `offer`, screen replies `answer`, both send `candidate`s (possible network routes). After that the video flows on its own.
 - Screen sends `ready` when it loads, so a phone that is already filming calls it again after a reload.
@@ -16,7 +17,9 @@ The phone is just a camera; the laptop turns its live video into a slit-scan. Ev
 - The small video bottom-right is the raw feed, for comparison.
 
 ## Run
+
 pnpm dev → open /screen, click the /mobile link (new tab, uses the laptop camera). With a phone: pnpm dev:mobile (the camera needs https), accept the warning at :4000 and :3000 on the phone, then /mobile on the phone and /screen on the laptop. Same Wi-Fi.
 
 ## Status / next
+
 Works with one phone. Next: take a row instead of a column, or let a tap on the phone switch between them.
