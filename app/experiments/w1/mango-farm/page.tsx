@@ -20,6 +20,13 @@ import { HEIGHT, settings, VARIETIES, WIDTH } from "./settings";
 // Click empty ground to plant a seed. Click a grown tree, then empty ground, to graft a copy.
 
 const SPEEDS = [1, 4, 16];
+const TASK_NAMES = {
+	idle: "looking",
+	toTree: "walking to tree",
+	cutting: "cutting",
+	toSpot: "carrying cutting",
+	resting: "resting",
+};
 const RADIUS = {
 	seed: 3,
 	seedling: 6,
@@ -41,20 +48,101 @@ function canopyPath(x: number, y: number, r: number, lobes: number) {
 	return path + "Z";
 }
 
-// A farmer seen from above: a wide hat around a small head. Carries a green cutting when it has one.
-function drawFarmer(ctx: CanvasRenderingContext2D, farmer: Farmer) {
-	ctx.fillStyle = settings.colors.hat;
-	ctx.beginPath();
-	ctx.arc(farmer.x, farmer.y, 7, 0, Math.PI * 2);
-	ctx.fill();
-	ctx.fillStyle = settings.colors.farmer;
-	ctx.beginPath();
-	ctx.arc(farmer.x, farmer.y, 3.5, 0, Math.PI * 2);
-	ctx.fill();
-	if (farmer.task === "toSpot") {
-		ctx.fillStyle = settings.colors.green;
-		ctx.fillRect(farmer.x + 6, farmer.y - 2, 6, 4);
+// A farmer seen from above: a wide hat around a small head, with feet that step while walking.
+// Walking to a tree: a faint trail to it. Cutting: a filling wedge shows progress.
+// Carrying a cutting: a green sprig and a faint trail to the spot it will go. Resting: faded, with a "z".
+function drawFarmer(ctx: CanvasRenderingContext2D, farm: Farm, farmer: Farmer) {
+	const { colors, rules } = settings;
+	const tree = farm.trees.find((t) => t.id === farmer.treeId);
+	const walking = farmer.task === "toTree" || farmer.task === "toSpot";
+
+	if (walking) {
+		const goal =
+			farmer.task === "toTree" ? tree : { x: farmer.spotX, y: farmer.spotY };
+		if (goal) {
+			ctx.globalAlpha = 0.25;
+			ctx.fillStyle = colors.hat;
+			for (let t = 0.1; t < 1; t += 0.1) {
+				ctx.beginPath();
+				ctx.arc(
+					farmer.x + (goal.x - farmer.x) * t,
+					farmer.y + (goal.y - farmer.y) * t,
+					1.5,
+					0,
+					Math.PI * 2,
+				);
+				ctx.fill();
+			}
+			// Where the graft will go: a soft patch of ground
+			if (farmer.task === "toSpot") {
+				ctx.beginPath();
+				ctx.arc(goal.x, goal.y, 8, 0, Math.PI * 2);
+				ctx.fill();
+			}
+			ctx.globalAlpha = 1;
+		}
 	}
+
+	ctx.save();
+	ctx.translate(farmer.x, farmer.y);
+	ctx.rotate(farmer.angle);
+	if (farmer.task === "resting") ctx.globalAlpha = 0.5;
+
+	// Feet: one ahead, one behind, swapping every few steps while walking.
+	const stride = walking ? Math.sin(farmer.walked * 0.5) * 4 : 0;
+	ctx.fillStyle = colors.seed;
+	ctx.beginPath();
+	ctx.arc(stride, -4, 2, 0, Math.PI * 2);
+	ctx.arc(-stride, 4, 2, 0, Math.PI * 2);
+	ctx.fill();
+
+	ctx.fillStyle = colors.hat;
+	ctx.beginPath();
+	ctx.arc(0, 0, 7, 0, Math.PI * 2);
+	ctx.fill();
+	ctx.fillStyle = colors.farmer;
+	ctx.beginPath();
+	ctx.arc(0, 0, 3.5, 0, Math.PI * 2);
+	ctx.fill();
+
+	if (farmer.task === "toSpot") {
+		ctx.fillStyle = colors.green;
+		ctx.fillRect(7, -2, 7, 4);
+	}
+	ctx.restore();
+
+	if (farmer.task === "cutting") {
+		const done = 1 - farmer.timer / rules.graftDays;
+		ctx.fillStyle = colors.green;
+		ctx.beginPath();
+		ctx.moveTo(farmer.x, farmer.y - 14);
+		ctx.arc(
+			farmer.x,
+			farmer.y - 14,
+			5,
+			-Math.PI / 2,
+			-Math.PI / 2 + done * Math.PI * 2,
+		);
+		ctx.fill();
+	}
+	if (farmer.task === "resting") {
+		ctx.fillStyle = colors.farmer;
+		ctx.font = "10px monospace";
+		ctx.fillText("z", farmer.x + 7, farmer.y - 7);
+	}
+}
+
+// A fresh farmer graft: a pale disc that grows and fades over 20 days.
+function drawGraftPulses(ctx: CanvasRenderingContext2D, farm: Farm) {
+	for (const entry of farm.graftLog) {
+		const t = (farm.day - entry.day) / 20;
+		ctx.globalAlpha = 0.35 * (1 - t);
+		ctx.fillStyle = settings.colors.green;
+		ctx.beginPath();
+		ctx.arc(entry.x, entry.y, 8 + t * 30, 0, Math.PI * 2);
+		ctx.fill();
+	}
+	ctx.globalAlpha = 1;
 }
 
 function drawTree(ctx: CanvasRenderingContext2D, tree: Tree) {
@@ -108,8 +196,9 @@ function draw(
 	ctx.globalAlpha = 1;
 	ctx.setLineDash([]);
 
+	drawGraftPulses(ctx, farm);
 	for (const tree of farm.trees) drawTree(ctx, tree);
-	for (const farmer of farm.farmers) drawFarmer(ctx, farmer);
+	for (const farmer of farm.farmers) drawFarmer(ctx, farm, farmer);
 
 	const selected = farm.trees.find((tree) => tree.id === selectedId);
 	if (selected) {
@@ -212,7 +301,7 @@ export default function MangoFarm() {
 			const s = stats(farm);
 			const t = s.trees;
 			setInfo(
-				`day ${s.day} · seeds ${t.seed} · seedlings ${t.seedling} · saplings ${t.sapling} · mature ${t.mature} · fruiting ${t.fruiting} · senescent ${t.senescent} · harvested ${s.harvested} · farmer grafts ${s.grafts}`,
+				`day ${s.day} · seeds ${t.seed} · seedlings ${t.seedling} · saplings ${t.sapling} · mature ${t.mature} · fruiting ${t.fruiting} · senescent ${t.senescent} · harvested ${s.harvested} · farmer grafts ${s.grafts} · farmers ${farm.farmers.map((f) => TASK_NAMES[f.task]).join(", ")}`,
 			);
 			setCounts(s.varieties);
 			const selected = farm.trees.find(

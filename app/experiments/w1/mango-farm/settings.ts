@@ -20,6 +20,7 @@ export const settings = {
 		farmerSpeed: 60, // farm units a farmer walks per day
 		graftDays: 5, // days a farmer spends taking a cutting
 		farmerRestDays: 30, // days a farmer rests after each graft
+		promisingFruit: 8, // a seedling variety with at least this much fruit is worth grafting
 		startTrees: 4, // used when the farm restarts
 		farmers: 2, // used when the farm restarts
 		seed: 412, // random seed, so every run is the same; used when the farm restarts

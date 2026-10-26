@@ -70,6 +70,14 @@ const SLIDERS: { title: string; items: Slider[] }[] = [
 				max: 200,
 				step: 5,
 			},
+			{
+				label: "promising fruit",
+				group: rules,
+				key: "promisingFruit",
+				min: 1,
+				max: 20,
+				step: 1,
+			},
 		],
 	},
 	{

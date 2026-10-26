@@ -52,6 +52,8 @@ export type Farmer = {
 	spotX: number; // where the graft will go
 	spotY: number;
 	timer: number; // days left cutting or resting
+	angle: number; // direction the farmer last walked, for drawing
+	walked: number; // total distance walked, for drawing footsteps
 };
 
 export type Farm = {
@@ -60,6 +62,7 @@ export type Farm = {
 	farmers: Farmer[];
 	harvested: number;
 	grafts: number; // grafts made by farmers
+	graftLog: { x: number; y: number; day: number }[]; // recent farmer grafts, for drawing
 	nextId: number;
 	random: number; // state of the random number generator
 };
@@ -105,6 +108,7 @@ export function createFarm(): Farm {
 		farmers: [],
 		harvested: 0,
 		grafts: 0,
+		graftLog: [],
 		nextId: 1,
 		random: settings.rules.seed,
 	};
@@ -132,6 +136,8 @@ export function createFarm(): Farm {
 			spotX: 0,
 			spotY: 0,
 			timer: 0,
+			angle: 0,
+			walked: 0,
 		});
 	}
 	return farm;
@@ -231,6 +237,7 @@ export function step(farm: Farm, days: number) {
 
 function tick(farm: Farm, dt: number) {
 	farm.day += dt;
+	farm.graftLog = farm.graftLog.filter((entry) => farm.day - entry.day < 20);
 	for (const farmer of farm.farmers) workFarmer(farm, farmer, dt);
 	for (const tree of [...farm.trees]) {
 		growTree(tree, dt);
@@ -307,13 +314,18 @@ function growFruits(farm: Farm, tree: Tree, dt: number) {
 	}
 }
 
-// Farmers work on named varieties that don't breed true (trueSeed 0), rarest variety first,
-// so the ones closest to dying out get grafted before the common ones.
+// Farmers graft varieties whose seeds won't carry them on: named varieties that don't breed true
+// (trueSeed 0), and seedling varieties that turned out promising (enough fruit). Rarest first,
+// so a new promising seedling, and any variety close to dying out, is grafted before common ones.
+function worthGrafting(tree: Tree) {
+	if (tree.traits) return tree.traits.fruit >= settings.rules.promisingFruit;
+	return settings.varieties[tree.variety as Variety].trueSeed === 0;
+}
+
 function pickTree(farm: Farm) {
 	const grown = farm.trees.filter(
 		(tree) =>
-			!tree.traits &&
-			settings.varieties[tree.variety as Variety].trueSeed === 0 &&
+			worthGrafting(tree) &&
 			(tree.stage === "mature" || tree.stage === "fruiting"),
 	);
 	if (grown.length === 0) return undefined;
@@ -343,6 +355,8 @@ function walk(farmer: Farmer, x: number, y: number, dt: number) {
 	const dy = y - farmer.y;
 	const distance = Math.hypot(dx, dy);
 	const reach = settings.rules.farmerSpeed * dt;
+	if (distance > 0) farmer.angle = Math.atan2(dy, dx);
+	farmer.walked += Math.min(distance, reach);
 	if (distance <= reach) {
 		farmer.x = x;
 		farmer.y = y;
@@ -379,8 +393,10 @@ function workFarmer(farm: Farm, farmer: Farmer, dt: number) {
 			if (
 				farmer.treeId &&
 				graft(farm, farmer.treeId, farmer.spotX, farmer.spotY)
-			)
+			) {
 				farm.grafts++;
+				farm.graftLog.push({ x: farmer.spotX, y: farmer.spotY, day: farm.day });
+			}
 			farmer.task = "resting";
 			farmer.timer = settings.rules.farmerRestDays;
 		}
