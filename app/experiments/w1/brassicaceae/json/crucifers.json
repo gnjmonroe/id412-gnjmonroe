@@ -1,0 +1,1424 @@
+{
+	"description": "Ancestry of the cruciferous vegetables as a graph. Every node is a clade, a species, a crop lineage (a branch of cultivated forms inside a species) or a vegetable; every edge points from ancestor to descendant. Edge types: `descent` (branching between clades and species, from the Open Tree of Life), `hybrid-parent` (a species formed by two parent species combining genomes: the Triangle of U and ×Raphanobrassica), `domestication` (a cultivated branch inside a species), `selection` (a crop selected from that branch) and `cross` (a crop bred from two crops). Hybrids and crosses have two parents, so this is a network, not a single tree. Each vegetable has `lineage`: every path from the family root to it, written out. `confidence` marks how settled a step is: established, likely or debated. Genomes: A = B. rapa, B = black mustard, C = B. oleracea, R = radish.",
+	"sources": [
+		"Open Tree of Life synthetic tree opentree16.1 (branching order between clades and species; CC0)",
+		"World Flora Online Plant List 2026-06 via species.json (names, authors, tribes; CC0)",
+		"U, N. (1935). Genome analysis in Brassica… Japanese Journal of Botany 7: 389–452 (Triangle of U)",
+		"Karpechenko, G. D. (1928). ×Raphanobrassica",
+		"Chalhoub, B. et al. (2014). Early allopolyploid evolution in the post-Neolithic Brassica napus oilseed genome. Science 345: 950–953",
+		"McAlvay, A. C. et al. (2021). Brassica rapa domestication: untangling wild and feral forms and convergence of crop morphotypes. Molecular Biology and Evolution 38: 3358–3372",
+		"Standard crop history for cultivar groups, places and dates (marked with confidence)"
+	],
+	"built": "2026-10-26",
+	"root": "brassicaceae",
+	"counts": {
+		"clade": 14,
+		"species": 18,
+		"crop-lineage": 12,
+		"vegetable": 42,
+		"edges": 93
+	},
+	"nodes": [
+		{
+			"id": "brassicaceae",
+			"kind": "clade",
+			"name": "Brassicaceae (core)",
+			"note": "The mustard family. Aethionema, sister to all others, has no vegetables and is left out here."
+		},
+		{
+			"id": "camelinodae",
+			"kind": "clade",
+			"name": "Camelinodae (lineage I)",
+			"rank": "supertribe"
+		},
+		{
+			"id": "brassicodae",
+			"kind": "clade",
+			"name": "Brassicodae (lineage II)",
+			"rank": "supertribe"
+		},
+		{
+			"id": "horseradish-cress-clade",
+			"kind": "clade",
+			"name": "horseradish + cresses clade",
+			"note": "Open Tree groups horseradish with Lepidium; WFO puts horseradish in tribe Cardamineae with watercress and land cress, so this grouping is uncertain."
+		},
+		{
+			"id": "lepidieae",
+			"kind": "clade",
+			"name": "Lepidieae",
+			"rank": "tribe"
+		},
+		{
+			"id": "cardamineae",
+			"kind": "clade",
+			"name": "Cardamineae (watercress + land cress)",
+			"rank": "tribe"
+		},
+		{
+			"id": "brassiceae",
+			"kind": "clade",
+			"name": "Brassiceae",
+			"rank": "tribe",
+			"note": "The cabbage tribe: almost all major crucifer crops."
+		},
+		{
+			"id": "nigra-lineage",
+			"kind": "clade",
+			"name": "Nigra lineage (B genome)",
+			"note": "Black mustard's branch, split from the rest of Brassiceae, which is why WFO now puts it in its own genus, Mutarda."
+		},
+		{
+			"id": "rapa-oleracea-side",
+			"kind": "clade",
+			"name": "Rapa/Oleracea side of Brassiceae"
+		},
+		{
+			"id": "rocket-and-brassica",
+			"kind": "clade",
+			"name": "rockets + mustards + Brassica"
+		},
+		{
+			"id": "rockets",
+			"kind": "clade",
+			"name": "rockets (Eruca + Diplotaxis)"
+		},
+		{
+			"id": "white-mustard-and-brassica",
+			"kind": "clade",
+			"name": "white mustard + radish + Brassica"
+		},
+		{
+			"id": "radish-and-brassica",
+			"kind": "clade",
+			"name": "radish + Brassica (R, A, C genomes)"
+		},
+		{
+			"id": "brassica-ac",
+			"kind": "clade",
+			"name": "Brassica A + C genomes",
+			"note": "B. rapa (A) and B. oleracea (C) split from a common ancestor a few million years ago; their genomes are still similar enough to combine in hybrids."
+		},
+		{
+			"id": "oleracea",
+			"kind": "species",
+			"name": "Brassica oleracea",
+			"author": "L.",
+			"tribe": "Brassiceae",
+			"common": "wild cabbage",
+			"genome": "CC",
+			"chromosomes2n": 18
+		},
+		{
+			"id": "rapa",
+			"kind": "species",
+			"name": "Brassica rapa",
+			"author": "L.",
+			"tribe": "Brassiceae",
+			"common": "field mustard, turnip",
+			"genome": "AA",
+			"chromosomes2n": 20
+		},
+		{
+			"id": "nigra",
+			"kind": "species",
+			"name": "Mutarda nigra",
+			"author": "Bernh.",
+			"tribe": "Brassiceae",
+			"common": "black mustard",
+			"synonyms": [
+				"Brassica nigra"
+			],
+			"genome": "BB",
+			"chromosomes2n": 16
+		},
+		{
+			"id": "raphanus",
+			"kind": "species",
+			"name": "Raphanus sativus",
+			"author": "L.",
+			"tribe": "Brassiceae",
+			"common": "radish",
+			"genome": "RR",
+			"chromosomes2n": 18
+		},
+		{
+			"id": "sinapis",
+			"kind": "species",
+			"name": "Sinapis alba",
+			"author": "L.",
+			"tribe": "Brassiceae",
+			"common": "white mustard"
+		},
+		{
+			"id": "eruca",
+			"kind": "species",
+			"name": "Eruca vesicaria",
+			"author": "(L.) Cav.",
+			"tribe": "Brassiceae",
+			"common": "rocket, arugula",
+			"synonyms": [
+				"Eruca sativa"
+			]
+		},
+		{
+			"id": "diplotaxis",
+			"kind": "species",
+			"name": "Diplotaxis tenuifolia",
+			"author": "(L.) DC.",
+			"tribe": "Brassiceae",
+			"common": "wild rocket"
+		},
+		{
+			"id": "crambe",
+			"kind": "species",
+			"name": "Crambe maritima",
+			"author": "L.",
+			"tribe": "Brassiceae",
+			"common": "sea kale"
+		},
+		{
+			"id": "eutrema",
+			"kind": "species",
+			"name": "Eutrema japonicum",
+			"author": "(Miq.) Koidz.",
+			"tribe": "Eutremeae",
+			"common": "wasabi"
+		},
+		{
+			"id": "armoracia",
+			"kind": "species",
+			"name": "Armoracia rusticana",
+			"author": "G.Gaertn., B.Mey. & Scherb.",
+			"tribe": "Cardamineae",
+			"common": "horseradish"
+		},
+		{
+			"id": "lepidium",
+			"kind": "species",
+			"name": "Lepidium sativum",
+			"author": "L.",
+			"tribe": "Lepidieae",
+			"common": "garden cress"
+		},
+		{
+			"id": "maca",
+			"kind": "species",
+			"name": "Lepidium meyenii",
+			"author": "Walp.",
+			"tribe": "Lepidieae",
+			"common": "maca"
+		},
+		{
+			"id": "nasturtium",
+			"kind": "species",
+			"name": "Nasturtium officinale",
+			"author": "R.Br.",
+			"tribe": "Cardamineae",
+			"common": "watercress"
+		},
+		{
+			"id": "barbarea",
+			"kind": "species",
+			"name": "Barbarea verna",
+			"author": "(Mill.) Asch.",
+			"tribe": "Cardamineae",
+			"common": "land cress"
+		},
+		{
+			"id": "juncea",
+			"kind": "species",
+			"name": "Brassica juncea",
+			"author": "(L.) Czern.",
+			"tribe": "Brassiceae",
+			"common": "brown / Indian mustard",
+			"genome": "AABB",
+			"chromosomes2n": 36,
+			"hybridOf": [
+				"rapa",
+				"nigra"
+			],
+			"formed": "thousands of years ago, probably West or Central Asia (debated)"
+		},
+		{
+			"id": "napus",
+			"kind": "species",
+			"name": "Brassica napus",
+			"author": "L.",
+			"tribe": "Brassiceae",
+			"common": "rapeseed, rutabaga",
+			"genome": "AACC",
+			"chromosomes2n": 38,
+			"hybridOf": [
+				"rapa",
+				"oleracea"
+			],
+			"formed": "about 7,500 years ago, in or near cultivation in Europe (Chalhoub et al. 2014)"
+		},
+		{
+			"id": "carinata",
+			"kind": "species",
+			"name": "Mutarda carinata",
+			"author": "(A.Braun) D.A.German",
+			"tribe": "Brassiceae",
+			"common": "Ethiopian mustard",
+			"genome": "BBCC",
+			"chromosomes2n": 34,
+			"hybridOf": [
+				"nigra",
+				"oleracea"
+			],
+			"synonyms": [
+				"Brassica carinata"
+			],
+			"formed": "Ethiopian highlands"
+		},
+		{
+			"id": "raphanobrassica",
+			"kind": "species",
+			"name": "×Raphanobrassica",
+			"author": null,
+			"tribe": "Brassiceae",
+			"common": "radish-cabbage hybrid",
+			"genome": "RRCC",
+			"chromosomes2n": 36,
+			"hybridOf": [
+				"raphanus",
+				"oleracea"
+			],
+			"experimental": true,
+			"formed": "1928, by G. D. Karpechenko"
+		},
+		{
+			"id": "leafy-kales",
+			"kind": "crop-lineage",
+			"name": "leafy kales",
+			"where": "Mediterranean / Europe",
+			"when": "by ~2,500 years ago (Greek and Roman writers)",
+			"confidence": "likely",
+			"note": "the earliest cultivated form of wild cabbage; the other oleracea crops branch from here"
+		},
+		{
+			"id": "wild-cabbage",
+			"kind": "vegetable",
+			"name": "wild cabbage",
+			"part": "leaves",
+			"group": "wild",
+			"note": "still grows on sea cliffs in western Europe",
+			"lineage": [
+				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Brassica A + C genomes → Brassica oleracea → wild cabbage"
+			]
+		},
+		{
+			"id": "kale",
+			"kind": "vegetable",
+			"name": "kale",
+			"group": "Acephala / Sabellica",
+			"part": "leaves",
+			"lineage": [
+				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Brassica A + C genomes → Brassica oleracea → leafy kales → kale"
+			]
+		},
+		{
+			"id": "collards",
+			"kind": "vegetable",
+			"name": "collard greens",
+			"group": "Viridis",
+			"part": "leaves",
+			"lineage": [
+				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Brassica A + C genomes → Brassica oleracea → leafy kales → collard greens"
+			]
+		},
+		{
+			"id": "tronchuda",
+			"kind": "vegetable",
+			"name": "Portuguese cabbage",
+			"group": "Tronchuda",
+			"part": "leaves and leaf ribs",
+			"confidence": "likely",
+			"lineage": [
+				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Brassica A + C genomes → Brassica oleracea → leafy kales → Portuguese cabbage"
+			]
+		},
+		{
+			"id": "headed-cabbages",
+			"kind": "crop-lineage",
+			"name": "headed cabbages",
+			"where": "northern and western Europe",
+			"when": "medieval, widespread by ~1200 CE",
+			"confidence": "likely",
+			"note": "selection for a tight terminal bud"
+		},
+		{
+			"id": "cabbage",
+			"kind": "vegetable",
+			"name": "cabbage",
+			"group": "Capitata",
+			"part": "terminal bud (head)",
+			"lineage": [
+				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Brassica A + C genomes → Brassica oleracea → leafy kales → headed cabbages → cabbage"
+			]
+		},
+		{
+			"id": "savoy",
+			"kind": "vegetable",
+			"name": "savoy cabbage",
+			"group": "Sabauda",
+			"part": "terminal bud, crinkled leaves",
+			"lineage": [
+				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Brassica A + C genomes → Brassica oleracea → leafy kales → headed cabbages → savoy cabbage"
+			]
+		},
+		{
+			"id": "brussels",
+			"kind": "vegetable",
+			"name": "Brussels sprouts",
+			"group": "Gemmifera",
+			"part": "side buds",
+			"where": "around Brussels, Belgium",
+			"when": "16th–18th century",
+			"confidence": "likely",
+			"note": "the head habit moved to the side buds",
+			"lineage": [
+				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Brassica A + C genomes → Brassica oleracea → leafy kales → headed cabbages → Brussels sprouts"
+			]
+		},
+		{
+			"id": "kohlrabi",
+			"kind": "vegetable",
+			"name": "kohlrabi",
+			"group": "Gongylodes",
+			"part": "swollen stem",
+			"where": "northern Europe",
+			"when": "by the 16th century",
+			"confidence": "likely",
+			"lineage": [
+				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Brassica A + C genomes → Brassica oleracea → leafy kales → kohlrabi"
+			]
+		},
+		{
+			"id": "flower-head-types",
+			"kind": "crop-lineage",
+			"name": "flower-head types",
+			"where": "Italy / eastern Mediterranean",
+			"when": "Roman era to 16th century",
+			"confidence": "likely",
+			"note": "selection for enlarged flower buds"
+		},
+		{
+			"id": "broccoli",
+			"kind": "vegetable",
+			"name": "broccoli",
+			"group": "Italica",
+			"part": "flower buds and stalks",
+			"lineage": [
+				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Brassica A + C genomes → Brassica oleracea → leafy kales → flower-head types → broccoli"
+			]
+		},
+		{
+			"id": "cauliflower",
+			"kind": "vegetable",
+			"name": "cauliflower",
+			"group": "Botrytis",
+			"part": "arrested flower head (curd)",
+			"note": "genetic studies place cauliflower as derived from broccoli-like ancestors",
+			"confidence": "likely",
+			"lineage": [
+				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Brassica A + C genomes → Brassica oleracea → leafy kales → flower-head types → cauliflower"
+			]
+		},
+		{
+			"id": "romanesco",
+			"kind": "vegetable",
+			"name": "Romanesco",
+			"group": "Botrytis",
+			"part": "arrested flower head, fractal spirals",
+			"where": "Italy",
+			"when": "by the 16th century",
+			"confidence": "likely",
+			"lineage": [
+				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Brassica A + C genomes → Brassica oleracea → leafy kales → flower-head types → cauliflower → Romanesco"
+			]
+		},
+		{
+			"id": "gai-lan",
+			"kind": "vegetable",
+			"name": "Chinese broccoli (gai lan)",
+			"group": "Alboglabra",
+			"part": "flower stalks and leaves",
+			"where": "southern China",
+			"note": "how it reached China and where it branches off is debated",
+			"confidence": "debated",
+			"lineage": [
+				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Brassica A + C genomes → Brassica oleracea → leafy kales → Chinese broccoli (gai lan)"
+			]
+		},
+		{
+			"id": "broccolini",
+			"kind": "vegetable",
+			"name": "broccolini",
+			"crossOf": [
+				"broccoli",
+				"gai-lan"
+			],
+			"group": "Italica × Alboglabra",
+			"part": "flower stalks and buds",
+			"when": "1993",
+			"where": "Japan (Sakata Seed)",
+			"lineage": [
+				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Brassica A + C genomes → Brassica oleracea → leafy kales → flower-head types → broccoli → broccolini",
+				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Brassica A + C genomes → Brassica oleracea → leafy kales → Chinese broccoli (gai lan) → broccolini"
+			]
+		},
+		{
+			"id": "kalettes",
+			"kind": "vegetable",
+			"name": "kalettes / flower sprouts",
+			"crossOf": [
+				"brussels",
+				"kale"
+			],
+			"group": "Gemmifera × Acephala",
+			"part": "side buds (small open rosettes)",
+			"when": "2010",
+			"where": "UK (Tozer Seeds)",
+			"lineage": [
+				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Brassica A + C genomes → Brassica oleracea → leafy kales → headed cabbages → Brussels sprouts → kalettes / flower sprouts",
+				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Brassica A + C genomes → Brassica oleracea → leafy kales → kale → kalettes / flower sprouts"
+			]
+		},
+		{
+			"id": "rapa-early",
+			"kind": "crop-lineage",
+			"name": "early rapa crops (turnips + oilseeds)",
+			"where": "Central Asia (Hindu Kush)",
+			"when": "~3,500–5,000 years ago",
+			"confidence": "debated",
+			"note": "after McAlvay et al. 2021; spread west to Europe and east to China"
+		},
+		{
+			"id": "rapa-european",
+			"kind": "crop-lineage",
+			"name": "European rapas",
+			"where": "Europe",
+			"confidence": "likely"
+		},
+		{
+			"id": "turnip",
+			"kind": "vegetable",
+			"name": "turnip",
+			"group": "Rapifera",
+			"part": "swollen root and hypocotyl",
+			"lineage": [
+				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Brassica A + C genomes → Brassica rapa → early rapa crops (turnips + oilseeds) → European rapas → turnip"
+			]
+		},
+		{
+			"id": "rapini",
+			"kind": "vegetable",
+			"name": "rapini / broccoli rabe",
+			"group": "Ruvo",
+			"part": "flower buds, stalks and leaves",
+			"where": "Italy",
+			"confidence": "likely",
+			"lineage": [
+				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Brassica A + C genomes → Brassica rapa → early rapa crops (turnips + oilseeds) → European rapas → rapini / broccoli rabe"
+			]
+		},
+		{
+			"id": "rapa-oilseeds",
+			"kind": "crop-lineage",
+			"name": "rapa oilseeds",
+			"where": "South Asia and Europe",
+			"confidence": "likely"
+		},
+		{
+			"id": "turnip-rape",
+			"kind": "vegetable",
+			"name": "turnip rape / sarson",
+			"group": "Oleifera",
+			"part": "seeds (oil)",
+			"lineage": [
+				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Brassica A + C genomes → Brassica rapa → early rapa crops (turnips + oilseeds) → rapa oilseeds → turnip rape / sarson"
+			]
+		},
+		{
+			"id": "rapa-east-asian",
+			"kind": "crop-lineage",
+			"name": "East Asian leafy rapas",
+			"where": "China",
+			"when": "~2,000 years ago onward",
+			"confidence": "likely"
+		},
+		{
+			"id": "bok-choy",
+			"kind": "vegetable",
+			"name": "bok choy",
+			"group": "Chinensis",
+			"part": "leaves and leaf stalks",
+			"note": "one of the oldest Chinese leaf vegetables",
+			"lineage": [
+				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Brassica A + C genomes → Brassica rapa → early rapa crops (turnips + oilseeds) → East Asian leafy rapas → bok choy"
+			]
+		},
+		{
+			"id": "tatsoi",
+			"kind": "vegetable",
+			"name": "tatsoi",
+			"group": "Narinosa",
+			"part": "leaves (rosette)",
+			"confidence": "likely",
+			"lineage": [
+				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Brassica A + C genomes → Brassica rapa → early rapa crops (turnips + oilseeds) → East Asian leafy rapas → bok choy → tatsoi"
+			]
+		},
+		{
+			"id": "napa",
+			"kind": "vegetable",
+			"name": "napa cabbage (baechu)",
+			"group": "Pekinensis",
+			"part": "head of leaves",
+			"where": "northern China",
+			"when": "by ~14th century",
+			"note": "the cabbage of Korean baechu kimchi; often thought to come from a bok choy × turnip cross",
+			"confidence": "likely",
+			"lineage": [
+				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Brassica A + C genomes → Brassica rapa → early rapa crops (turnips + oilseeds) → East Asian leafy rapas → napa cabbage (baechu)",
+				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Brassica A + C genomes → Brassica rapa → early rapa crops (turnips + oilseeds) → European rapas → turnip → napa cabbage (baechu)",
+				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Brassica A + C genomes → Brassica rapa → early rapa crops (turnips + oilseeds) → East Asian leafy rapas → bok choy → napa cabbage (baechu)"
+			]
+		},
+		{
+			"id": "komatsuna",
+			"kind": "vegetable",
+			"name": "komatsuna",
+			"group": "Perviridis",
+			"part": "leaves",
+			"where": "Japan",
+			"confidence": "likely",
+			"lineage": [
+				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Brassica A + C genomes → Brassica rapa → early rapa crops (turnips + oilseeds) → East Asian leafy rapas → komatsuna"
+			]
+		},
+		{
+			"id": "mizuna",
+			"kind": "vegetable",
+			"name": "mizuna",
+			"group": "Nipposinica",
+			"part": "leaves",
+			"where": "Japan",
+			"confidence": "likely",
+			"lineage": [
+				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Brassica A + C genomes → Brassica rapa → early rapa crops (turnips + oilseeds) → East Asian leafy rapas → mizuna"
+			]
+		},
+		{
+			"id": "napus-oilseed",
+			"kind": "crop-lineage",
+			"name": "oilseed rape",
+			"where": "Europe",
+			"confidence": "likely"
+		},
+		{
+			"id": "canola",
+			"kind": "vegetable",
+			"name": "canola",
+			"group": "Oleifera",
+			"part": "seeds (oil)",
+			"where": "Canada",
+			"when": "1970s",
+			"note": "oilseed rape bred for low erucic acid and glucosinolates",
+			"lineage": [
+				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Brassica A + C genomes → Brassica rapa → Brassica napus → oilseed rape → canola",
+				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Brassica A + C genomes → Brassica oleracea → Brassica napus → oilseed rape → canola"
+			]
+		},
+		{
+			"id": "rutabaga",
+			"kind": "vegetable",
+			"name": "rutabaga / swede",
+			"group": "Napobrassica",
+			"part": "swollen root and hypocotyl",
+			"where": "Europe (Scandinavia / Bohemia)",
+			"when": "by the 17th century",
+			"confidence": "likely",
+			"lineage": [
+				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Brassica A + C genomes → Brassica rapa → Brassica napus → rutabaga / swede",
+				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Brassica A + C genomes → Brassica oleracea → Brassica napus → rutabaga / swede"
+			]
+		},
+		{
+			"id": "siberian-kale",
+			"kind": "vegetable",
+			"name": "Siberian / Hanover kale",
+			"group": "Pabularia",
+			"part": "leaves",
+			"lineage": [
+				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Brassica A + C genomes → Brassica rapa → Brassica napus → Siberian / Hanover kale",
+				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Brassica A + C genomes → Brassica oleracea → Brassica napus → Siberian / Hanover kale"
+			]
+		},
+		{
+			"id": "juncea-seed",
+			"kind": "crop-lineage",
+			"name": "seed mustards",
+			"where": "South Asia",
+			"confidence": "likely"
+		},
+		{
+			"id": "brown-mustard",
+			"kind": "vegetable",
+			"name": "brown mustard seed",
+			"part": "seeds (condiment, oil)",
+			"lineage": [
+				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Brassica A + C genomes → Brassica rapa → Brassica juncea → seed mustards → brown mustard seed",
+				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Nigra lineage (B genome) → Mutarda nigra → Brassica juncea → seed mustards → brown mustard seed"
+			]
+		},
+		{
+			"id": "juncea-vegetable",
+			"kind": "crop-lineage",
+			"name": "East Asian vegetable mustards",
+			"where": "China, Korea, Japan",
+			"confidence": "likely"
+		},
+		{
+			"id": "mustard-greens",
+			"kind": "vegetable",
+			"name": "mustard greens (gat)",
+			"part": "leaves",
+			"note": "Korean gat (갓), used in gat kimchi",
+			"lineage": [
+				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Brassica A + C genomes → Brassica rapa → Brassica juncea → East Asian vegetable mustards → mustard greens (gat)",
+				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Nigra lineage (B genome) → Mutarda nigra → Brassica juncea → East Asian vegetable mustards → mustard greens (gat)"
+			]
+		},
+		{
+			"id": "zha-cai",
+			"kind": "vegetable",
+			"name": "zha cai (stem mustard)",
+			"part": "swollen stem",
+			"where": "Sichuan, China",
+			"lineage": [
+				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Brassica A + C genomes → Brassica rapa → Brassica juncea → East Asian vegetable mustards → zha cai (stem mustard)",
+				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Nigra lineage (B genome) → Mutarda nigra → Brassica juncea → East Asian vegetable mustards → zha cai (stem mustard)"
+			]
+		},
+		{
+			"id": "ethiopian-kale",
+			"kind": "vegetable",
+			"name": "Ethiopian kale (gomenzer)",
+			"part": "leaves and seeds",
+			"where": "Ethiopia",
+			"lineage": [
+				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Nigra lineage (B genome) → Mutarda nigra → Mutarda carinata → Ethiopian kale (gomenzer)",
+				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Brassica A + C genomes → Brassica oleracea → Mutarda carinata → Ethiopian kale (gomenzer)"
+			]
+		},
+		{
+			"id": "black-mustard",
+			"kind": "vegetable",
+			"name": "black mustard seed",
+			"part": "seeds (condiment)",
+			"lineage": [
+				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Nigra lineage (B genome) → Mutarda nigra → black mustard seed"
+			]
+		},
+		{
+			"id": "radish-western",
+			"kind": "crop-lineage",
+			"name": "Western small radishes",
+			"where": "Mediterranean / Europe",
+			"confidence": "likely"
+		},
+		{
+			"id": "radish-east-asian",
+			"kind": "crop-lineage",
+			"name": "East Asian large radishes",
+			"where": "China, Korea, Japan",
+			"confidence": "likely",
+			"note": "genetically distinct from Western radishes; possibly a separate domestication"
+		},
+		{
+			"id": "radish",
+			"kind": "vegetable",
+			"name": "radish",
+			"part": "swollen root and hypocotyl",
+			"lineage": [
+				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Raphanus sativus → Western small radishes → radish"
+			]
+		},
+		{
+			"id": "daikon",
+			"kind": "vegetable",
+			"name": "daikon / Korean radish (mu)",
+			"part": "swollen root",
+			"note": "Korean mu (무), used in kkakdugi",
+			"lineage": [
+				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → radish + Brassica (R, A, C genomes) → Raphanus sativus → East Asian large radishes → daikon / Korean radish (mu)"
+			]
+		},
+		{
+			"id": "white-mustard",
+			"kind": "vegetable",
+			"name": "white / yellow mustard seed",
+			"part": "seeds (condiment)",
+			"lineage": [
+				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → white mustard + radish + Brassica → Sinapis alba → white / yellow mustard seed"
+			]
+		},
+		{
+			"id": "arugula",
+			"kind": "vegetable",
+			"name": "arugula / rocket",
+			"part": "leaves",
+			"lineage": [
+				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → rockets (Eruca + Diplotaxis) → Eruca vesicaria → arugula / rocket"
+			]
+		},
+		{
+			"id": "wild-rocket",
+			"kind": "vegetable",
+			"name": "wild rocket",
+			"part": "leaves",
+			"lineage": [
+				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → rockets + mustards + Brassica → rockets (Eruca + Diplotaxis) → Diplotaxis tenuifolia → wild rocket"
+			]
+		},
+		{
+			"id": "sea-kale",
+			"kind": "vegetable",
+			"name": "sea kale",
+			"part": "blanched shoots",
+			"lineage": [
+				"Brassicaceae (core) → Brassicodae (lineage II) → Brassiceae → Rapa/Oleracea side of Brassiceae → Crambe maritima → sea kale"
+			]
+		},
+		{
+			"id": "horseradish",
+			"kind": "vegetable",
+			"name": "horseradish",
+			"part": "root (condiment)",
+			"lineage": [
+				"Brassicaceae (core) → Camelinodae (lineage I) → horseradish + cresses clade → Armoracia rusticana → horseradish"
+			]
+		},
+		{
+			"id": "watercress",
+			"kind": "vegetable",
+			"name": "watercress",
+			"part": "leaves and stems",
+			"lineage": [
+				"Brassicaceae (core) → Camelinodae (lineage I) → Cardamineae (watercress + land cress) → Nasturtium officinale → watercress"
+			]
+		},
+		{
+			"id": "land-cress",
+			"kind": "vegetable",
+			"name": "land cress",
+			"part": "leaves",
+			"lineage": [
+				"Brassicaceae (core) → Camelinodae (lineage I) → Cardamineae (watercress + land cress) → Barbarea verna → land cress"
+			]
+		},
+		{
+			"id": "wasabi",
+			"kind": "vegetable",
+			"name": "wasabi",
+			"part": "rhizome (condiment)",
+			"where": "Japan",
+			"lineage": [
+				"Brassicaceae (core) → Brassicodae (lineage II) → Eutrema japonicum → wasabi"
+			]
+		},
+		{
+			"id": "garden-cress",
+			"kind": "vegetable",
+			"name": "garden cress",
+			"part": "seedlings and leaves",
+			"lineage": [
+				"Brassicaceae (core) → Camelinodae (lineage I) → horseradish + cresses clade → Lepidieae → Lepidium sativum → garden cress"
+			]
+		},
+		{
+			"id": "maca-root",
+			"kind": "vegetable",
+			"name": "maca",
+			"part": "swollen hypocotyl and root",
+			"where": "Andes, Peru",
+			"lineage": [
+				"Brassicaceae (core) → Camelinodae (lineage I) → horseradish + cresses clade → Lepidieae → Lepidium meyenii → maca"
+			]
+		}
+	],
+	"edges": [
+		{
+			"from": "brassicaceae",
+			"to": "camelinodae",
+			"type": "descent",
+			"source": "Open Tree of Life synthetic tree opentree16.1"
+		},
+		{
+			"from": "brassicaceae",
+			"to": "brassicodae",
+			"type": "descent",
+			"source": "Open Tree of Life synthetic tree opentree16.1"
+		},
+		{
+			"from": "camelinodae",
+			"to": "horseradish-cress-clade",
+			"type": "descent",
+			"source": "Open Tree of Life synthetic tree opentree16.1"
+		},
+		{
+			"from": "camelinodae",
+			"to": "cardamineae",
+			"type": "descent",
+			"source": "Open Tree of Life synthetic tree opentree16.1"
+		},
+		{
+			"from": "horseradish-cress-clade",
+			"to": "lepidieae",
+			"type": "descent",
+			"source": "Open Tree of Life synthetic tree opentree16.1"
+		},
+		{
+			"from": "brassicodae",
+			"to": "brassiceae",
+			"type": "descent",
+			"source": "Open Tree of Life synthetic tree opentree16.1"
+		},
+		{
+			"from": "brassiceae",
+			"to": "nigra-lineage",
+			"type": "descent",
+			"source": "Open Tree of Life synthetic tree opentree16.1"
+		},
+		{
+			"from": "brassiceae",
+			"to": "rapa-oleracea-side",
+			"type": "descent",
+			"source": "Open Tree of Life synthetic tree opentree16.1"
+		},
+		{
+			"from": "rapa-oleracea-side",
+			"to": "rocket-and-brassica",
+			"type": "descent",
+			"source": "Open Tree of Life synthetic tree opentree16.1"
+		},
+		{
+			"from": "rocket-and-brassica",
+			"to": "rockets",
+			"type": "descent",
+			"source": "Open Tree of Life synthetic tree opentree16.1"
+		},
+		{
+			"from": "rocket-and-brassica",
+			"to": "white-mustard-and-brassica",
+			"type": "descent",
+			"source": "Open Tree of Life synthetic tree opentree16.1"
+		},
+		{
+			"from": "white-mustard-and-brassica",
+			"to": "radish-and-brassica",
+			"type": "descent",
+			"source": "Open Tree of Life synthetic tree opentree16.1"
+		},
+		{
+			"from": "radish-and-brassica",
+			"to": "brassica-ac",
+			"type": "descent",
+			"source": "Open Tree of Life synthetic tree opentree16.1"
+		},
+		{
+			"from": "brassica-ac",
+			"to": "oleracea",
+			"type": "descent",
+			"source": "Open Tree of Life synthetic tree opentree16.1"
+		},
+		{
+			"from": "brassica-ac",
+			"to": "rapa",
+			"type": "descent",
+			"source": "Open Tree of Life synthetic tree opentree16.1"
+		},
+		{
+			"from": "nigra-lineage",
+			"to": "nigra",
+			"type": "descent",
+			"source": "Open Tree of Life synthetic tree opentree16.1"
+		},
+		{
+			"from": "radish-and-brassica",
+			"to": "raphanus",
+			"type": "descent",
+			"source": "Open Tree of Life synthetic tree opentree16.1"
+		},
+		{
+			"from": "white-mustard-and-brassica",
+			"to": "sinapis",
+			"type": "descent",
+			"source": "Open Tree of Life synthetic tree opentree16.1"
+		},
+		{
+			"from": "rockets",
+			"to": "eruca",
+			"type": "descent",
+			"source": "Open Tree of Life synthetic tree opentree16.1"
+		},
+		{
+			"from": "rockets",
+			"to": "diplotaxis",
+			"type": "descent",
+			"source": "Open Tree of Life synthetic tree opentree16.1"
+		},
+		{
+			"from": "rapa-oleracea-side",
+			"to": "crambe",
+			"type": "descent",
+			"source": "Open Tree of Life synthetic tree opentree16.1"
+		},
+		{
+			"from": "brassicodae",
+			"to": "eutrema",
+			"type": "descent",
+			"source": "Open Tree of Life synthetic tree opentree16.1"
+		},
+		{
+			"from": "horseradish-cress-clade",
+			"to": "armoracia",
+			"type": "descent",
+			"source": "Open Tree of Life synthetic tree opentree16.1"
+		},
+		{
+			"from": "lepidieae",
+			"to": "lepidium",
+			"type": "descent",
+			"source": "Open Tree of Life synthetic tree opentree16.1"
+		},
+		{
+			"from": "lepidieae",
+			"to": "maca",
+			"type": "descent",
+			"source": "Open Tree of Life synthetic tree opentree16.1"
+		},
+		{
+			"from": "cardamineae",
+			"to": "nasturtium",
+			"type": "descent",
+			"source": "Open Tree of Life synthetic tree opentree16.1"
+		},
+		{
+			"from": "cardamineae",
+			"to": "barbarea",
+			"type": "descent",
+			"source": "Open Tree of Life synthetic tree opentree16.1"
+		},
+		{
+			"from": "rapa",
+			"to": "juncea",
+			"type": "hybrid-parent",
+			"source": "U 1935 (Triangle of U)",
+			"confidence": "established"
+		},
+		{
+			"from": "nigra",
+			"to": "juncea",
+			"type": "hybrid-parent",
+			"source": "U 1935 (Triangle of U)",
+			"confidence": "established"
+		},
+		{
+			"from": "rapa",
+			"to": "napus",
+			"type": "hybrid-parent",
+			"source": "U 1935 (Triangle of U)",
+			"confidence": "established"
+		},
+		{
+			"from": "oleracea",
+			"to": "napus",
+			"type": "hybrid-parent",
+			"source": "U 1935 (Triangle of U)",
+			"confidence": "established"
+		},
+		{
+			"from": "nigra",
+			"to": "carinata",
+			"type": "hybrid-parent",
+			"source": "U 1935 (Triangle of U)",
+			"confidence": "established"
+		},
+		{
+			"from": "oleracea",
+			"to": "carinata",
+			"type": "hybrid-parent",
+			"source": "U 1935 (Triangle of U)",
+			"confidence": "established"
+		},
+		{
+			"from": "raphanus",
+			"to": "raphanobrassica",
+			"type": "hybrid-parent",
+			"source": "Karpechenko 1928",
+			"confidence": "established"
+		},
+		{
+			"from": "oleracea",
+			"to": "raphanobrassica",
+			"type": "hybrid-parent",
+			"source": "Karpechenko 1928",
+			"confidence": "established"
+		},
+		{
+			"from": "oleracea",
+			"to": "leafy-kales",
+			"type": "domestication",
+			"confidence": "likely"
+		},
+		{
+			"from": "oleracea",
+			"to": "wild-cabbage",
+			"type": "selection",
+			"confidence": "established"
+		},
+		{
+			"from": "leafy-kales",
+			"to": "kale",
+			"type": "selection",
+			"confidence": "established"
+		},
+		{
+			"from": "leafy-kales",
+			"to": "collards",
+			"type": "selection",
+			"confidence": "established"
+		},
+		{
+			"from": "leafy-kales",
+			"to": "tronchuda",
+			"type": "selection",
+			"confidence": "likely"
+		},
+		{
+			"from": "leafy-kales",
+			"to": "headed-cabbages",
+			"type": "domestication",
+			"confidence": "likely"
+		},
+		{
+			"from": "headed-cabbages",
+			"to": "cabbage",
+			"type": "selection",
+			"confidence": "established"
+		},
+		{
+			"from": "headed-cabbages",
+			"to": "savoy",
+			"type": "selection",
+			"confidence": "established"
+		},
+		{
+			"from": "headed-cabbages",
+			"to": "brussels",
+			"type": "selection",
+			"confidence": "likely"
+		},
+		{
+			"from": "leafy-kales",
+			"to": "kohlrabi",
+			"type": "selection",
+			"confidence": "likely"
+		},
+		{
+			"from": "leafy-kales",
+			"to": "flower-head-types",
+			"type": "domestication",
+			"confidence": "likely"
+		},
+		{
+			"from": "flower-head-types",
+			"to": "broccoli",
+			"type": "selection",
+			"confidence": "established"
+		},
+		{
+			"from": "flower-head-types",
+			"to": "cauliflower",
+			"type": "selection",
+			"confidence": "likely"
+		},
+		{
+			"from": "cauliflower",
+			"to": "romanesco",
+			"type": "selection",
+			"confidence": "likely"
+		},
+		{
+			"from": "leafy-kales",
+			"to": "gai-lan",
+			"type": "selection",
+			"confidence": "debated"
+		},
+		{
+			"from": "broccoli",
+			"to": "broccolini",
+			"type": "cross",
+			"confidence": "established"
+		},
+		{
+			"from": "gai-lan",
+			"to": "broccolini",
+			"type": "cross",
+			"confidence": "established"
+		},
+		{
+			"from": "brussels",
+			"to": "kalettes",
+			"type": "cross",
+			"confidence": "established"
+		},
+		{
+			"from": "kale",
+			"to": "kalettes",
+			"type": "cross",
+			"confidence": "established"
+		},
+		{
+			"from": "rapa",
+			"to": "rapa-early",
+			"type": "domestication",
+			"confidence": "debated"
+		},
+		{
+			"from": "rapa-early",
+			"to": "rapa-european",
+			"type": "domestication",
+			"confidence": "likely"
+		},
+		{
+			"from": "rapa-european",
+			"to": "turnip",
+			"type": "selection",
+			"confidence": "established"
+		},
+		{
+			"from": "rapa-european",
+			"to": "rapini",
+			"type": "selection",
+			"confidence": "likely"
+		},
+		{
+			"from": "rapa-early",
+			"to": "rapa-oilseeds",
+			"type": "domestication",
+			"confidence": "likely"
+		},
+		{
+			"from": "rapa-oilseeds",
+			"to": "turnip-rape",
+			"type": "selection",
+			"confidence": "established"
+		},
+		{
+			"from": "rapa-early",
+			"to": "rapa-east-asian",
+			"type": "domestication",
+			"confidence": "likely"
+		},
+		{
+			"from": "rapa-east-asian",
+			"to": "bok-choy",
+			"type": "selection",
+			"confidence": "established"
+		},
+		{
+			"from": "bok-choy",
+			"to": "tatsoi",
+			"type": "selection",
+			"confidence": "likely"
+		},
+		{
+			"from": "rapa-east-asian",
+			"to": "napa",
+			"type": "selection",
+			"confidence": "likely"
+		},
+		{
+			"from": "turnip",
+			"to": "napa",
+			"type": "cross",
+			"confidence": "debated",
+			"note": "proposed second parent of napa cabbage"
+		},
+		{
+			"from": "bok-choy",
+			"to": "napa",
+			"type": "cross",
+			"confidence": "debated",
+			"note": "proposed parent of napa cabbage"
+		},
+		{
+			"from": "rapa-east-asian",
+			"to": "komatsuna",
+			"type": "selection",
+			"confidence": "likely"
+		},
+		{
+			"from": "rapa-east-asian",
+			"to": "mizuna",
+			"type": "selection",
+			"confidence": "likely"
+		},
+		{
+			"from": "napus",
+			"to": "napus-oilseed",
+			"type": "domestication",
+			"confidence": "likely"
+		},
+		{
+			"from": "napus-oilseed",
+			"to": "canola",
+			"type": "selection",
+			"confidence": "established"
+		},
+		{
+			"from": "napus",
+			"to": "rutabaga",
+			"type": "selection",
+			"confidence": "likely"
+		},
+		{
+			"from": "napus",
+			"to": "siberian-kale",
+			"type": "selection",
+			"confidence": "established"
+		},
+		{
+			"from": "juncea",
+			"to": "juncea-seed",
+			"type": "domestication",
+			"confidence": "likely"
+		},
+		{
+			"from": "juncea-seed",
+			"to": "brown-mustard",
+			"type": "selection",
+			"confidence": "established"
+		},
+		{
+			"from": "juncea",
+			"to": "juncea-vegetable",
+			"type": "domestication",
+			"confidence": "likely"
+		},
+		{
+			"from": "juncea-vegetable",
+			"to": "mustard-greens",
+			"type": "selection",
+			"confidence": "established"
+		},
+		{
+			"from": "juncea-vegetable",
+			"to": "zha-cai",
+			"type": "selection",
+			"confidence": "established"
+		},
+		{
+			"from": "carinata",
+			"to": "ethiopian-kale",
+			"type": "selection",
+			"confidence": "established"
+		},
+		{
+			"from": "nigra",
+			"to": "black-mustard",
+			"type": "selection",
+			"confidence": "established"
+		},
+		{
+			"from": "raphanus",
+			"to": "radish-western",
+			"type": "domestication",
+			"confidence": "likely"
+		},
+		{
+			"from": "raphanus",
+			"to": "radish-east-asian",
+			"type": "domestication",
+			"confidence": "likely"
+		},
+		{
+			"from": "radish-western",
+			"to": "radish",
+			"type": "selection",
+			"confidence": "established"
+		},
+		{
+			"from": "radish-east-asian",
+			"to": "daikon",
+			"type": "selection",
+			"confidence": "established"
+		},
+		{
+			"from": "sinapis",
+			"to": "white-mustard",
+			"type": "selection",
+			"confidence": "established"
+		},
+		{
+			"from": "eruca",
+			"to": "arugula",
+			"type": "selection",
+			"confidence": "established"
+		},
+		{
+			"from": "diplotaxis",
+			"to": "wild-rocket",
+			"type": "selection",
+			"confidence": "established"
+		},
+		{
+			"from": "crambe",
+			"to": "sea-kale",
+			"type": "selection",
+			"confidence": "established"
+		},
+		{
+			"from": "armoracia",
+			"to": "horseradish",
+			"type": "selection",
+			"confidence": "established"
+		},
+		{
+			"from": "nasturtium",
+			"to": "watercress",
+			"type": "selection",
+			"confidence": "established"
+		},
+		{
+			"from": "barbarea",
+			"to": "land-cress",
+			"type": "selection",
+			"confidence": "established"
+		},
+		{
+			"from": "eutrema",
+			"to": "wasabi",
+			"type": "selection",
+			"confidence": "established"
+		},
+		{
+			"from": "lepidium",
+			"to": "garden-cress",
+			"type": "selection",
+			"confidence": "established"
+		},
+		{
+			"from": "maca",
+			"to": "maca-root",
+			"type": "selection",
+			"confidence": "established"
+		}
+	]
+}
