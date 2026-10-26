@@ -82,6 +82,7 @@ export type Farm = {
 	batEaten: number; // fruit eaten by bats
 	harvested: number;
 	grafts: number; // grafts made by farmers
+	attention: Record<string, number>; // grafting trips started per variety ("seedlings" for all seedlings)
 	graftLog: { x: number; y: number; day: number }[]; // recent farmer grafts, for drawing
 	nextId: number;
 	random: number; // state of the random number generator
@@ -131,6 +132,7 @@ export function createFarm(): Farm {
 		harvested: 0,
 		grafts: 0,
 		graftLog: [],
+		attention: {},
 		nextId: 1,
 		random: settings.rules.seed,
 	};
@@ -162,7 +164,8 @@ export function createFarm(): Farm {
 			walked: 0,
 		});
 	}
-	for (let i = 0; i < settings.rules.bats; i++) {
+	for (let i = 0; i < settings.rules.farmers; i++) {
+		// one bat per farmer
 		farm.bats.push({
 			id: i + 1,
 			x: 0,
@@ -354,8 +357,7 @@ function growFruits(farm: Farm, tree: Tree, dt: number) {
 }
 
 // Farmers graft varieties whose seeds won't carry them on: named varieties that don't breed true
-// (trueSeed 0), and seedling varieties that turned out promising (enough fruit). Rarest first,
-// so a new promising seedling, and any variety close to dying out, is grafted before common ones.
+// (trueSeed 0), and seedling varieties that turned out promising (enough fruit).
 function worthGrafting(tree: Tree) {
 	if (tree.traits) return tree.traits.fruit >= settings.rules.promisingFruit;
 	return settings.varieties[tree.variety as Variety].trueSeed === 0;
@@ -368,11 +370,16 @@ function pickTree(farm: Farm) {
 			(tree.stage === "mature" || tree.stage === "fruiting"),
 	);
 	if (grown.length === 0) return undefined;
-	const count = (name: string) =>
-		farm.trees.filter((tree) => tree.variety === name).length;
-	const fewest = Math.min(...grown.map((tree) => count(tree.variety)));
-	const rarest = grown.filter((tree) => count(tree.variety) === fewest);
-	return rarest[Math.floor(random(farm) * rarest.length)];
+	// Equal attention: go to the variety that has had the fewest grafting trips so far.
+	// All seedling varieties share one turn, so a crowd of seedlings can't take over.
+	const turns = (tree: Tree) => farm.attention[attentionKey(tree)] ?? 0;
+	const fewest = Math.min(...grown.map(turns));
+	const next = grown.filter((tree) => turns(tree) === fewest);
+	return next[Math.floor(random(farm) * next.length)];
+}
+
+function attentionKey(tree: Tree) {
+	return tree.traits ? "seedlings" : tree.variety;
 }
 
 // Look for free ground near a tree, at most 20 tries.
@@ -412,6 +419,8 @@ function workFarmer(farm: Farm, farmer: Farmer, dt: number) {
 		const target = pickTree(farm);
 		const spot = target && findSpot(farm, target);
 		if (target && spot) {
+			const key = attentionKey(target);
+			farm.attention[key] = (farm.attention[key] ?? 0) + 1;
 			farmer.task = "toTree";
 			farmer.treeId = target.id;
 			farmer.spotX = spot.x;

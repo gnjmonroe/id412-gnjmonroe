@@ -201,9 +201,8 @@ const SLIDERS: { title: string; items: Slider[] }[] = [
 	{
 		title: "On restart",
 		items: [
-			{ label: "bats", group: rules, key: "bats", min: 0, max: 20, step: 1 },
 			{
-				label: "farmers",
+				label: "farmers (+1 bat each)",
 				group: rules,
 				key: "farmers",
 				min: 0,
