@@ -356,11 +356,10 @@ function growFruits(farm: Farm, tree: Tree, dt: number) {
 	}
 }
 
-// Farmers graft varieties whose seeds won't carry them on: named varieties that don't breed true
-// (trueSeed 0), and seedling varieties that turned out promising (enough fruit).
+// Farmers graft every named variety, and seedling varieties that turned out promising (enough fruit).
 function worthGrafting(tree: Tree) {
 	if (tree.traits) return tree.traits.fruit >= settings.rules.promisingFruit;
-	return settings.varieties[tree.variety as Variety].trueSeed === 0;
+	return true;
 }
 
 function pickTree(farm: Farm) {
