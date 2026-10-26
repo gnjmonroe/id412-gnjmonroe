@@ -24,6 +24,20 @@ import { HEIGHT, settings, VARIETIES, WIDTH } from "./settings";
 
 const FRUIT_SIZE = 6; // radius of a mango
 const BAT_SIZE = 1.8; // bats are drawn this many times their base size
+// Inks and dash patterns for graft lines, after Karel Martens' overprinted colours.
+const LINE_INKS = [
+	"#00a0e0", // cyan
+	"#e6007e", // magenta
+	"#ffd400", // yellow
+	"#ff4f1f", // red-orange
+	"#1f3fd1", // ultramarine
+	"#00a651", // green
+	"#ff9ec8", // pink
+	"#7a3fa0", // violet
+	"#1d1d1b", // black
+	"#8ad3f0", // pale sky
+];
+const LINE_DASHES = [[], [8, 4], [2, 4], [12, 3, 2, 3], [1, 6]];
 const SPEEDS = [1, 4, 16];
 const TASK_NAMES = {
 	idle: "looking",
@@ -205,6 +219,10 @@ function jitter(treeId: number, slot: number) {
 	return n - Math.floor(n);
 }
 
+function pick<T>(list: T[], chance: number) {
+	return list[Math.floor(chance * list.length)];
+}
+
 // Mangoes are drawn after all canopies, without the multiply blend, so they keep their true colours.
 function drawFruits(ctx: CanvasRenderingContext2D, tree: Tree) {
 	const r = RADIUS[tree.stage];
@@ -251,15 +269,17 @@ function draw(
 	selectedId: number | null,
 ) {
 	// Lines from each tree to the tree it came from. Seed: thin, solid, in the link colour.
-	// Graft: thicker, dashed, in the variety's own colour, so each grafted family is easy to follow.
+	// Graft: each line gets its own ink, weight and dash, picked at random once per tree.
 	for (const tree of farm.trees) {
 		const parent = farm.trees.find((other) => other.id === tree.parentId);
 		if (!parent) continue;
 		const grafted = tree.origin === "graft";
-		ctx.globalAlpha = grafted ? 0.8 : 0.4;
-		ctx.strokeStyle = grafted ? traitsOf(tree).leaf : settings.colors.link;
-		ctx.lineWidth = grafted ? 2.5 : 1;
-		ctx.setLineDash(grafted ? [6, 4] : []);
+		ctx.globalAlpha = grafted ? 0.85 : 0.4;
+		ctx.strokeStyle = grafted
+			? pick(LINE_INKS, jitter(tree.id, 300))
+			: settings.colors.link;
+		ctx.lineWidth = grafted ? 1.5 + jitter(tree.id, 301) * 3.5 : 1;
+		ctx.setLineDash(grafted ? pick(LINE_DASHES, jitter(tree.id, 302)) : []);
 		ctx.beginPath();
 		ctx.moveTo(parent.x, parent.y);
 		ctx.lineTo(tree.x, tree.y);
