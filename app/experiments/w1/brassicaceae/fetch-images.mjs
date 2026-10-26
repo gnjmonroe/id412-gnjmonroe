@@ -5,23 +5,33 @@
 // json/images.json is the one place to maintain images. For each vegetable id it keeps:
 //   wikipedia  the English Wikipedia article whose lead image is used (edit to pick another article)
 //   file       the Wikimedia Commons file (edit to pick a specific photo; it wins over `wikipedia`)
-//   src, author, license, licenseUrl, source   filled in by this script
+//   fetched, src, width, height, author, license, licenseUrl, source   filled in by this script
 // Run the script again after editing; it only re-downloads what changed (or everything with --all).
 
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import {
+	existsSync,
+	mkdirSync,
+	readFileSync,
+	unlinkSync,
+	writeFileSync,
+} from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const root = join(here, "../../../..");
-const SIZE = 128; // thumbnail box in pixels (the canvas draws them smaller, sharp on retina screens)
+const SIZE = 120; // thumbnail width in pixels; Wikimedia serves standard widths (120, 250, …), others get rounded up
 const PUBLIC_DIR = "experiments/w1/brassicaceae/images";
 const HEADERS = { "user-agent": "id412-web-workshop/1.0 (student project)" };
 const all = process.argv.includes("--all");
 
-const crucifers = JSON.parse(readFileSync(join(here, "json/crucifers.json"), "utf8"));
+const crucifers = JSON.parse(
+	readFileSync(join(here, "json/crucifers.json"), "utf8"),
+);
 const imagesPath = join(here, "json/images.json");
-const saved = existsSync(imagesPath) ? JSON.parse(readFileSync(imagesPath, "utf8")) : { images: {} };
+const saved = existsSync(imagesPath)
+	? JSON.parse(readFileSync(imagesPath, "utf8"))
+	: { images: {} };
 mkdirSync(join(root, "public", PUBLIC_DIR), { recursive: true });
 
 const wait = (ms) => new Promise((done) => setTimeout(done, ms));
@@ -53,14 +63,20 @@ async function leadImage(title) {
 
 // Thumbnail URL and credit for a Commons file.
 async function fileInfo(file) {
-	const url = `https://commons.wikimedia.org/w/api.php?action=query&format=json&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=${SIZE}&iiurlheight=${SIZE}&titles=File:${encodeURIComponent(file)}`;
+	const url = `https://commons.wikimedia.org/w/api.php?action=query&format=json&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=${SIZE}&titles=File:${encodeURIComponent(file)}`;
 	const page = Object.values((await getJson(url)).query.pages)[0];
 	const info = page.imageinfo?.[0];
 	if (!info) return null;
 	const meta = info.extmetadata ?? {};
-	const plain = (html) => (html ?? "").replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim();
+	const plain = (html) =>
+		(html ?? "")
+			.replace(/<[^>]+>/g, "")
+			.replace(/\s+/g, " ")
+			.trim();
 	return {
 		thumb: info.thumburl,
+		width: info.thumbwidth,
+		height: info.thumbheight,
 		author: plain(meta.Artist?.value) || "unknown",
 		license: plain(meta.LicenseShortName?.value) || "see source",
 		licenseUrl: meta.LicenseUrl?.value ?? null,
@@ -69,20 +85,53 @@ async function fileInfo(file) {
 }
 
 const images = {};
+
+// Saved after every vegetable, so an interrupted run keeps what it already fetched.
+function save() {
+	const out = {
+		description:
+			"One small photo per vegetable in crucifers.json, keyed by vegetable id. Edit `wikipedia` or `file` to change a photo, then run fetch-images.mjs. `src` is the local copy in public/; author, license and source are the credit the licence asks for.",
+		source:
+			"Wikimedia Commons, via the lead images of English Wikipedia articles",
+		images: { ...saved.images, ...images },
+	};
+	writeFileSync(imagesPath, JSON.stringify(out, null, "\t") + "\n");
+}
 for (const veg of crucifers.nodes.filter((n) => n.kind === "vegetable")) {
 	const entry = { wikipedia: veg.name, ...saved.images[veg.id] };
 	try {
 		const file = entry.file ?? (await leadImage(entry.wikipedia));
 		if (!file) throw new Error(`no lead image on "${entry.wikipedia}"`);
-		const changed = file !== saved.images[veg.id]?.file || !entry.src;
+		const changed = file !== entry.fetched || !entry.src; // `fetched`: the file the local copy was made from
 		if (changed || all) {
 			const info = await fileInfo(file);
 			if (!info) throw new Error(`no Commons file "${file}"`);
 			const ext = info.thumb.split("?")[0].split(".").pop().toLowerCase();
 			const name = `${veg.id}.${ext}`;
 			const res = await politeFetch(info.thumb);
-			writeFileSync(join(root, "public", PUBLIC_DIR, name), Buffer.from(await res.arrayBuffer()));
-			Object.assign(entry, { file, src: `/${PUBLIC_DIR}/${name}`, author: info.author, license: info.license, licenseUrl: info.licenseUrl, source: info.source });
+			writeFileSync(
+				join(root, "public", PUBLIC_DIR, name),
+				Buffer.from(await res.arrayBuffer()),
+			);
+			// remove the old local copy if the new one has another name (e.g. .jpg → .png)
+			const old = entry.src && join(root, "public", entry.src);
+			if (
+				old &&
+				old !== join(root, "public", PUBLIC_DIR, name) &&
+				existsSync(old)
+			)
+				unlinkSync(old);
+			Object.assign(entry, {
+				file,
+				fetched: file,
+				src: `/${PUBLIC_DIR}/${name}`,
+				width: info.width,
+				height: info.height,
+				author: info.author,
+				license: info.license,
+				licenseUrl: info.licenseUrl,
+				source: info.source,
+			});
 			delete entry.thumb;
 			console.log(`ok    ${veg.id.padEnd(16)} ${file}  (${info.license})`);
 		} else {
@@ -92,12 +141,6 @@ for (const veg of crucifers.nodes.filter((n) => n.kind === "vegetable")) {
 		console.log(`MISS  ${veg.id.padEnd(16)} ${error.message}`);
 	}
 	images[veg.id] = entry;
+	save();
 	await wait(1500); // be gentle with Wikimedia between vegetables
 }
-
-const out = {
-	description: "One small photo per vegetable in crucifers.json, keyed by vegetable id. Edit `wikipedia` or `file` to change a photo, then run fetch-images.mjs. `src` is the local copy in public/; author, license and source are the credit the licence asks for.",
-	source: "Wikimedia Commons, via the lead images of English Wikipedia articles",
-	images,
-};
-writeFileSync(imagesPath, JSON.stringify(out, null, "\t") + "\n");

@@ -1,7 +1,10 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import NextImage from "next/image"; // named so it does not hide the browser's Image
+import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 import data from "./json/crucifers.json";
+import photoData from "./json/images.json";
 import styles from "./page.module.css";
 
 // The ancestry of the cruciferous vegetables from json/crucifers.json, drawn as an outline tree:
@@ -59,9 +62,23 @@ function place(id: string, d: number) {
 }
 place(data.root, 0);
 
+// Small photos of the vegetables (see json/images.json and fetch-images.mjs)
+type Photo = {
+	src?: string;
+	width?: number;
+	height?: number;
+	author?: string;
+	license?: string;
+};
+const photos = photoData.images as Record<string, Photo>;
+const PHOTO = 20; // diameter of a photo on the canvas
+
 // Tree coordinates of a node's dot
 const nodeX = (id: string) => MARGIN + depth[id] * INDENT;
 const nodeY = (id: string) => HEADER + MARGIN + row[id] * ROW;
+
+// Where a node's label starts: after the dot, and after the photo for vegetables.
+const textX = (n: Node) => nodeX(n.id) + (photos[n.id]?.src ? 18 + PHOTO : 11);
 
 function label(n: Node) {
 	return n.kind === "species" && n.common ? `${n.name} (${n.common})` : n.name;
@@ -72,7 +89,7 @@ function treeSize(ctx: CanvasRenderingContext2D) {
 	ctx.font = FONT;
 	let width = 0;
 	for (const n of nodes)
-		width = Math.max(width, nodeX(n.id) + 12 + ctx.measureText(label(n)).width);
+		width = Math.max(width, textX(n) + ctx.measureText(label(n)).width);
 	return {
 		width: width + MARGIN,
 		height: nodeY(nodes[0].id) + rows * ROW + MARGIN,
@@ -85,6 +102,8 @@ function draw(
 	height: number,
 	panX: number,
 	panY: number,
+	images: Record<string, HTMLImageElement>,
+	hover: Node | null,
 ) {
 	ctx.fillStyle = PAPER;
 	ctx.fillRect(0, 0, width, height);
@@ -133,14 +152,33 @@ function draw(
 		const x = nodeX(n.id);
 		const y = nodeY(n.id);
 		const text = label(n);
-		ctx.fillStyle = PAPER;
-		ctx.fillRect(x + 8, y - 8, ctx.measureText(text).width + 6, 16);
+		const tx = textX(n);
+		if (hover === n) {
+			ctx.fillStyle = "rgba(0, 166, 81, 0.12)";
+			ctx.fillRect(
+				x - 8,
+				y - ROW / 2,
+				tx - x + ctx.measureText(text).width + 16,
+				ROW,
+			);
+		} else {
+			ctx.fillStyle = PAPER;
+			ctx.fillRect(
+				x + 8,
+				y - ROW / 2 + 2,
+				tx - x - 4 + ctx.measureText(text).width,
+				ROW - 4,
+			);
+		}
+		const image = images[n.id];
+		if (image?.complete && image.naturalWidth)
+			drawPhoto(ctx, image, x + 10 + PHOTO / 2, y);
 		ctx.fillStyle = KIND_COLOR[n.kind] ?? INK;
 		ctx.beginPath();
 		ctx.arc(x, y, n.kind === "vegetable" ? 4.5 : 3.5, 0, Math.PI * 2);
 		ctx.fill();
 		ctx.fillStyle = n.kind === "clade" ? "rgba(29, 29, 27, 0.6)" : INK;
-		ctx.fillText(text, x + 11, y);
+		ctx.fillText(text, tx, y);
 	}
 	ctx.restore();
 
@@ -151,6 +189,7 @@ function draw(
 	ctx.font = "14px ui-monospace, Menlo, monospace";
 	ctx.textBaseline = "middle";
 	ctx.fillText("Cruciferous vegetables: ancestry", MARGIN, 20);
+	const titleWidth = ctx.measureText("Cruciferous vegetables: ancestry").width;
 	ctx.font = "11px ui-monospace, Menlo, monospace";
 	const legend: [string, string, boolean][] = [
 		["clade", KIND_COLOR.clade, false],
@@ -182,11 +221,65 @@ function draw(
 		lx += 22 + ctx.measureText(name).width + 20;
 	}
 	ctx.fillStyle = "rgba(29, 29, 27, 0.5)";
-	ctx.fillText("drag or scroll to move", lx + 10, 44);
+	ctx.fillText(
+		"drag or scroll to move · hover a vegetable for its photo credit, click to view it",
+		lx + 10,
+		44,
+	);
+
+	// Photo credit for the hovered vegetable (the CC licences ask for it)
+	const photo = hover && photos[hover.id];
+	if (hover && photo?.src) {
+		ctx.font = "11px ui-monospace, Menlo, monospace";
+		ctx.fillStyle = "rgba(29, 29, 27, 0.7)";
+		ctx.fillText(
+			`click to view · photo of ${hover.name}: ${photo.author}, ${photo.license}, Wikimedia Commons`,
+			MARGIN + titleWidth + 24,
+			20,
+		);
+	}
+}
+
+// A photo cropped to a circle, filling it like CSS object-fit: cover.
+function drawPhoto(
+	ctx: CanvasRenderingContext2D,
+	image: HTMLImageElement,
+	cx: number,
+	cy: number,
+) {
+	const side = Math.min(image.naturalWidth, image.naturalHeight);
+	const sx = (image.naturalWidth - side) / 2;
+	const sy = (image.naturalHeight - side) / 2;
+	ctx.save();
+	ctx.beginPath();
+	ctx.arc(cx, cy, PHOTO / 2, 0, Math.PI * 2);
+	ctx.clip();
+	ctx.drawImage(
+		image,
+		sx,
+		sy,
+		side,
+		side,
+		cx - PHOTO / 2,
+		cy - PHOTO / 2,
+		PHOTO,
+		PHOTO,
+	);
+	ctx.restore();
 }
 
 export default function Brassicaceae() {
 	const canvasRef = useRef<HTMLCanvasElement>(null);
+	const [viewing, setViewing] = useState<Node | null>(null); // vegetable whose photo is open
+
+	// Escape closes the photo viewer
+	useEffect(() => {
+		function onKey(event: KeyboardEvent) {
+			if (event.key === "Escape") setViewing(null);
+		}
+		window.addEventListener("keydown", onKey);
+		return () => window.removeEventListener("keydown", onKey);
+	}, []);
 
 	useEffect(() => {
 		const canvas = canvasRef.current;
@@ -198,6 +291,17 @@ export default function Brassicaceae() {
 		let height = 0;
 		let panX = 0;
 		let panY = 0;
+		let hover: Node | null = null;
+
+		// Load the photos; redraw as each one arrives.
+		const images: Record<string, HTMLImageElement> = {};
+		for (const [id, photo] of Object.entries(photos)) {
+			if (!photo.src) continue;
+			const image = new Image();
+			image.onload = () => redraw();
+			image.src = photo.src;
+			images[id] = image;
+		}
 
 		// Keep the view inside the tree (no panning past its edges).
 		function clamp() {
@@ -205,7 +309,7 @@ export default function Brassicaceae() {
 			panY = Math.max(0, Math.min(panY, tree.height - height));
 		}
 		function redraw() {
-			draw(ctx!, width, height, panX, panY);
+			draw(ctx!, width, height, panX, panY, images, hover);
 		}
 		function resize() {
 			const dpr = window.devicePixelRatio || 1;
@@ -222,14 +326,30 @@ export default function Brassicaceae() {
 		let dragging = false;
 		let lastX = 0;
 		let lastY = 0;
+		let startX = 0;
+		let startY = 0;
 		function onDown(event: PointerEvent) {
 			dragging = true;
-			lastX = event.clientX;
-			lastY = event.clientY;
+			lastX = startX = event.clientX;
+			lastY = startY = event.clientY;
 			canvas!.setPointerCapture(event.pointerId);
 		}
+		// The vegetable on the row under the pointer, if any
+		function pick(clientY: number) {
+			if (clientY < HEADER) return null;
+			const r = Math.round((clientY + panY - nodeY(data.root)) / ROW);
+			const n = nodes.find((node) => row[node.id] === r);
+			return n && n.kind === "vegetable" ? n : null;
+		}
 		function onMove(event: PointerEvent) {
-			if (!dragging) return;
+			if (!dragging) {
+				const next = pick(event.clientY);
+				if (next !== hover) {
+					hover = next;
+					redraw();
+				}
+				return;
+			}
 			panX -= event.clientX - lastX;
 			panY -= event.clientY - lastY;
 			lastX = event.clientX;
@@ -237,8 +357,13 @@ export default function Brassicaceae() {
 			clamp();
 			redraw();
 		}
-		function onUp() {
+		// A click (pointer barely moved) on a vegetable with a photo opens the viewer.
+		function onUp(event: PointerEvent) {
 			dragging = false;
+			if (Math.hypot(event.clientX - startX, event.clientY - startY) > 4)
+				return;
+			const n = pick(event.clientY);
+			if (n && photos[n.id]?.src) setViewing(n);
 		}
 		// Scroll wheel or trackpad moves the view too
 		function onWheel(event: WheelEvent) {
@@ -269,6 +394,34 @@ export default function Brassicaceae() {
 	return (
 		<main className={styles.container}>
 			<canvas ref={canvasRef} className={styles.canvas} />
+			<nav className={styles.links}>
+				<Link href="/experiments/w1/brassicaceae/signature">
+					signature view →
+				</Link>
+				<Link href="/experiments/w1/brassicaceae/cards">card view →</Link>
+			</nav>
+			{viewing && (
+				<div className={styles.viewer} onClick={() => setViewing(null)}>
+					{/* the file as stored on disk, at its real size */}
+					<NextImage
+						src={photos[viewing.id].src!}
+						alt={viewing.name}
+						width={photos[viewing.id].width}
+						height={photos[viewing.id].height}
+						unoptimized
+					/>
+					<p>{viewing.name}</p>
+					<p className={styles.credit}>
+						{photos[viewing.id].width} × {photos[viewing.id].height} px, as
+						stored on disk
+					</p>
+					<p className={styles.credit}>
+						photo: {photos[viewing.id].author}, {photos[viewing.id].license},
+						Wikimedia Commons
+					</p>
+					<p className={styles.credit}>click anywhere or press Esc to close</p>
+				</div>
+			)}
 		</main>
 	);
 }

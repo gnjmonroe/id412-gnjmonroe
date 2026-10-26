@@ -2561,11 +2561,7 @@
 								"children": [
 									{
 										"clade": null,
-										"supertribes": [
-											"Arabodae",
-											"Brassicodae",
-											"Camelinodae"
-										],
+										"supertribes": ["Arabodae", "Brassicodae", "Camelinodae"],
 										"tribes": [
 											"Alyssopsideae",
 											"Arabidopsideae",
@@ -2593,10 +2589,7 @@
 										"children": [
 											{
 												"clade": null,
-												"supertribes": [
-													"Brassicodae",
-													"Camelinodae"
-												],
+												"supertribes": ["Brassicodae", "Camelinodae"],
 												"tribes": [
 													"Alyssopsideae",
 													"Arabidopsideae",
@@ -2623,10 +2616,7 @@
 												"children": [
 													{
 														"clade": null,
-														"supertribes": [
-															"Brassicodae",
-															"Camelinodae"
-														],
+														"supertribes": ["Brassicodae", "Camelinodae"],
 														"tribes": [
 															"Alyssopsideae",
 															"Arabidopsideae",
@@ -2653,10 +2643,7 @@
 														"children": [
 															{
 																"clade": null,
-																"supertribes": [
-																	"Brassicodae",
-																	"Camelinodae"
-																],
+																"supertribes": ["Brassicodae", "Camelinodae"],
 																"tribes": [
 																	"Alyssopsideae",
 																	"Arabidopsideae",
@@ -3315,9 +3302,7 @@
 																											{
 																												"clade": null,
 																												"supertribes": [],
-																												"tribes": [
-																													"Unplaced"
-																												],
+																												"tribes": ["Unplaced"],
 																												"genera": 5,
 																												"children": [
 																													{
@@ -3522,9 +3507,7 @@
 																							},
 																							{
 																								"clade": null,
-																								"supertribes": [
-																									"Camelinodae"
-																								],
+																								"supertribes": ["Camelinodae"],
 																								"tribes": [
 																									"Arabidopsideae",
 																									"Microlepidieae"
@@ -3572,22 +3555,14 @@
 																					},
 																					{
 																						"clade": "Physarieae",
-																						"supertribes": [
-																							"Camelinodae"
-																						],
-																						"tribes": [
-																							"Physarieae"
-																						],
+																						"supertribes": ["Camelinodae"],
+																						"tribes": ["Physarieae"],
 																						"genera": 7,
 																						"children": [
 																							{
 																								"clade": null,
-																								"supertribes": [
-																									"Camelinodae"
-																								],
-																								"tribes": [
-																									"Physarieae"
-																								],
+																								"supertribes": ["Camelinodae"],
+																								"tribes": ["Physarieae"],
 																								"genera": 4,
 																								"children": [
 																									{
@@ -3609,9 +3584,7 @@
 																										"supertribes": [
 																											"Camelinodae"
 																										],
-																										"tribes": [
-																											"Physarieae"
-																										],
+																										"tribes": ["Physarieae"],
 																										"genera": 2,
 																										"children": [
 																											{
@@ -3634,12 +3607,8 @@
 																							},
 																							{
 																								"clade": null,
-																								"supertribes": [
-																									"Camelinodae"
-																								],
-																								"tribes": [
-																									"Physarieae"
-																								],
+																								"supertribes": ["Camelinodae"],
+																								"tribes": ["Physarieae"],
 																								"genera": 3,
 																								"children": [
 																									{
@@ -3647,9 +3616,7 @@
 																										"supertribes": [
 																											"Camelinodae"
 																										],
-																										"tribes": [
-																											"Physarieae"
-																										],
+																										"tribes": ["Physarieae"],
 																										"genera": 2,
 																										"children": [
 																											{
@@ -3692,9 +3659,7 @@
 																	},
 																	{
 																		"clade": null,
-																		"supertribes": [
-																			"Camelinodae"
-																		],
+																		"supertribes": ["Camelinodae"],
 																		"tribes": [
 																			"Cardamineae",
 																			"Descurainieae",
@@ -3704,9 +3669,7 @@
 																		"children": [
 																			{
 																				"clade": null,
-																				"supertribes": [
-																					"Camelinodae"
-																				],
+																				"supertribes": ["Camelinodae"],
 																				"tribes": [
 																					"Cardamineae",
 																					"Descurainieae"
@@ -3715,9 +3678,7 @@
 																				"children": [
 																					{
 																						"clade": null,
-																						"supertribes": [
-																							"Camelinodae"
-																						],
+																						"supertribes": ["Camelinodae"],
 																						"tribes": [
 																							"Cardamineae",
 																							"Descurainieae"
@@ -3726,9 +3687,7 @@
 																						"children": [
 																							{
 																								"clade": null,
-																								"supertribes": [
-																									"Camelinodae"
-																								],
+																								"supertribes": ["Camelinodae"],
 																								"tribes": [
 																									"Cardamineae",
 																									"Descurainieae"
@@ -3749,9 +3708,7 @@
 																										"supertribes": [
 																											"Camelinodae"
 																										],
-																										"tribes": [
-																											"Descurainieae"
-																										],
+																										"tribes": ["Descurainieae"],
 																										"genera": 1,
 																										"children": [
 																											{
@@ -3783,12 +3740,8 @@
 																					},
 																					{
 																						"clade": null,
-																						"supertribes": [
-																							"Camelinodae"
-																						],
-																						"tribes": [
-																							"Descurainieae"
-																						],
+																						"supertribes": ["Camelinodae"],
+																						"tribes": ["Descurainieae"],
 																						"genera": 2,
 																						"children": [
 																							{
@@ -3822,13 +3775,8 @@
 															},
 															{
 																"clade": null,
-																"supertribes": [
-																	"Camelinodae"
-																],
-																"tribes": [
-																	"Lepidieae",
-																	"Smelowskieae"
-																],
+																"supertribes": ["Camelinodae"],
+																"tribes": ["Lepidieae", "Smelowskieae"],
 																"genera": 2,
 																"children": [
 																	{
@@ -3851,42 +3799,26 @@
 													},
 													{
 														"clade": null,
-														"supertribes": [
-															"Camelinodae"
-														],
-														"tribes": [
-															"Cardamineae"
-														],
+														"supertribes": ["Camelinodae"],
+														"tribes": ["Cardamineae"],
 														"genera": 8,
 														"children": [
 															{
 																"clade": null,
-																"supertribes": [
-																	"Camelinodae"
-																],
-																"tribes": [
-																	"Cardamineae"
-																],
+																"supertribes": ["Camelinodae"],
+																"tribes": ["Cardamineae"],
 																"genera": 7,
 																"children": [
 																	{
 																		"clade": null,
-																		"supertribes": [
-																			"Camelinodae"
-																		],
-																		"tribes": [
-																			"Cardamineae"
-																		],
+																		"supertribes": ["Camelinodae"],
+																		"tribes": ["Cardamineae"],
 																		"genera": 6,
 																		"children": [
 																			{
 																				"clade": null,
-																				"supertribes": [
-																					"Camelinodae"
-																				],
-																				"tribes": [
-																					"Cardamineae"
-																				],
+																				"supertribes": ["Camelinodae"],
+																				"tribes": ["Cardamineae"],
 																				"genera": 2,
 																				"children": [
 																					{
@@ -3907,12 +3839,8 @@
 																			},
 																			{
 																				"clade": null,
-																				"supertribes": [
-																					"Camelinodae"
-																				],
-																				"tribes": [
-																					"Cardamineae"
-																				],
+																				"supertribes": ["Camelinodae"],
+																				"tribes": ["Cardamineae"],
 																				"genera": 4,
 																				"children": [
 																					{
@@ -3924,22 +3852,14 @@
 																					},
 																					{
 																						"clade": null,
-																						"supertribes": [
-																							"Camelinodae"
-																						],
-																						"tribes": [
-																							"Cardamineae"
-																						],
+																						"supertribes": ["Camelinodae"],
+																						"tribes": ["Cardamineae"],
 																						"genera": 3,
 																						"children": [
 																							{
 																								"clade": null,
-																								"supertribes": [
-																									"Camelinodae"
-																								],
-																								"tribes": [
-																									"Cardamineae"
-																								],
+																								"supertribes": ["Camelinodae"],
+																								"tribes": ["Cardamineae"],
 																								"genera": 2,
 																								"children": [
 																									{
@@ -3993,12 +3913,8 @@
 														"clade": null,
 														"unresolved": true,
 														"note": "genera that Open Tree can place only at this ancestor (not one natural group of their own)",
-														"supertribes": [
-															"Camelinodae"
-														],
-														"tribes": [
-															"Cardamineae"
-														],
+														"supertribes": ["Camelinodae"],
+														"tribes": ["Cardamineae"],
 														"genera": 1,
 														"children": [
 															{
@@ -4014,12 +3930,8 @@
 											},
 											{
 												"clade": null,
-												"supertribes": [
-													"Arabodae"
-												],
-												"tribes": [
-													"Stevenieae"
-												],
+												"supertribes": ["Arabodae"],
+												"tribes": ["Stevenieae"],
 												"genera": 2,
 												"children": [
 													{
@@ -4042,12 +3954,8 @@
 												"clade": null,
 												"unresolved": true,
 												"note": "genera that Open Tree can place only at this ancestor (not one natural group of their own)",
-												"supertribes": [
-													"Camelinodae"
-												],
-												"tribes": [
-													"Microlepidieae"
-												],
+												"supertribes": ["Camelinodae"],
+												"tribes": ["Microlepidieae"],
 												"genera": 1,
 												"children": [
 													{
@@ -4063,11 +3971,7 @@
 									},
 									{
 										"clade": null,
-										"supertribes": [
-											"Arabodae",
-											"Brassicodae",
-											"Heliophilodae"
-										],
+										"supertribes": ["Arabodae", "Brassicodae", "Heliophilodae"],
 										"tribes": [
 											"Alysseae",
 											"Anastaticeae",
@@ -4102,10 +4006,7 @@
 										"children": [
 											{
 												"clade": null,
-												"supertribes": [
-													"Brassicodae",
-													"Heliophilodae"
-												],
+												"supertribes": ["Brassicodae", "Heliophilodae"],
 												"tribes": [
 													"Anastaticeae",
 													"Aphragmeae",
@@ -4137,10 +4038,7 @@
 												"children": [
 													{
 														"clade": null,
-														"supertribes": [
-															"Brassicodae",
-															"Heliophilodae"
-														],
+														"supertribes": ["Brassicodae", "Heliophilodae"],
 														"tribes": [
 															"Anastaticeae",
 															"Aphragmeae",
@@ -4169,9 +4067,7 @@
 														"children": [
 															{
 																"clade": null,
-																"supertribes": [
-																	"Heliophilodae"
-																],
+																"supertribes": ["Heliophilodae"],
 																"tribes": [
 																	"Anastaticeae",
 																	"Asteae",
@@ -4184,9 +4080,7 @@
 																"children": [
 																	{
 																		"clade": null,
-																		"supertribes": [
-																			"Heliophilodae"
-																		],
+																		"supertribes": ["Heliophilodae"],
 																		"tribes": [
 																			"Anastaticeae",
 																			"Asteae",
@@ -4198,9 +4092,7 @@
 																		"children": [
 																			{
 																				"clade": null,
-																				"supertribes": [
-																					"Heliophilodae"
-																				],
+																				"supertribes": ["Heliophilodae"],
 																				"tribes": [
 																					"Anastaticeae",
 																					"Iberideae",
@@ -4210,12 +4102,8 @@
 																				"children": [
 																					{
 																						"clade": null,
-																						"supertribes": [
-																							"Heliophilodae"
-																						],
-																						"tribes": [
-																							"Anastaticeae"
-																						],
+																						"supertribes": ["Heliophilodae"],
+																						"tribes": ["Anastaticeae"],
 																						"genera": 11,
 																						"children": [
 																							{
@@ -4223,9 +4111,7 @@
 																								"supertribes": [
 																									"Heliophilodae"
 																								],
-																								"tribes": [
-																									"Anastaticeae"
-																								],
+																								"tribes": ["Anastaticeae"],
 																								"genera": 9,
 																								"children": [
 																									{
@@ -4233,9 +4119,7 @@
 																										"supertribes": [
 																											"Heliophilodae"
 																										],
-																										"tribes": [
-																											"Anastaticeae"
-																										],
+																										"tribes": ["Anastaticeae"],
 																										"genera": 8,
 																										"children": [
 																											{
@@ -4410,9 +4294,7 @@
 																								"supertribes": [
 																									"Heliophilodae"
 																								],
-																								"tribes": [
-																									"Anastaticeae"
-																								],
+																								"tribes": ["Anastaticeae"],
 																								"genera": 2,
 																								"children": [
 																									{
@@ -4435,9 +4317,7 @@
 																					},
 																					{
 																						"clade": null,
-																						"supertribes": [
-																							"Heliophilodae"
-																						],
+																						"supertribes": ["Heliophilodae"],
 																						"tribes": [
 																							"Iberideae",
 																							"Subularieae"
@@ -4464,13 +4344,8 @@
 																			},
 																			{
 																				"clade": null,
-																				"supertribes": [
-																					"Heliophilodae"
-																				],
-																				"tribes": [
-																					"Asteae",
-																					"Biscutelleae"
-																				],
+																				"supertribes": ["Heliophilodae"],
+																				"tribes": ["Asteae", "Biscutelleae"],
 																				"genera": 5,
 																				"children": [
 																					{
@@ -4482,9 +4357,7 @@
 																					},
 																					{
 																						"clade": null,
-																						"supertribes": [
-																							"Heliophilodae"
-																						],
+																						"supertribes": ["Heliophilodae"],
 																						"tribes": [
 																							"Asteae",
 																							"Biscutelleae"
@@ -4496,9 +4369,7 @@
 																								"supertribes": [
 																									"Heliophilodae"
 																								],
-																								"tribes": [
-																									"Biscutelleae"
-																								],
+																								"tribes": ["Biscutelleae"],
 																								"genera": 2,
 																								"children": [
 																									{
@@ -4552,12 +4423,8 @@
 																				"clade": null,
 																				"unresolved": true,
 																				"note": "genera that Open Tree can place only at this ancestor (not one natural group of their own)",
-																				"supertribes": [
-																					"Heliophilodae"
-																				],
-																				"tribes": [
-																					"Biscutelleae"
-																				],
+																				"supertribes": ["Heliophilodae"],
+																				"tribes": ["Biscutelleae"],
 																				"genera": 1,
 																				"children": [
 																					{
@@ -4573,21 +4440,14 @@
 																	},
 																	{
 																		"clade": null,
-																		"supertribes": [
-																			"Heliophilodae"
-																		],
-																		"tribes": [
-																			"Cochlearieae",
-																			"Iberideae"
-																		],
+																		"supertribes": ["Heliophilodae"],
+																		"tribes": ["Cochlearieae", "Iberideae"],
 																		"genera": 3,
 																		"children": [
 																			{
 																				"clade": "Cochlearieae",
 																				"supertribes": [],
-																				"tribes": [
-																					"Cochlearieae"
-																				],
+																				"tribes": ["Cochlearieae"],
 																				"genera": 2,
 																				"children": [
 																					{
@@ -4602,9 +4462,7 @@
 																						"unresolved": true,
 																						"note": "genera that Open Tree can place only at this ancestor (not one natural group of their own)",
 																						"supertribes": [],
-																						"tribes": [
-																							"Cochlearieae"
-																						],
+																						"tribes": ["Cochlearieae"],
 																						"genera": 1,
 																						"children": [
 																							{
@@ -4631,10 +4489,7 @@
 															},
 															{
 																"clade": null,
-																"supertribes": [
-																	"Brassicodae",
-																	"Heliophilodae"
-																],
+																"supertribes": ["Brassicodae", "Heliophilodae"],
 																"tribes": [
 																	"Aphragmeae",
 																	"Asteae",
@@ -6108,12 +5963,8 @@
 																					},
 																					{
 																						"clade": "Kernereae",
-																						"supertribes": [
-																							"Brassicodae"
-																						],
-																						"tribes": [
-																							"Kernereae"
-																						],
+																						"supertribes": ["Brassicodae"],
+																						"tribes": ["Kernereae"],
 																						"genera": 2,
 																						"children": [
 																							{
@@ -6136,12 +5987,8 @@
 																			},
 																			{
 																				"clade": "Megacarpaeeae",
-																				"supertribes": [
-																					"Heliophilodae"
-																				],
-																				"tribes": [
-																					"Megacarpaeeae"
-																				],
+																				"supertribes": ["Heliophilodae"],
+																				"tribes": ["Megacarpaeeae"],
 																				"genera": 2,
 																				"children": [
 																					{
@@ -6178,9 +6025,7 @@
 																		"children": [
 																			{
 																				"clade": null,
-																				"supertribes": [
-																					"Heliophilodae"
-																				],
+																				"supertribes": ["Heliophilodae"],
 																				"tribes": [
 																					"Cremolobeae",
 																					"Eudemeae",
@@ -6190,12 +6035,8 @@
 																				"children": [
 																					{
 																						"clade": null,
-																						"supertribes": [
-																							"Heliophilodae"
-																						],
-																						"tribes": [
-																							"Eudemeae"
-																						],
+																						"supertribes": ["Heliophilodae"],
+																						"tribes": ["Eudemeae"],
 																						"genera": 7,
 																						"children": [
 																							{
@@ -6203,9 +6044,7 @@
 																								"supertribes": [
 																									"Heliophilodae"
 																								],
-																								"tribes": [
-																									"Eudemeae"
-																								],
+																								"tribes": ["Eudemeae"],
 																								"genera": 2,
 																								"children": [
 																									{
@@ -6229,9 +6068,7 @@
 																								"supertribes": [
 																									"Heliophilodae"
 																								],
-																								"tribes": [
-																									"Eudemeae"
-																								],
+																								"tribes": ["Eudemeae"],
 																								"genera": 4,
 																								"children": [
 																									{
@@ -6239,9 +6076,7 @@
 																										"supertribes": [
 																											"Heliophilodae"
 																										],
-																										"tribes": [
-																											"Eudemeae"
-																										],
+																										"tribes": ["Eudemeae"],
 																										"genera": 3,
 																										"children": [
 																											{
@@ -6249,9 +6084,7 @@
 																												"supertribes": [
 																													"Heliophilodae"
 																												],
-																												"tribes": [
-																													"Eudemeae"
-																												],
+																												"tribes": ["Eudemeae"],
 																												"genera": 2,
 																												"children": [
 																													{
@@ -6291,9 +6124,7 @@
 																												"supertribes": [
 																													"Heliophilodae"
 																												],
-																												"tribes": [
-																													"Eudemeae"
-																												],
+																												"tribes": ["Eudemeae"],
 																												"genera": 1,
 																												"children": [
 																													{
@@ -6314,9 +6145,7 @@
 																										"supertribes": [
 																											"Heliophilodae"
 																										],
-																										"tribes": [
-																											"Eudemeae"
-																										],
+																										"tribes": ["Eudemeae"],
 																										"genera": 1,
 																										"children": [
 																											{
@@ -6341,9 +6170,7 @@
 																					},
 																					{
 																						"clade": null,
-																						"supertribes": [
-																							"Heliophilodae"
-																						],
+																						"supertribes": ["Heliophilodae"],
 																						"tribes": [
 																							"Cremolobeae",
 																							"Schizopetaleae"
@@ -6355,9 +6182,7 @@
 																								"supertribes": [
 																									"Heliophilodae"
 																								],
-																								"tribes": [
-																									"Cremolobeae"
-																								],
+																								"tribes": ["Cremolobeae"],
 																								"genera": 3,
 																								"children": [
 																									{
@@ -6365,9 +6190,7 @@
 																										"supertribes": [
 																											"Heliophilodae"
 																										],
-																										"tribes": [
-																											"Cremolobeae"
-																										],
+																										"tribes": ["Cremolobeae"],
 																										"genera": 2,
 																										"children": [
 																											{
@@ -6407,9 +6230,7 @@
 																										"supertribes": [
 																											"Heliophilodae"
 																										],
-																										"tribes": [
-																											"Cremolobeae"
-																										],
+																										"tribes": ["Cremolobeae"],
 																										"genera": 1,
 																										"children": [
 																											{
@@ -6447,12 +6268,8 @@
 																		"clade": null,
 																		"unresolved": true,
 																		"note": "genera that Open Tree can place only at this ancestor (not one natural group of their own)",
-																		"supertribes": [
-																			"Heliophilodae"
-																		],
-																		"tribes": [
-																			"Schizopetaleae"
-																		],
+																		"supertribes": ["Heliophilodae"],
+																		"tribes": ["Schizopetaleae"],
 																		"genera": 1,
 																		"children": [
 																			{
@@ -6470,9 +6287,7 @@
 													},
 													{
 														"clade": null,
-														"supertribes": [
-															"Heliophilodae"
-														],
+														"supertribes": ["Heliophilodae"],
 														"tribes": [
 															"Chamireae",
 															"Heliophileae",
@@ -6482,13 +6297,8 @@
 														"children": [
 															{
 																"clade": "Heliophileae",
-																"supertribes": [
-																	"Heliophilodae"
-																],
-																"tribes": [
-																	"Chamireae",
-																	"Heliophileae"
-																],
+																"supertribes": ["Heliophilodae"],
+																"tribes": ["Chamireae", "Heliophileae"],
 																"genera": 2,
 																"children": [
 																	{
@@ -6502,12 +6312,8 @@
 																		"clade": null,
 																		"unresolved": true,
 																		"note": "genera that Open Tree can place only at this ancestor (not one natural group of their own)",
-																		"supertribes": [
-																			"Heliophilodae"
-																		],
-																		"tribes": [
-																			"Heliophileae"
-																		],
+																		"supertribes": ["Heliophilodae"],
+																		"tribes": ["Heliophileae"],
 																		"genera": 1,
 																		"children": [
 																			{
@@ -6534,57 +6340,32 @@
 											},
 											{
 												"clade": null,
-												"supertribes": [
-													"Arabodae",
-													"Brassicodae"
-												],
-												"tribes": [
-													"Alysseae",
-													"Arabideae",
-													"Coluteocarpeae"
-												],
+												"supertribes": ["Arabodae", "Brassicodae"],
+												"tribes": ["Alysseae", "Arabideae", "Coluteocarpeae"],
 												"genera": 33,
 												"children": [
 													{
 														"clade": null,
-														"supertribes": [
-															"Arabodae",
-															"Brassicodae"
-														],
-														"tribes": [
-															"Alysseae",
-															"Coluteocarpeae"
-														],
+														"supertribes": ["Arabodae", "Brassicodae"],
+														"tribes": ["Alysseae", "Coluteocarpeae"],
 														"genera": 23,
 														"children": [
 															{
 																"clade": null,
-																"supertribes": [
-																	"Brassicodae"
-																],
-																"tribes": [
-																	"Coluteocarpeae"
-																],
+																"supertribes": ["Brassicodae"],
+																"tribes": ["Coluteocarpeae"],
 																"genera": 4,
 																"children": [
 																	{
 																		"clade": null,
-																		"supertribes": [
-																			"Brassicodae"
-																		],
-																		"tribes": [
-																			"Coluteocarpeae"
-																		],
+																		"supertribes": ["Brassicodae"],
+																		"tribes": ["Coluteocarpeae"],
 																		"genera": 3,
 																		"children": [
 																			{
 																				"clade": null,
-																				"supertribes": [
-																					"Brassicodae"
-																				],
-																				"tribes": [
-																					"Coluteocarpeae"
-																				],
+																				"supertribes": ["Brassicodae"],
+																				"tribes": ["Coluteocarpeae"],
 																				"genera": 2,
 																				"children": [
 																					{
@@ -6623,62 +6404,38 @@
 															},
 															{
 																"clade": null,
-																"supertribes": [
-																	"Arabodae"
-																],
-																"tribes": [
-																	"Alysseae"
-																],
+																"supertribes": ["Arabodae"],
+																"tribes": ["Alysseae"],
 																"genera": 19,
 																"children": [
 																	{
 																		"clade": null,
-																		"supertribes": [
-																			"Arabodae"
-																		],
-																		"tribes": [
-																			"Alysseae"
-																		],
+																		"supertribes": ["Arabodae"],
+																		"tribes": ["Alysseae"],
 																		"genera": 17,
 																		"children": [
 																			{
 																				"clade": null,
-																				"supertribes": [
-																					"Arabodae"
-																				],
-																				"tribes": [
-																					"Alysseae"
-																				],
+																				"supertribes": ["Arabodae"],
+																				"tribes": ["Alysseae"],
 																				"genera": 12,
 																				"children": [
 																					{
 																						"clade": null,
-																						"supertribes": [
-																							"Arabodae"
-																						],
-																						"tribes": [
-																							"Alysseae"
-																						],
+																						"supertribes": ["Arabodae"],
+																						"tribes": ["Alysseae"],
 																						"genera": 11,
 																						"children": [
 																							{
 																								"clade": null,
-																								"supertribes": [
-																									"Arabodae"
-																								],
-																								"tribes": [
-																									"Alysseae"
-																								],
+																								"supertribes": ["Arabodae"],
+																								"tribes": ["Alysseae"],
 																								"genera": 3,
 																								"children": [
 																									{
 																										"clade": null,
-																										"supertribes": [
-																											"Arabodae"
-																										],
-																										"tribes": [
-																											"Alysseae"
-																										],
+																										"supertribes": ["Arabodae"],
+																										"tribes": ["Alysseae"],
 																										"genera": 2,
 																										"children": [
 																											{
@@ -6708,12 +6465,8 @@
 																							},
 																							{
 																								"clade": null,
-																								"supertribes": [
-																									"Arabodae"
-																								],
-																								"tribes": [
-																									"Alysseae"
-																								],
+																								"supertribes": ["Arabodae"],
+																								"tribes": ["Alysseae"],
 																								"genera": 8,
 																								"children": [
 																									{
@@ -6725,12 +6478,8 @@
 																									},
 																									{
 																										"clade": null,
-																										"supertribes": [
-																											"Arabodae"
-																										],
-																										"tribes": [
-																											"Alysseae"
-																										],
+																										"supertribes": ["Arabodae"],
+																										"tribes": ["Alysseae"],
 																										"genera": 7,
 																										"children": [
 																											{
@@ -6738,9 +6487,7 @@
 																												"supertribes": [
 																													"Arabodae"
 																												],
-																												"tribes": [
-																													"Alysseae"
-																												],
+																												"tribes": ["Alysseae"],
 																												"genera": 4,
 																												"children": [
 																													{
@@ -6802,9 +6549,7 @@
 																												"supertribes": [
 																													"Arabodae"
 																												],
-																												"tribes": [
-																													"Alysseae"
-																												],
+																												"tribes": ["Alysseae"],
 																												"genera": 3,
 																												"children": [
 																													{
@@ -6859,32 +6604,20 @@
 																			},
 																			{
 																				"clade": null,
-																				"supertribes": [
-																					"Arabodae"
-																				],
-																				"tribes": [
-																					"Alysseae"
-																				],
+																				"supertribes": ["Arabodae"],
+																				"tribes": ["Alysseae"],
 																				"genera": 5,
 																				"children": [
 																					{
 																						"clade": null,
-																						"supertribes": [
-																							"Arabodae"
-																						],
-																						"tribes": [
-																							"Alysseae"
-																						],
+																						"supertribes": ["Arabodae"],
+																						"tribes": ["Alysseae"],
 																						"genera": 4,
 																						"children": [
 																							{
 																								"clade": null,
-																								"supertribes": [
-																									"Arabodae"
-																								],
-																								"tribes": [
-																									"Alysseae"
-																								],
+																								"supertribes": ["Arabodae"],
+																								"tribes": ["Alysseae"],
 																								"genera": 3,
 																								"children": [
 																									{
@@ -6923,12 +6656,8 @@
 																						"clade": null,
 																						"unresolved": true,
 																						"note": "genera that Open Tree can place only at this ancestor (not one natural group of their own)",
-																						"supertribes": [
-																							"Arabodae"
-																						],
-																						"tribes": [
-																							"Alysseae"
-																						],
+																						"supertribes": ["Arabodae"],
+																						"tribes": ["Alysseae"],
 																						"genera": 1,
 																						"children": [
 																							{
@@ -6948,12 +6677,8 @@
 																		"clade": null,
 																		"unresolved": true,
 																		"note": "genera that Open Tree can place only at this ancestor (not one natural group of their own)",
-																		"supertribes": [
-																			"Arabodae"
-																		],
-																		"tribes": [
-																			"Alysseae"
-																		],
+																		"supertribes": ["Arabodae"],
+																		"tribes": ["Alysseae"],
 																		"genera": 2,
 																		"children": [
 																			{
@@ -6978,42 +6703,26 @@
 													},
 													{
 														"clade": null,
-														"supertribes": [
-															"Arabodae"
-														],
-														"tribes": [
-															"Arabideae"
-														],
+														"supertribes": ["Arabodae"],
+														"tribes": ["Arabideae"],
 														"genera": 10,
 														"children": [
 															{
 																"clade": null,
-																"supertribes": [
-																	"Arabodae"
-																],
-																"tribes": [
-																	"Arabideae"
-																],
+																"supertribes": ["Arabodae"],
+																"tribes": ["Arabideae"],
 																"genera": 9,
 																"children": [
 																	{
 																		"clade": null,
-																		"supertribes": [
-																			"Arabodae"
-																		],
-																		"tribes": [
-																			"Arabideae"
-																		],
+																		"supertribes": ["Arabodae"],
+																		"tribes": ["Arabideae"],
 																		"genera": 4,
 																		"children": [
 																			{
 																				"clade": null,
-																				"supertribes": [
-																					"Arabodae"
-																				],
-																				"tribes": [
-																					"Arabideae"
-																				],
+																				"supertribes": ["Arabodae"],
+																				"tribes": ["Arabideae"],
 																				"genera": 2,
 																				"children": [
 																					{
@@ -7034,12 +6743,8 @@
 																			},
 																			{
 																				"clade": null,
-																				"supertribes": [
-																					"Arabodae"
-																				],
-																				"tribes": [
-																					"Arabideae"
-																				],
+																				"supertribes": ["Arabodae"],
+																				"tribes": ["Arabideae"],
 																				"genera": 2,
 																				"children": [
 																					{
@@ -7062,32 +6767,20 @@
 																	},
 																	{
 																		"clade": null,
-																		"supertribes": [
-																			"Arabodae"
-																		],
-																		"tribes": [
-																			"Arabideae"
-																		],
+																		"supertribes": ["Arabodae"],
+																		"tribes": ["Arabideae"],
 																		"genera": 5,
 																		"children": [
 																			{
 																				"clade": null,
-																				"supertribes": [
-																					"Arabodae"
-																				],
-																				"tribes": [
-																					"Arabideae"
-																				],
+																				"supertribes": ["Arabodae"],
+																				"tribes": ["Arabideae"],
 																				"genera": 4,
 																				"children": [
 																					{
 																						"clade": null,
-																						"supertribes": [
-																							"Arabodae"
-																						],
-																						"tribes": [
-																							"Arabideae"
-																						],
+																						"supertribes": ["Arabodae"],
+																						"tribes": ["Arabideae"],
 																						"genera": 2,
 																						"children": [
 																							{
@@ -7117,12 +6810,8 @@
 																						"clade": null,
 																						"unresolved": true,
 																						"note": "genera that Open Tree can place only at this ancestor (not one natural group of their own)",
-																						"supertribes": [
-																							"Arabodae"
-																						],
-																						"tribes": [
-																							"Arabideae"
-																						],
+																						"supertribes": ["Arabodae"],
+																						"tribes": ["Arabideae"],
 																						"genera": 1,
 																						"children": [
 																							{
@@ -7190,9 +6879,7 @@
 												"clade": null,
 												"unresolved": true,
 												"note": "genera that Open Tree can place only at this ancestor (not one natural group of their own)",
-												"supertribes": [
-													"Brassicodae"
-												],
+												"supertribes": ["Brassicodae"],
 												"tribes": [
 													"Brassiceae",
 													"Coluteocarpeae",
@@ -7251,12 +6938,8 @@
 										"clade": null,
 										"unresolved": true,
 										"note": "genera that Open Tree can place only at this ancestor (not one natural group of their own)",
-										"supertribes": [
-											"Brassicodae"
-										],
-										"tribes": [
-											"Thelypodieae"
-										],
+										"supertribes": ["Brassicodae"],
+										"tribes": ["Thelypodieae"],
 										"genera": 1,
 										"children": [
 											{
@@ -7272,11 +6955,7 @@
 							},
 							{
 								"clade": null,
-								"supertribes": [
-									"Brassicodae",
-									"Heliophilodae",
-									"Hesperodae"
-								],
+								"supertribes": ["Brassicodae", "Heliophilodae", "Hesperodae"],
 								"tribes": [
 									"Anchonieae",
 									"Chorisporeae",
@@ -7290,23 +6969,14 @@
 								"children": [
 									{
 										"clade": null,
-										"supertribes": [
-											"Hesperodae"
-										],
-										"tribes": [
-											"Chorisporeae",
-											"Dontostemoneae"
-										],
+										"supertribes": ["Hesperodae"],
+										"tribes": ["Chorisporeae", "Dontostemoneae"],
 										"genera": 4,
 										"children": [
 											{
 												"clade": null,
-												"supertribes": [
-													"Hesperodae"
-												],
-												"tribes": [
-													"Chorisporeae"
-												],
+												"supertribes": ["Hesperodae"],
+												"tribes": ["Chorisporeae"],
 												"genera": 3,
 												"children": [
 													{
@@ -7327,12 +6997,8 @@
 														"clade": null,
 														"unresolved": true,
 														"note": "genera that Open Tree can place only at this ancestor (not one natural group of their own)",
-														"supertribes": [
-															"Hesperodae"
-														],
-														"tribes": [
-															"Chorisporeae"
-														],
+														"supertribes": ["Hesperodae"],
+														"tribes": ["Chorisporeae"],
 														"genera": 1,
 														"children": [
 															{
@@ -7350,12 +7016,8 @@
 												"clade": null,
 												"unresolved": true,
 												"note": "genera that Open Tree can place only at this ancestor (not one natural group of their own)",
-												"supertribes": [
-													"Hesperodae"
-												],
-												"tribes": [
-													"Dontostemoneae"
-												],
+												"supertribes": ["Hesperodae"],
+												"tribes": ["Dontostemoneae"],
 												"genera": 1,
 												"children": [
 													{
@@ -7416,52 +7078,32 @@
 														"children": [
 															{
 																"clade": null,
-																"supertribes": [
-																	"Hesperodae"
-																],
-																"tribes": [
-																	"Euclidieae"
-																],
+																"supertribes": ["Hesperodae"],
+																"tribes": ["Euclidieae"],
 																"genera": 25,
 																"children": [
 																	{
 																		"clade": null,
-																		"supertribes": [
-																			"Hesperodae"
-																		],
-																		"tribes": [
-																			"Euclidieae"
-																		],
+																		"supertribes": ["Hesperodae"],
+																		"tribes": ["Euclidieae"],
 																		"genera": 21,
 																		"children": [
 																			{
 																				"clade": null,
-																				"supertribes": [
-																					"Hesperodae"
-																				],
-																				"tribes": [
-																					"Euclidieae"
-																				],
+																				"supertribes": ["Hesperodae"],
+																				"tribes": ["Euclidieae"],
 																				"genera": 20,
 																				"children": [
 																					{
 																						"clade": null,
-																						"supertribes": [
-																							"Hesperodae"
-																						],
-																						"tribes": [
-																							"Euclidieae"
-																						],
+																						"supertribes": ["Hesperodae"],
+																						"tribes": ["Euclidieae"],
 																						"genera": 19,
 																						"children": [
 																							{
 																								"clade": null,
-																								"supertribes": [
-																									"Hesperodae"
-																								],
-																								"tribes": [
-																									"Euclidieae"
-																								],
+																								"supertribes": ["Hesperodae"],
+																								"tribes": ["Euclidieae"],
 																								"genera": 17,
 																								"children": [
 																									{
@@ -7469,9 +7111,7 @@
 																										"supertribes": [
 																											"Hesperodae"
 																										],
-																										"tribes": [
-																											"Euclidieae"
-																										],
+																										"tribes": ["Euclidieae"],
 																										"genera": 16,
 																										"children": [
 																											{
@@ -7754,12 +7394,8 @@
 																								"clade": null,
 																								"unresolved": true,
 																								"note": "genera that Open Tree can place only at this ancestor (not one natural group of their own)",
-																								"supertribes": [
-																									"Hesperodae"
-																								],
-																								"tribes": [
-																									"Euclidieae"
-																								],
+																								"supertribes": ["Hesperodae"],
+																								"tribes": ["Euclidieae"],
 																								"genera": 1,
 																								"children": [
 																									{
@@ -7793,12 +7429,8 @@
 																	},
 																	{
 																		"clade": null,
-																		"supertribes": [
-																			"Hesperodae"
-																		],
-																		"tribes": [
-																			"Euclidieae"
-																		],
+																		"supertribes": ["Hesperodae"],
+																		"tribes": ["Euclidieae"],
 																		"genera": 2,
 																		"children": [
 																			{
@@ -7819,12 +7451,8 @@
 																	},
 																	{
 																		"clade": null,
-																		"supertribes": [
-																			"Hesperodae"
-																		],
-																		"tribes": [
-																			"Euclidieae"
-																		],
+																		"supertribes": ["Hesperodae"],
+																		"tribes": ["Euclidieae"],
 																		"genera": 2,
 																		"children": [
 																			{
@@ -7847,14 +7475,8 @@
 															},
 															{
 																"clade": null,
-																"supertribes": [
-																	"Brassicodae",
-																	"Heliophilodae"
-																],
-																"tribes": [
-																	"Kernereae",
-																	"Subularieae"
-																],
+																"supertribes": ["Brassicodae", "Heliophilodae"],
+																"tribes": ["Kernereae", "Subularieae"],
 																"genera": 2,
 																"children": [
 																	{
@@ -7884,24 +7506,14 @@
 													},
 													{
 														"clade": null,
-														"supertribes": [
-															"Hesperodae"
-														],
-														"tribes": [
-															"Anchonieae",
-															"Euclidieae"
-														],
+														"supertribes": ["Hesperodae"],
+														"tribes": ["Anchonieae", "Euclidieae"],
 														"genera": 6,
 														"children": [
 															{
 																"clade": null,
-																"supertribes": [
-																	"Hesperodae"
-																],
-																"tribes": [
-																	"Anchonieae",
-																	"Euclidieae"
-																],
+																"supertribes": ["Hesperodae"],
+																"tribes": ["Anchonieae", "Euclidieae"],
 																"genera": 3,
 																"children": [
 																	{
@@ -7929,12 +7541,8 @@
 															},
 															{
 																"clade": null,
-																"supertribes": [
-																	"Hesperodae"
-																],
-																"tribes": [
-																	"Anchonieae"
-																],
+																"supertribes": ["Hesperodae"],
+																"tribes": ["Anchonieae"],
 																"genera": 2,
 																"children": [
 																	{
@@ -7948,12 +7556,8 @@
 																		"clade": null,
 																		"unresolved": true,
 																		"note": "genera that Open Tree can place only at this ancestor (not one natural group of their own)",
-																		"supertribes": [
-																			"Hesperodae"
-																		],
-																		"tribes": [
-																			"Anchonieae"
-																		],
+																		"supertribes": ["Hesperodae"],
+																		"tribes": ["Anchonieae"],
 																		"genera": 1,
 																		"children": [
 																			{
@@ -7971,12 +7575,8 @@
 																"clade": null,
 																"unresolved": true,
 																"note": "genera that Open Tree can place only at this ancestor (not one natural group of their own)",
-																"supertribes": [
-																	"Hesperodae"
-																],
-																"tribes": [
-																	"Anchonieae"
-																],
+																"supertribes": ["Hesperodae"],
+																"tribes": ["Anchonieae"],
 																"genera": 1,
 																"children": [
 																	{
@@ -8005,13 +7605,8 @@
 										"clade": null,
 										"unresolved": true,
 										"note": "genera that Open Tree can place only at this ancestor (not one natural group of their own)",
-										"supertribes": [
-											"Hesperodae"
-										],
-										"tribes": [
-											"Chorisporeae",
-											"Dontostemoneae"
-										],
+										"supertribes": ["Hesperodae"],
+										"tribes": ["Chorisporeae", "Dontostemoneae"],
 										"genera": 2,
 										"children": [
 											{
@@ -8034,12 +7629,8 @@
 							},
 							{
 								"clade": null,
-								"supertribes": [
-									"Arabodae"
-								],
-								"tribes": [
-									"Arabideae"
-								],
+								"supertribes": ["Arabodae"],
+								"tribes": ["Arabideae"],
 								"genera": 2,
 								"children": [
 									{
@@ -8053,12 +7644,8 @@
 										"clade": null,
 										"unresolved": true,
 										"note": "genera that Open Tree can place only at this ancestor (not one natural group of their own)",
-										"supertribes": [
-											"Arabodae"
-										],
-										"tribes": [
-											"Arabideae"
-										],
+										"supertribes": ["Arabodae"],
+										"tribes": ["Arabideae"],
 										"genera": 1,
 										"children": [
 											{
@@ -8074,12 +7661,8 @@
 							},
 							{
 								"clade": null,
-								"supertribes": [
-									"Brassicodae"
-								],
-								"tribes": [
-									"Brassiceae"
-								],
+								"supertribes": ["Brassicodae"],
+								"tribes": ["Brassiceae"],
 								"genera": 2,
 								"children": [
 									{
@@ -8100,12 +7683,8 @@
 							},
 							{
 								"clade": null,
-								"supertribes": [
-									"Brassicodae"
-								],
-								"tribes": [
-									"Brassiceae"
-								],
+								"supertribes": ["Brassicodae"],
+								"tribes": ["Brassiceae"],
 								"genera": 2,
 								"children": [
 									{

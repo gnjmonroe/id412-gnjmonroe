@@ -304,9 +304,7 @@
 			"author": "Bernh.",
 			"tribe": "Brassiceae",
 			"common": "black mustard",
-			"synonyms": [
-				"Brassica nigra"
-			],
+			"synonyms": ["Brassica nigra"],
 			"genome": {
 				"state": "BB, 2n = 16, diploid",
 				"change": "B genome: x = 8",
@@ -372,9 +370,7 @@
 			"author": "(L.) Cav.",
 			"tribe": "Brassiceae",
 			"common": "rocket, arugula",
-			"synonyms": [
-				"Eruca sativa"
-			],
+			"synonyms": ["Eruca sativa"],
 			"genome": {
 				"state": "2n = 22, diploid",
 				"change": "x = 11",
@@ -569,10 +565,7 @@
 				"signature": "[At-α › PCK › WGT › Rapa/Oleracea › A/C › AA] + [At-α › PCK › WGT › Nigra › BB] › AABB"
 			},
 			"chromosomes2n": 36,
-			"hybridOf": [
-				"rapa",
-				"nigra"
-			],
+			"hybridOf": ["rapa", "nigra"],
 			"formed": "thousands of years ago, probably West or Central Asia (debated)"
 		},
 		{
@@ -599,10 +592,7 @@
 				"signature": "[At-α › PCK › WGT › Rapa/Oleracea › A/C › AA] + [At-α › PCK › WGT › Rapa/Oleracea › A/C › CC] › AACC"
 			},
 			"chromosomes2n": 38,
-			"hybridOf": [
-				"rapa",
-				"oleracea"
-			],
+			"hybridOf": ["rapa", "oleracea"],
 			"formed": "about 7,500 years ago, in or near cultivation in Europe (Chalhoub et al. 2014)"
 		},
 		{
@@ -630,13 +620,8 @@
 				"signature": "[At-α › PCK › WGT › Nigra › BB] + [At-α › PCK › WGT › Rapa/Oleracea › A/C › CC] › BBCC"
 			},
 			"chromosomes2n": 34,
-			"hybridOf": [
-				"nigra",
-				"oleracea"
-			],
-			"synonyms": [
-				"Brassica carinata"
-			],
+			"hybridOf": ["nigra", "oleracea"],
+			"synonyms": ["Brassica carinata"],
 			"formed": "Ethiopian highlands"
 		},
 		{
@@ -663,10 +648,7 @@
 				"signature": "[At-α › PCK › WGT › Rapa/Oleracea › RR] + [At-α › PCK › WGT › Rapa/Oleracea › A/C › CC] › RRCC"
 			},
 			"chromosomes2n": 36,
-			"hybridOf": [
-				"raphanus",
-				"oleracea"
-			],
+			"hybridOf": ["raphanus", "oleracea"],
 			"experimental": true,
 			"formed": "1928, by G. D. Karpechenko"
 		},
@@ -1083,10 +1065,7 @@
 			"id": "broccolini",
 			"kind": "vegetable",
 			"name": "broccolini",
-			"crossOf": [
-				"broccoli",
-				"gai-lan"
-			],
+			"crossOf": ["broccoli", "gai-lan"],
 			"group": "Italica × Alboglabra",
 			"part": "flower stalks and buds",
 			"when": "1993",
@@ -1119,10 +1098,7 @@
 			"id": "kalettes",
 			"kind": "vegetable",
 			"name": "kalettes / flower sprouts",
-			"crossOf": [
-				"brussels",
-				"kale"
-			],
+			"crossOf": ["brussels", "kale"],
 			"group": "Gemmifera × Acephala",
 			"part": "side buds (small open rosettes)",
 			"when": "2010",

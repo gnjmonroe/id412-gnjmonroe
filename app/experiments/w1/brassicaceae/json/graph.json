@@ -1,0 +1,623 @@
+{
+	"description": "The crucifer lineage as one tree, Brassicaceae at the top. Built from crucifers.json (nodes, edges, genome.signature) and images.json (src). Each entry hangs under its main parent in `children`; hybrids and crosses list their other parents by id in `alsoFrom`. `image` is null for entries without a photo (clades, species, crop lineages).",
+	"root": {
+		"id": "brassicaceae",
+		"name": "Brassicaceae (core)",
+		"signature": "At-α",
+		"image": null,
+		"children": [
+			{
+				"id": "camelinodae",
+				"name": "Camelinodae (lineage I)",
+				"signature": "At-α › ACK",
+				"image": null,
+				"children": [
+					{
+						"id": "horseradish-cress-clade",
+						"name": "horseradish + cresses clade",
+						"signature": "At-α › ACK",
+						"image": null,
+						"children": [
+							{
+								"id": "lepidieae",
+								"name": "Lepidieae",
+								"signature": "At-α › ACK › Lepidieae",
+								"image": null,
+								"children": [
+									{
+										"id": "lepidium",
+										"name": "Lepidium sativum",
+										"signature": "At-α › ACK › Lepidieae › 2n=16·Ls",
+										"image": null,
+										"children": [
+											{
+												"id": "garden-cress",
+												"name": "garden cress",
+												"signature": "At-α › ACK › Lepidieae › 2n=16·Ls › sprouts",
+												"image": "/experiments/w1/brassicaceae/images/garden-cress.jpg"
+											}
+										]
+									},
+									{
+										"id": "maca",
+										"name": "Lepidium meyenii",
+										"signature": "At-α › ACK › Lepidieae › 2n=64",
+										"image": null,
+										"children": [
+											{
+												"id": "maca-root",
+												"name": "maca",
+												"signature": "At-α › ACK › Lepidieae › 2n=64 › hypocotyl",
+												"image": "/experiments/w1/brassicaceae/images/maca-root.png"
+											}
+										]
+									}
+								]
+							},
+							{
+								"id": "armoracia",
+								"name": "Armoracia rusticana",
+								"signature": "At-α › ACK › 2n=32·Ar",
+								"image": null,
+								"children": [
+									{
+										"id": "horseradish",
+										"name": "horseradish",
+										"signature": "At-α › ACK › 2n=32·Ar › root",
+										"image": "/experiments/w1/brassicaceae/images/horseradish.jpg"
+									}
+								]
+							}
+						]
+					},
+					{
+						"id": "cardamineae",
+						"name": "Cardamineae (watercress + land cress)",
+						"signature": "At-α › ACK › Cardamineae",
+						"image": null,
+						"children": [
+							{
+								"id": "nasturtium",
+								"name": "Nasturtium officinale",
+								"signature": "At-α › ACK › Cardamineae › 2n=32·No",
+								"image": null,
+								"children": [
+									{
+										"id": "watercress",
+										"name": "watercress",
+										"signature": "At-α › ACK › Cardamineae › 2n=32·No › leaf",
+										"image": "/experiments/w1/brassicaceae/images/watercress.jpg"
+									}
+								]
+							},
+							{
+								"id": "barbarea",
+								"name": "Barbarea verna",
+								"signature": "At-α › ACK › Cardamineae › 2n=16·Bv",
+								"image": null,
+								"children": [
+									{
+										"id": "land-cress",
+										"name": "land cress",
+										"signature": "At-α › ACK › Cardamineae › 2n=16·Bv › leaf",
+										"image": "/experiments/w1/brassicaceae/images/land-cress.jpg"
+									}
+								]
+							}
+						]
+					}
+				]
+			},
+			{
+				"id": "brassicodae",
+				"name": "Brassicodae (lineage II)",
+				"signature": "At-α › PCK",
+				"image": null,
+				"children": [
+					{
+						"id": "brassiceae",
+						"name": "Brassiceae",
+						"signature": "At-α › PCK › WGT",
+						"image": null,
+						"children": [
+							{
+								"id": "nigra-lineage",
+								"name": "Nigra lineage (B genome)",
+								"signature": "At-α › PCK › WGT › Nigra",
+								"image": null,
+								"children": [
+									{
+										"id": "nigra",
+										"name": "Mutarda nigra",
+										"signature": "At-α › PCK › WGT › Nigra › BB",
+										"image": null,
+										"children": [
+											{
+												"id": "carinata",
+												"name": "Mutarda carinata",
+												"signature": "[At-α › PCK › WGT › Nigra › BB] + [At-α › PCK › WGT › Rapa/Oleracea › A/C › CC] › BBCC",
+												"image": null,
+												"alsoFrom": ["oleracea"],
+												"children": [
+													{
+														"id": "ethiopian-kale",
+														"name": "Ethiopian kale (gomenzer)",
+														"signature": "[At-α › PCK › WGT › Nigra › BB] + [At-α › PCK › WGT › Rapa/Oleracea › A/C › CC] › BBCC › leaf/seed",
+														"image": "/experiments/w1/brassicaceae/images/ethiopian-kale.jpg"
+													}
+												]
+											},
+											{
+												"id": "black-mustard",
+												"name": "black mustard seed",
+												"signature": "At-α › PCK › WGT › Nigra › BB › seed",
+												"image": "/experiments/w1/brassicaceae/images/black-mustard.jpg"
+											}
+										]
+									}
+								]
+							},
+							{
+								"id": "rapa-oleracea-side",
+								"name": "Rapa/Oleracea side of Brassiceae",
+								"signature": "At-α › PCK › WGT › Rapa/Oleracea",
+								"image": null,
+								"children": [
+									{
+										"id": "rocket-and-brassica",
+										"name": "rockets + mustards + Brassica",
+										"signature": "At-α › PCK › WGT › Rapa/Oleracea",
+										"image": null,
+										"children": [
+											{
+												"id": "rockets",
+												"name": "rockets (Eruca + Diplotaxis)",
+												"signature": "At-α › PCK › WGT › Rapa/Oleracea",
+												"image": null,
+												"children": [
+													{
+														"id": "eruca",
+														"name": "Eruca vesicaria",
+														"signature": "At-α › PCK › WGT › Rapa/Oleracea › 2n=22",
+														"image": null,
+														"children": [
+															{
+																"id": "arugula",
+																"name": "arugula / rocket",
+																"signature": "At-α › PCK › WGT › Rapa/Oleracea › 2n=22 › leaf",
+																"image": "/experiments/w1/brassicaceae/images/arugula.jpg"
+															}
+														]
+													},
+													{
+														"id": "diplotaxis",
+														"name": "Diplotaxis tenuifolia",
+														"signature": "At-α › PCK › WGT › Rapa/Oleracea › 2n=22·Dt",
+														"image": null,
+														"children": [
+															{
+																"id": "wild-rocket",
+																"name": "wild rocket",
+																"signature": "At-α › PCK › WGT › Rapa/Oleracea › 2n=22·Dt › leaf",
+																"image": "/experiments/w1/brassicaceae/images/wild-rocket.jpg"
+															}
+														]
+													}
+												]
+											},
+											{
+												"id": "white-mustard-and-brassica",
+												"name": "white mustard + radish + Brassica",
+												"signature": "At-α › PCK › WGT › Rapa/Oleracea",
+												"image": null,
+												"children": [
+													{
+														"id": "radish-and-brassica",
+														"name": "radish + Brassica (R, A, C genomes)",
+														"signature": "At-α › PCK › WGT › Rapa/Oleracea",
+														"image": null,
+														"children": [
+															{
+																"id": "brassica-ac",
+																"name": "Brassica A + C genomes",
+																"signature": "At-α › PCK › WGT › Rapa/Oleracea › A/C",
+																"image": null,
+																"children": [
+																	{
+																		"id": "oleracea",
+																		"name": "Brassica oleracea",
+																		"signature": "At-α › PCK › WGT › Rapa/Oleracea › A/C › CC",
+																		"image": null,
+																		"children": [
+																			{
+																				"id": "leafy-kales",
+																				"name": "leafy kales",
+																				"signature": "At-α › PCK › WGT › Rapa/Oleracea › A/C › CC › leafy",
+																				"image": null,
+																				"children": [
+																					{
+																						"id": "kale",
+																						"name": "kale",
+																						"signature": "At-α › PCK › WGT › Rapa/Oleracea › A/C › CC › leafy › curled leaves",
+																						"image": "/experiments/w1/brassicaceae/images/kale.jpg"
+																					},
+																					{
+																						"id": "collards",
+																						"name": "collard greens",
+																						"signature": "At-α › PCK › WGT › Rapa/Oleracea › A/C › CC › leafy › flat leaves",
+																						"image": "/experiments/w1/brassicaceae/images/collards.jpg"
+																					},
+																					{
+																						"id": "tronchuda",
+																						"name": "Portuguese cabbage",
+																						"signature": "At-α › PCK › WGT › Rapa/Oleracea › A/C › CC › leafy › thick ribs",
+																						"image": "/experiments/w1/brassicaceae/images/tronchuda.jpg"
+																					},
+																					{
+																						"id": "headed-cabbages",
+																						"name": "headed cabbages",
+																						"signature": "At-α › PCK › WGT › Rapa/Oleracea › A/C › CC › leafy › heading",
+																						"image": null,
+																						"children": [
+																							{
+																								"id": "cabbage",
+																								"name": "cabbage",
+																								"signature": "At-α › PCK › WGT › Rapa/Oleracea › A/C › CC › leafy › heading › terminal head",
+																								"image": "/experiments/w1/brassicaceae/images/cabbage.jpg"
+																							},
+																							{
+																								"id": "savoy",
+																								"name": "savoy cabbage",
+																								"signature": "At-α › PCK › WGT › Rapa/Oleracea › A/C › CC › leafy › heading › savoyed head",
+																								"image": "/experiments/w1/brassicaceae/images/savoy.jpg"
+																							},
+																							{
+																								"id": "brussels",
+																								"name": "Brussels sprouts",
+																								"signature": "At-α › PCK › WGT › Rapa/Oleracea › A/C › CC › leafy › heading › axillary heads",
+																								"image": "/experiments/w1/brassicaceae/images/brussels.jpg",
+																								"children": [
+																									{
+																										"id": "kalettes",
+																										"name": "kalettes / flower sprouts",
+																										"signature": "[At-α › PCK › WGT › Rapa/Oleracea › A/C › CC › leafy › heading › axillary heads] + [At-α › PCK › WGT › Rapa/Oleracea › A/C › CC › leafy › curled leaves] › Gemmifera×Acephala",
+																										"image": "/experiments/w1/brassicaceae/images/kalettes.jpg",
+																										"alsoFrom": ["kale"]
+																									}
+																								]
+																							}
+																						]
+																					},
+																					{
+																						"id": "kohlrabi",
+																						"name": "kohlrabi",
+																						"signature": "At-α › PCK › WGT › Rapa/Oleracea › A/C › CC › leafy › swollen stem",
+																						"image": "/experiments/w1/brassicaceae/images/kohlrabi.jpg"
+																					},
+																					{
+																						"id": "flower-head-types",
+																						"name": "flower-head types",
+																						"signature": "At-α › PCK › WGT › Rapa/Oleracea › A/C › CC › leafy › inflorescence",
+																						"image": null,
+																						"children": [
+																							{
+																								"id": "broccoli",
+																								"name": "broccoli",
+																								"signature": "At-α › PCK › WGT › Rapa/Oleracea › A/C › CC › leafy › inflorescence › green buds",
+																								"image": "/experiments/w1/brassicaceae/images/broccoli.jpg",
+																								"children": [
+																									{
+																										"id": "broccolini",
+																										"name": "broccolini",
+																										"signature": "[At-α › PCK › WGT › Rapa/Oleracea › A/C › CC › leafy › inflorescence › green buds] + [At-α › PCK › WGT › Rapa/Oleracea › A/C › CC › leafy › Alboglabra] › F1 Italica×Alboglabra",
+																										"image": "/experiments/w1/brassicaceae/images/broccolini.jpg",
+																										"alsoFrom": ["gai-lan"]
+																									}
+																								]
+																							},
+																							{
+																								"id": "cauliflower",
+																								"name": "cauliflower",
+																								"signature": "At-α › PCK › WGT › Rapa/Oleracea › A/C › CC › leafy › inflorescence › curd·BoCAL",
+																								"image": "/experiments/w1/brassicaceae/images/cauliflower.jpg",
+																								"children": [
+																									{
+																										"id": "romanesco",
+																										"name": "Romanesco",
+																										"signature": "At-α › PCK › WGT › Rapa/Oleracea › A/C › CC › leafy › inflorescence › curd·BoCAL › fractal curd",
+																										"image": "/experiments/w1/brassicaceae/images/romanesco.jpg"
+																									}
+																								]
+																							}
+																						]
+																					},
+																					{
+																						"id": "gai-lan",
+																						"name": "Chinese broccoli (gai lan)",
+																						"signature": "At-α › PCK › WGT › Rapa/Oleracea › A/C › CC › leafy › Alboglabra",
+																						"image": "/experiments/w1/brassicaceae/images/gai-lan.jpg"
+																					}
+																				]
+																			},
+																			{
+																				"id": "wild-cabbage",
+																				"name": "wild cabbage",
+																				"signature": "At-α › PCK › WGT › Rapa/Oleracea › A/C › CC › wild",
+																				"image": "/experiments/w1/brassicaceae/images/wild-cabbage.jpg"
+																			}
+																		]
+																	},
+																	{
+																		"id": "rapa",
+																		"name": "Brassica rapa",
+																		"signature": "At-α › PCK › WGT › Rapa/Oleracea › A/C › AA",
+																		"image": null,
+																		"children": [
+																			{
+																				"id": "juncea",
+																				"name": "Brassica juncea",
+																				"signature": "[At-α › PCK › WGT › Rapa/Oleracea › A/C › AA] + [At-α › PCK › WGT › Nigra › BB] › AABB",
+																				"image": null,
+																				"alsoFrom": ["nigra"],
+																				"children": [
+																					{
+																						"id": "juncea-seed",
+																						"name": "seed mustards",
+																						"signature": "[At-α › PCK › WGT › Rapa/Oleracea › A/C › AA] + [At-α › PCK › WGT › Nigra › BB] › AABB › South Asia seed",
+																						"image": null,
+																						"children": [
+																							{
+																								"id": "brown-mustard",
+																								"name": "brown mustard seed",
+																								"signature": "[At-α › PCK › WGT › Rapa/Oleracea › A/C › AA] + [At-α › PCK › WGT › Nigra › BB] › AABB › South Asia seed › seed",
+																								"image": "/experiments/w1/brassicaceae/images/brown-mustard.jpg"
+																							}
+																						]
+																					},
+																					{
+																						"id": "juncea-vegetable",
+																						"name": "East Asian vegetable mustards",
+																						"signature": "[At-α › PCK › WGT › Rapa/Oleracea › A/C › AA] + [At-α › PCK › WGT › Nigra › BB] › AABB › East Asia veg",
+																						"image": null,
+																						"children": [
+																							{
+																								"id": "mustard-greens",
+																								"name": "mustard greens (gat)",
+																								"signature": "[At-α › PCK › WGT › Rapa/Oleracea › A/C › AA] + [At-α › PCK › WGT › Nigra › BB] › AABB › East Asia veg › leaf",
+																								"image": "/experiments/w1/brassicaceae/images/mustard-greens.jpg"
+																							},
+																							{
+																								"id": "zha-cai",
+																								"name": "zha cai (stem mustard)",
+																								"signature": "[At-α › PCK › WGT › Rapa/Oleracea › A/C › AA] + [At-α › PCK › WGT › Nigra › BB] › AABB › East Asia veg › swollen stem",
+																								"image": "/experiments/w1/brassicaceae/images/zha-cai.jpg"
+																							}
+																						]
+																					}
+																				]
+																			},
+																			{
+																				"id": "napus",
+																				"name": "Brassica napus",
+																				"signature": "[At-α › PCK › WGT › Rapa/Oleracea › A/C › AA] + [At-α › PCK › WGT › Rapa/Oleracea › A/C › CC] › AACC",
+																				"image": null,
+																				"alsoFrom": ["oleracea"],
+																				"children": [
+																					{
+																						"id": "napus-oilseed",
+																						"name": "oilseed rape",
+																						"signature": "[At-α › PCK › WGT › Rapa/Oleracea › A/C › AA] + [At-α › PCK › WGT › Rapa/Oleracea › A/C › CC] › AACC › oilseed",
+																						"image": null,
+																						"children": [
+																							{
+																								"id": "canola",
+																								"name": "canola",
+																								"signature": "[At-α › PCK › WGT › Rapa/Oleracea › A/C › AA] + [At-α › PCK › WGT › Rapa/Oleracea › A/C › CC] › AACC › oilseed › 00: FAE1⁻ low-GSL",
+																								"image": "/experiments/w1/brassicaceae/images/canola.jpg"
+																							}
+																						]
+																					},
+																					{
+																						"id": "rutabaga",
+																						"name": "rutabaga / swede",
+																						"signature": "[At-α › PCK › WGT › Rapa/Oleracea › A/C › AA] + [At-α › PCK › WGT › Rapa/Oleracea › A/C › CC] › AACC › swede root",
+																						"image": "/experiments/w1/brassicaceae/images/rutabaga.jpg"
+																					},
+																					{
+																						"id": "siberian-kale",
+																						"name": "Siberian / Hanover kale",
+																						"signature": "[At-α › PCK › WGT › Rapa/Oleracea › A/C › AA] + [At-α › PCK › WGT › Rapa/Oleracea › A/C › CC] › AACC › leafy napus",
+																						"image": "/experiments/w1/brassicaceae/images/siberian-kale.jpg"
+																					}
+																				]
+																			},
+																			{
+																				"id": "rapa-early",
+																				"name": "early rapa crops (turnips + oilseeds)",
+																				"signature": "At-α › PCK › WGT › Rapa/Oleracea › A/C › AA › rapa-dom",
+																				"image": null,
+																				"children": [
+																					{
+																						"id": "rapa-european",
+																						"name": "European rapas",
+																						"signature": "At-α › PCK › WGT › Rapa/Oleracea › A/C › AA › rapa-dom › Europe",
+																						"image": null,
+																						"children": [
+																							{
+																								"id": "turnip",
+																								"name": "turnip",
+																								"signature": "At-α › PCK › WGT › Rapa/Oleracea › A/C › AA › rapa-dom › Europe › swollen root",
+																								"image": "/experiments/w1/brassicaceae/images/turnip.jpg"
+																							},
+																							{
+																								"id": "rapini",
+																								"name": "rapini / broccoli rabe",
+																								"signature": "At-α › PCK › WGT › Rapa/Oleracea › A/C › AA › rapa-dom › Europe › flowering shoots",
+																								"image": "/experiments/w1/brassicaceae/images/rapini.jpg"
+																							}
+																						]
+																					},
+																					{
+																						"id": "rapa-oilseeds",
+																						"name": "rapa oilseeds",
+																						"signature": "At-α › PCK › WGT › Rapa/Oleracea › A/C › AA › rapa-dom › oilseed",
+																						"image": null,
+																						"children": [
+																							{
+																								"id": "turnip-rape",
+																								"name": "turnip rape / sarson",
+																								"signature": "At-α › PCK › WGT › Rapa/Oleracea › A/C › AA › rapa-dom › oilseed › oil seeds",
+																								"image": "/experiments/w1/brassicaceae/images/turnip-rape.jpg"
+																							}
+																						]
+																					},
+																					{
+																						"id": "rapa-east-asian",
+																						"name": "East Asian leafy rapas",
+																						"signature": "At-α › PCK › WGT › Rapa/Oleracea › A/C › AA › rapa-dom › East Asia",
+																						"image": null,
+																						"children": [
+																							{
+																								"id": "bok-choy",
+																								"name": "bok choy",
+																								"signature": "At-α › PCK › WGT › Rapa/Oleracea › A/C › AA › rapa-dom › East Asia › white petioles",
+																								"image": "/experiments/w1/brassicaceae/images/bok-choy.jpg",
+																								"children": [
+																									{
+																										"id": "tatsoi",
+																										"name": "tatsoi",
+																										"signature": "At-α › PCK › WGT › Rapa/Oleracea › A/C › AA › rapa-dom › East Asia › white petioles › rosette",
+																										"image": "/experiments/w1/brassicaceae/images/tatsoi.jpg"
+																									}
+																								]
+																							},
+																							{
+																								"id": "napa",
+																								"name": "napa cabbage (baechu)",
+																								"signature": "At-α › PCK › WGT › Rapa/Oleracea › A/C › AA › rapa-dom › East Asia › A-genome head",
+																								"image": "/experiments/w1/brassicaceae/images/napa.png",
+																								"alsoFrom": [
+																									"turnip",
+																									"bok-choy"
+																								]
+																							},
+																							{
+																								"id": "komatsuna",
+																								"name": "komatsuna",
+																								"signature": "At-α › PCK › WGT › Rapa/Oleracea › A/C › AA › rapa-dom › East Asia › Perviridis",
+																								"image": "/experiments/w1/brassicaceae/images/komatsuna.jpg"
+																							},
+																							{
+																								"id": "mizuna",
+																								"name": "mizuna",
+																								"signature": "At-α › PCK › WGT › Rapa/Oleracea › A/C › AA › rapa-dom › East Asia › dissected leaves",
+																								"image": "/experiments/w1/brassicaceae/images/mizuna.jpg"
+																							}
+																						]
+																					}
+																				]
+																			}
+																		]
+																	}
+																]
+															},
+															{
+																"id": "raphanus",
+																"name": "Raphanus sativus",
+																"signature": "At-α › PCK › WGT › Rapa/Oleracea › RR",
+																"image": null,
+																"children": [
+																	{
+																		"id": "raphanobrassica",
+																		"name": "×Raphanobrassica",
+																		"signature": "[At-α › PCK › WGT › Rapa/Oleracea › RR] + [At-α › PCK › WGT › Rapa/Oleracea › A/C › CC] › RRCC",
+																		"image": null,
+																		"alsoFrom": ["oleracea"]
+																	},
+																	{
+																		"id": "radish-western",
+																		"name": "Western small radishes",
+																		"signature": "At-α › PCK › WGT › Rapa/Oleracea › RR › Western",
+																		"image": null,
+																		"children": [
+																			{
+																				"id": "radish",
+																				"name": "radish",
+																				"signature": "At-α › PCK › WGT › Rapa/Oleracea › RR › Western › small root",
+																				"image": "/experiments/w1/brassicaceae/images/radish.jpg"
+																			}
+																		]
+																	},
+																	{
+																		"id": "radish-east-asian",
+																		"name": "East Asian large radishes",
+																		"signature": "At-α › PCK › WGT › Rapa/Oleracea › RR › East Asian",
+																		"image": null,
+																		"children": [
+																			{
+																				"id": "daikon",
+																				"name": "daikon / Korean radish (mu)",
+																				"signature": "At-α › PCK › WGT › Rapa/Oleracea › RR › East Asian › large root",
+																				"image": "/experiments/w1/brassicaceae/images/daikon.png"
+																			}
+																		]
+																	}
+																]
+															}
+														]
+													},
+													{
+														"id": "sinapis",
+														"name": "Sinapis alba",
+														"signature": "At-α › PCK › WGT › Rapa/Oleracea › 2n=24",
+														"image": null,
+														"children": [
+															{
+																"id": "white-mustard",
+																"name": "white / yellow mustard seed",
+																"signature": "At-α › PCK › WGT › Rapa/Oleracea › 2n=24 › seed",
+																"image": "/experiments/w1/brassicaceae/images/white-mustard.jpg"
+															}
+														]
+													}
+												]
+											}
+										]
+									},
+									{
+										"id": "crambe",
+										"name": "Crambe maritima",
+										"signature": "At-α › PCK › WGT › Rapa/Oleracea › 2n=60",
+										"image": null,
+										"children": [
+											{
+												"id": "sea-kale",
+												"name": "sea kale",
+												"signature": "At-α › PCK › WGT › Rapa/Oleracea › 2n=60 › shoots",
+												"image": "/experiments/w1/brassicaceae/images/sea-kale.jpg"
+											}
+										]
+									}
+								]
+							}
+						]
+					},
+					{
+						"id": "eutrema",
+						"name": "Eutrema japonicum",
+						"signature": "At-α › PCK › 2n=28",
+						"image": null,
+						"children": [
+							{
+								"id": "wasabi",
+								"name": "wasabi",
+								"signature": "At-α › PCK › 2n=28 › rhizome",
+								"image": "/experiments/w1/brassicaceae/images/wasabi.jpg"
+							}
+						]
+					}
+				]
+			}
+		]
+	}
+}

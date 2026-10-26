@@ -9,7 +9,10 @@
 			"author": "MPF",
 			"license": "CC BY 2.5",
 			"licenseUrl": "https://creativecommons.org/licenses/by/2.5",
-			"source": "https://commons.wikimedia.org/wiki/File:Brassica_oleracea0.jpg"
+			"source": "https://commons.wikimedia.org/wiki/File:Brassica_oleracea0.jpg",
+			"fetched": "Brassica_oleracea0.jpg",
+			"width": 120,
+			"height": 90
 		},
 		"kale": {
 			"wikipedia": "Kale",
@@ -18,7 +21,10 @@
 			"author": "Rasbak",
 			"license": "CC BY-SA 3.0",
 			"licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
-			"source": "https://commons.wikimedia.org/wiki/File:Boerenkool.jpg"
+			"source": "https://commons.wikimedia.org/wiki/File:Boerenkool.jpg",
+			"fetched": "Boerenkool.jpg",
+			"width": 120,
+			"height": 115
 		},
 		"collards": {
 			"wikipedia": "Collard (plant)",
@@ -27,10 +33,22 @@
 			"author": "Evan-Amos",
 			"license": "Public domain",
 			"licenseUrl": null,
-			"source": "https://commons.wikimedia.org/wiki/File:Collard-Greens-Bundle.jpg"
+			"source": "https://commons.wikimedia.org/wiki/File:Collard-Greens-Bundle.jpg",
+			"fetched": "Collard-Greens-Bundle.jpg",
+			"width": 120,
+			"height": 83
 		},
 		"tronchuda": {
-			"wikipedia": "Tronchuda cabbage"
+			"wikipedia": "Tronchuda cabbage",
+			"file": "Brassica_oleracea_var._costata_-_Madeira_01.jpg",
+			"src": "/experiments/w1/brassicaceae/images/tronchuda.jpg",
+			"author": "H. Zell",
+			"license": "CC BY-SA 3.0",
+			"licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+			"source": "https://commons.wikimedia.org/wiki/File:Brassica_oleracea_var._costata_-_Madeira_01.jpg",
+			"fetched": "Brassica_oleracea_var._costata_-_Madeira_01.jpg",
+			"width": 120,
+			"height": 55
 		},
 		"cabbage": {
 			"wikipedia": "Cabbage",
@@ -39,118 +57,454 @@
 			"author": "fir0002 flagstaffotos [at] gmail.com Canon 20D + Sigma 150mm f/2.8",
 			"license": "GFDL 1.2",
 			"licenseUrl": "http://www.gnu.org/licenses/old-licenses/fdl-1.2.html",
-			"source": "https://commons.wikimedia.org/wiki/File:Cabbage_and_cross_section_on_white.jpg"
+			"source": "https://commons.wikimedia.org/wiki/File:Cabbage_and_cross_section_on_white.jpg",
+			"fetched": "Cabbage_and_cross_section_on_white.jpg",
+			"width": 120,
+			"height": 54
 		},
 		"savoy": {
-			"wikipedia": "Savoy cabbage"
+			"wikipedia": "Savoy cabbage",
+			"file": "Savoy_Cabbage.jpg",
+			"src": "/experiments/w1/brassicaceae/images/savoy.jpg",
+			"author": "Evelyn Gunn",
+			"license": "CC BY-SA 3.0",
+			"licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+			"source": "https://commons.wikimedia.org/wiki/File:Savoy_Cabbage.jpg",
+			"fetched": "Savoy_Cabbage.jpg",
+			"width": 120,
+			"height": 90
 		},
 		"brussels": {
-			"wikipedia": "Brussels sprout"
+			"wikipedia": "Brussels sprout",
+			"file": "Brussels_sprout_closeup.jpg",
+			"src": "/experiments/w1/brassicaceae/images/brussels.jpg",
+			"author": "Eric Hunt",
+			"license": "CC BY 2.5",
+			"licenseUrl": "https://creativecommons.org/licenses/by/2.5",
+			"source": "https://commons.wikimedia.org/wiki/File:Brussels_sprout_closeup.jpg",
+			"fetched": "Brussels_sprout_closeup.jpg",
+			"width": 120,
+			"height": 180
 		},
 		"kohlrabi": {
-			"wikipedia": "Kohlrabi"
+			"wikipedia": "Kohlrabi",
+			"file": "Brassica_oleracea_var._gongylodes_(kohlrabi).jpg",
+			"src": "/experiments/w1/brassicaceae/images/kohlrabi.jpg",
+			"author": "Unknown",
+			"license": "CC0",
+			"licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+			"source": "https://commons.wikimedia.org/wiki/File:Brassica_oleracea_var._gongylodes_(kohlrabi).jpg",
+			"fetched": "Brassica_oleracea_var._gongylodes_(kohlrabi).jpg",
+			"width": 120,
+			"height": 80
 		},
 		"broccoli": {
-			"wikipedia": "Broccoli"
+			"wikipedia": "Broccoli",
+			"file": "Broccoli_and_cross_section_edit.jpg",
+			"src": "/experiments/w1/brassicaceae/images/broccoli.jpg",
+			"author": "Fir0002",
+			"license": "GFDL 1.2",
+			"licenseUrl": "http://www.gnu.org/licenses/old-licenses/fdl-1.2.html",
+			"source": "https://commons.wikimedia.org/wiki/File:Broccoli_and_cross_section_edit.jpg",
+			"fetched": "Broccoli_and_cross_section_edit.jpg",
+			"width": 120,
+			"height": 80
 		},
 		"cauliflower": {
-			"wikipedia": "Cauliflower"
+			"wikipedia": "Cauliflower",
+			"file": "Chou-fleur_02.jpg",
+			"src": "/experiments/w1/brassicaceae/images/cauliflower.jpg",
+			"author": "Coyau",
+			"license": "CC BY-SA 3.0",
+			"licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+			"source": "https://commons.wikimedia.org/wiki/File:Chou-fleur_02.jpg",
+			"fetched": "Chou-fleur_02.jpg",
+			"width": 120,
+			"height": 96
 		},
 		"romanesco": {
-			"wikipedia": "Romanesco broccoli"
+			"wikipedia": "Romanesco broccoli",
+			"file": "Romanesco_broccoli_(Brassica_oleracea).jpg",
+			"src": "/experiments/w1/brassicaceae/images/romanesco.jpg",
+			"author": "Ivar Leidus",
+			"license": "CC BY-SA 4.0",
+			"licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+			"source": "https://commons.wikimedia.org/wiki/File:Romanesco_broccoli_(Brassica_oleracea).jpg",
+			"fetched": "Romanesco_broccoli_(Brassica_oleracea).jpg",
+			"width": 120,
+			"height": 96
 		},
 		"gai-lan": {
-			"wikipedia": "Gai lan"
+			"wikipedia": "Gai lan",
+			"file": "Gailan.jpg",
+			"src": "/experiments/w1/brassicaceae/images/gai-lan.jpg",
+			"author": "Kowloonese",
+			"license": "CC BY-SA 3.0",
+			"licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+			"source": "https://commons.wikimedia.org/wiki/File:Gailan.jpg",
+			"fetched": "Gailan.jpg",
+			"width": 120,
+			"height": 160
 		},
 		"broccolini": {
-			"wikipedia": "Broccolini"
+			"wikipedia": "Broccolini",
+			"file": "Broccolini.jpg",
+			"src": "/experiments/w1/brassicaceae/images/broccolini.jpg",
+			"author": "User Agriffin on en.wikipedia",
+			"license": "CC BY 1.0",
+			"licenseUrl": "https://creativecommons.org/licenses/by/1.0",
+			"source": "https://commons.wikimedia.org/wiki/File:Broccolini.jpg",
+			"fetched": "Broccolini.jpg",
+			"width": 120,
+			"height": 80
 		},
 		"kalettes": {
-			"wikipedia": "Kalette"
+			"wikipedia": "Kalette",
+			"file": "Kalettes_stem_and_indivisual.jpg",
+			"src": "/experiments/w1/brassicaceae/images/kalettes.jpg",
+			"author": "Debhatter",
+			"license": "CC BY-SA 4.0",
+			"licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+			"source": "https://commons.wikimedia.org/wiki/File:Kalettes_stem_and_indivisual.jpg",
+			"fetched": "Kalettes_stem_and_indivisual.jpg",
+			"width": 120,
+			"height": 180
 		},
 		"turnip": {
-			"wikipedia": "Turnip"
+			"wikipedia": "Turnip",
+			"file": "Turnip_2622027.jpg",
+			"src": "/experiments/w1/brassicaceae/images/turnip.jpg",
+			"author": "thebittenword.com",
+			"license": "CC BY 2.0",
+			"licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+			"source": "https://commons.wikimedia.org/wiki/File:Turnip_2622027.jpg",
+			"fetched": "Turnip_2622027.jpg",
+			"width": 120,
+			"height": 80
 		},
 		"rapini": {
-			"wikipedia": "Rapini"
+			"wikipedia": "Rapini",
+			"file": "Rapini.jpg",
+			"src": "/experiments/w1/brassicaceae/images/rapini.jpg",
+			"author": "Roedelius",
+			"license": "CC BY-SA 3.0",
+			"licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+			"source": "https://commons.wikimedia.org/wiki/File:Rapini.jpg",
+			"fetched": "Rapini.jpg",
+			"width": 120,
+			"height": 136
 		},
 		"turnip-rape": {
-			"wikipedia": "Field mustard"
+			"wikipedia": "Field mustard",
+			"file": "Turnip_rape_field_in_Parikkala.JPG",
+			"src": "/experiments/w1/brassicaceae/images/turnip-rape.jpg",
+			"author": "SeppVei",
+			"license": "Public domain",
+			"licenseUrl": null,
+			"source": "https://commons.wikimedia.org/wiki/File:Turnip_rape_field_in_Parikkala.JPG",
+			"fetched": "Turnip_rape_field_in_Parikkala.JPG",
+			"width": 120,
+			"height": 90
 		},
 		"bok-choy": {
-			"wikipedia": "Bok choy"
+			"wikipedia": "Bok choy",
+			"file": "Bok_Choy_(49553125456).jpg",
+			"src": "/experiments/w1/brassicaceae/images/bok-choy.jpg",
+			"author": "spurekar",
+			"license": "CC BY 2.0",
+			"licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+			"source": "https://commons.wikimedia.org/wiki/File:Bok_Choy_(49553125456).jpg",
+			"fetched": "Bok_Choy_(49553125456).jpg",
+			"width": 120,
+			"height": 180
 		},
 		"tatsoi": {
-			"wikipedia": "Tatsoi"
+			"wikipedia": "Tatsoi",
+			"file": "Brassica_rapa_subsp_narinosa.jpg",
+			"src": "/experiments/w1/brassicaceae/images/tatsoi.jpg",
+			"author": "Idéalités",
+			"license": "CC BY-SA 4.0",
+			"licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+			"source": "https://commons.wikimedia.org/wiki/File:Brassica_rapa_subsp_narinosa.jpg",
+			"fetched": "Brassica_rapa_subsp_narinosa.jpg",
+			"width": 120,
+			"height": 90
 		},
 		"napa": {
-			"wikipedia": "Napa cabbage"
+			"wikipedia": "Napa cabbage",
+			"file": "Napa_cabbages.png",
+			"src": "/experiments/w1/brassicaceae/images/napa.png",
+			"author": "Bayartai",
+			"license": "CC0",
+			"licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+			"source": "https://commons.wikimedia.org/wiki/File:Napa_cabbages.png",
+			"fetched": "Napa_cabbages.png",
+			"width": 120,
+			"height": 160
 		},
 		"komatsuna": {
-			"wikipedia": "Komatsuna"
+			"wikipedia": "Komatsuna",
+			"file": "Komatsuna.jpg",
+			"src": "/experiments/w1/brassicaceae/images/komatsuna.jpg",
+			"author": "日陰猫Joga at Japanese Wikipedia",
+			"license": "CC BY-SA 3.0",
+			"licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+			"source": "https://commons.wikimedia.org/wiki/File:Komatsuna.jpg",
+			"fetched": "Komatsuna.jpg",
+			"width": 120,
+			"height": 160
 		},
 		"mizuna": {
-			"wikipedia": "Mizuna"
+			"wikipedia": "Mizuna",
+			"file": "Mizuna_001.jpg",
+			"src": "/experiments/w1/brassicaceae/images/mizuna.jpg",
+			"author": "Flickr user masahiko(Masahiko Satoh)",
+			"license": "CC BY 2.0",
+			"licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+			"source": "https://commons.wikimedia.org/wiki/File:Mizuna_001.jpg",
+			"fetched": "Mizuna_001.jpg",
+			"width": 120,
+			"height": 181
 		},
 		"canola": {
-			"wikipedia": "Canola"
+			"wikipedia": "Canola",
+			"file": "Canola_field_framed_by_Spruce_tree.jpg",
+			"src": "/experiments/w1/brassicaceae/images/canola.jpg",
+			"author": "BethGwynne",
+			"license": "CC BY-SA 4.0",
+			"licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+			"source": "https://commons.wikimedia.org/wiki/File:Canola_field_framed_by_Spruce_tree.jpg",
+			"fetched": "Canola_field_framed_by_Spruce_tree.jpg",
+			"width": 120,
+			"height": 90
 		},
 		"rutabaga": {
-			"wikipedia": "Rutabaga"
+			"wikipedia": "Rutabaga",
+			"file": "Rutabaga,_variety_nadmorska.JPG",
+			"src": "/experiments/w1/brassicaceae/images/rutabaga.jpg",
+			"author": "Picasa user Seedambassadors",
+			"license": "CC BY-SA 3.0",
+			"licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+			"source": "https://commons.wikimedia.org/wiki/File:Rutabaga,_variety_nadmorska.JPG",
+			"fetched": "Rutabaga,_variety_nadmorska.JPG",
+			"width": 120,
+			"height": 90
 		},
 		"siberian-kale": {
-			"wikipedia": "Siberian kale"
+			"wikipedia": "Siberian kale",
+			"file": "CBG_Fruit_Veg_Island_-_Anniversary_Heirloom_Beds,_Brassica_napus_'Ragged_Jack'_Siberian_Kale_150627_(20329896065).jpg",
+			"src": "/experiments/w1/brassicaceae/images/siberian-kale.jpg",
+			"author": "cultivar413 from Fallbrook, California",
+			"license": "CC BY 2.0",
+			"licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+			"source": "https://commons.wikimedia.org/wiki/File:CBG_Fruit_Veg_Island_-_Anniversary_Heirloom_Beds,_Brassica_napus_%27Ragged_Jack%27_Siberian_Kale_150627_(20329896065).jpg",
+			"fetched": "CBG_Fruit_Veg_Island_-_Anniversary_Heirloom_Beds,_Brassica_napus_'Ragged_Jack'_Siberian_Kale_150627_(20329896065).jpg",
+			"width": 120,
+			"height": 68
 		},
 		"brown-mustard": {
-			"wikipedia": "Brassica juncea"
+			"wikipedia": "Brassica juncea",
+			"file": "Brown_Mustard_Seed_(Close).jpg",
+			"src": "/experiments/w1/brassicaceae/images/brown-mustard.jpg",
+			"author": "Dsaikia2015",
+			"license": "CC BY-SA 4.0",
+			"licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+			"source": "https://commons.wikimedia.org/wiki/File:Brown_Mustard_Seed_(Close).jpg",
+			"fetched": "Brown_Mustard_Seed_(Close).jpg",
+			"width": 120,
+			"height": 80
 		},
 		"mustard-greens": {
-			"wikipedia": "Mustard greens"
+			"wikipedia": "Mustard greens",
+			"file": "Curly_mustard_leaves.jpg",
+			"src": "/experiments/w1/brassicaceae/images/mustard-greens.jpg",
+			"author": "Jim Conrad",
+			"license": "Public domain",
+			"licenseUrl": null,
+			"source": "https://commons.wikimedia.org/wiki/File:Curly_mustard_leaves.jpg",
+			"fetched": "Curly_mustard_leaves.jpg",
+			"width": 120,
+			"height": 117
 		},
 		"zha-cai": {
-			"wikipedia": "Zha cai"
+			"wikipedia": "Zha cai",
+			"file": "TwoHeadsZhacai.jpg",
+			"src": "/experiments/w1/brassicaceae/images/zha-cai.jpg",
+			"author": "Sjschen",
+			"license": "CC BY-SA 3.0",
+			"licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+			"source": "https://commons.wikimedia.org/wiki/File:TwoHeadsZhacai.jpg",
+			"fetched": "TwoHeadsZhacai.jpg",
+			"width": 120,
+			"height": 90
 		},
 		"ethiopian-kale": {
-			"wikipedia": "Brassica carinata"
+			"wikipedia": "Brassica carinata",
+			"file": "Habesha_gomen_in_Ethiopian_garden.jpg",
+			"src": "/experiments/w1/brassicaceae/images/ethiopian-kale.jpg",
+			"author": "Ztmcfaul",
+			"license": "Public domain",
+			"licenseUrl": null,
+			"source": "https://commons.wikimedia.org/wiki/File:Habesha_gomen_in_Ethiopian_garden.jpg",
+			"fetched": "Habesha_gomen_in_Ethiopian_garden.jpg",
+			"width": 120,
+			"height": 160
 		},
 		"black-mustard": {
-			"wikipedia": "Brassica nigra"
+			"wikipedia": "Brassica nigra",
+			"file": "Black_mustard_seeds_(closeup).jpg",
+			"src": "/experiments/w1/brassicaceae/images/black-mustard.jpg",
+			"author": "Sanjay Acharya",
+			"license": "CC BY-SA 3.0",
+			"licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+			"source": "https://commons.wikimedia.org/wiki/File:Black_mustard_seeds_(closeup).jpg",
+			"fetched": "Black_mustard_seeds_(closeup).jpg",
+			"width": 120,
+			"height": 80
 		},
 		"radish": {
-			"wikipedia": "Radish"
+			"wikipedia": "Radish",
+			"file": "Radish_3371103037_4ab07db0bf_o.jpg",
+			"src": "/experiments/w1/brassicaceae/images/radish.jpg",
+			"author": "Self, en:User:Jengod",
+			"license": "Public domain",
+			"licenseUrl": null,
+			"source": "https://commons.wikimedia.org/wiki/File:Radish_3371103037_4ab07db0bf_o.jpg",
+			"fetched": "Radish_3371103037_4ab07db0bf_o.jpg",
+			"width": 120,
+			"height": 160
 		},
 		"daikon": {
-			"wikipedia": "Daikon"
+			"wikipedia": "Daikon",
+			"file": "Different_kinds_of_White_Radish.png",
+			"src": "/experiments/w1/brassicaceae/images/daikon.png",
+			"author": "KimYunmi",
+			"license": "CC BY-SA 4.0",
+			"licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+			"source": "https://commons.wikimedia.org/wiki/File:Different_kinds_of_White_Radish.png",
+			"fetched": "Different_kinds_of_White_Radish.png",
+			"width": 120,
+			"height": 90
 		},
 		"white-mustard": {
-			"wikipedia": "Sinapis alba"
+			"wikipedia": "Sinapis alba",
+			"file": "Sa_yellow_mustard.jpg",
+			"src": "/experiments/w1/brassicaceae/images/white-mustard.jpg",
+			"author": "Sanjay Acharya",
+			"license": "CC BY-SA 3.0",
+			"licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+			"source": "https://commons.wikimedia.org/wiki/File:Sa_yellow_mustard.jpg",
+			"fetched": "Sa_yellow_mustard.jpg",
+			"width": 120,
+			"height": 80
 		},
 		"arugula": {
-			"wikipedia": "Eruca vesicaria"
+			"wikipedia": "Eruca vesicaria",
+			"file": "Eruca_sativa.jpg",
+			"src": "/experiments/w1/brassicaceae/images/arugula.jpg",
+			"author": "Whut",
+			"license": "CC BY-SA 3.0",
+			"licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+			"source": "https://commons.wikimedia.org/wiki/File:Eruca_sativa.jpg",
+			"fetched": "Eruca_sativa.jpg",
+			"width": 120,
+			"height": 213
 		},
 		"wild-rocket": {
-			"wikipedia": "Diplotaxis tenuifolia"
+			"wikipedia": "Diplotaxis tenuifolia",
+			"file": "Diplotaxis_tenuifolia_in_Split,_Croatia_20230526.jpg",
+			"src": "/experiments/w1/brassicaceae/images/wild-rocket.jpg",
+			"author": "Argo Navis",
+			"license": "CC BY-SA 4.0",
+			"licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+			"source": "https://commons.wikimedia.org/wiki/File:Diplotaxis_tenuifolia_in_Split,_Croatia_20230526.jpg",
+			"fetched": "Diplotaxis_tenuifolia_in_Split,_Croatia_20230526.jpg",
+			"width": 120,
+			"height": 120
 		},
 		"sea-kale": {
-			"wikipedia": "Crambe maritima"
+			"wikipedia": "Crambe maritima",
+			"file": "Crambe_Maritima_Estonia.jpg",
+			"src": "/experiments/w1/brassicaceae/images/sea-kale.jpg",
+			"author": "Siim at et.wikipedia",
+			"license": "CC BY-SA 2.5",
+			"licenseUrl": "https://creativecommons.org/licenses/by-sa/2.5",
+			"source": "https://commons.wikimedia.org/wiki/File:Crambe_Maritima_Estonia.jpg",
+			"fetched": "Crambe_Maritima_Estonia.jpg",
+			"width": 120,
+			"height": 90
 		},
 		"horseradish": {
-			"wikipedia": "Horseradish"
+			"wikipedia": "Horseradish",
+			"file": "Armoracia_rusticana.jpg",
+			"src": "/experiments/w1/brassicaceae/images/horseradish.jpg",
+			"author": "Pethan",
+			"license": "CC BY-SA 3.0",
+			"licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+			"source": "https://commons.wikimedia.org/wiki/File:Armoracia_rusticana.jpg",
+			"fetched": "Armoracia_rusticana.jpg",
+			"width": 120,
+			"height": 160
 		},
 		"watercress": {
-			"wikipedia": "Watercress"
+			"wikipedia": "Watercress",
+			"file": "Watercress_(2).JPG",
+			"src": "/experiments/w1/brassicaceae/images/watercress.jpg",
+			"author": "Masparasol",
+			"license": "CC BY 3.0",
+			"licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+			"source": "https://commons.wikimedia.org/wiki/File:Watercress_(2).JPG",
+			"fetched": "Watercress_(2).JPG",
+			"width": 120,
+			"height": 90
 		},
 		"land-cress": {
-			"wikipedia": "Barbarea verna"
+			"wikipedia": "Barbarea verna",
+			"file": "Barbarea_verna_2018-05-04_0804.jpg",
+			"src": "/experiments/w1/brassicaceae/images/land-cress.jpg",
+			"author": "Salicyna",
+			"license": "CC BY-SA 4.0",
+			"licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+			"source": "https://commons.wikimedia.org/wiki/File:Barbarea_verna_2018-05-04_0804.jpg",
+			"fetched": "Barbarea_verna_2018-05-04_0804.jpg",
+			"width": 120,
+			"height": 90
 		},
 		"wasabi": {
-			"wikipedia": "Wasabi"
+			"wikipedia": "Wasabi",
+			"file": "Wasabia_japonica_4.JPG",
+			"src": "/experiments/w1/brassicaceae/images/wasabi.jpg",
+			"author": "Qwert1234",
+			"license": "CC BY-SA 3.0",
+			"licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+			"source": "https://commons.wikimedia.org/wiki/File:Wasabia_japonica_4.JPG",
+			"fetched": "Wasabia_japonica_4.JPG",
+			"width": 120,
+			"height": 90
 		},
 		"garden-cress": {
-			"wikipedia": "Lepidium sativum"
+			"wikipedia": "Lepidium sativum",
+			"file": "Lepidium_sativum_2019-05-04_2820.jpg",
+			"src": "/experiments/w1/brassicaceae/images/garden-cress.jpg",
+			"author": "Salicyna",
+			"license": "CC BY-SA 4.0",
+			"licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+			"source": "https://commons.wikimedia.org/wiki/File:Lepidium_sativum_2019-05-04_2820.jpg",
+			"fetched": "Lepidium_sativum_2019-05-04_2820.jpg",
+			"width": 120,
+			"height": 90
 		},
 		"maca-root": {
-			"wikipedia": "Lepidium meyenii"
+			"wikipedia": "Lepidium meyenii",
+			"file": "Maca_(Lepidium_meyenii).png",
+			"src": "/experiments/w1/brassicaceae/images/maca-root.png",
+			"author": "User:Konstantin Silka",
+			"license": "CC BY-SA 4.0",
+			"licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+			"source": "https://commons.wikimedia.org/wiki/File:Maca_(Lepidium_meyenii).png",
+			"fetched": "Maca_(Lepidium_meyenii).png",
+			"width": 120,
+			"height": 119
 		}
 	}
 }

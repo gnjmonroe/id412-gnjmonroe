@@ -1,0 +1,132 @@
+.container {
+	position: fixed;
+	inset: 0;
+	overflow: auto;
+	background: #efece4;
+	color: #1d1d1b;
+	font-family: ui-monospace, Menlo, monospace;
+}
+
+/* three bands: clicked cards, current cards, button. The top and bottom bands are at least
+   half a screen tall, so the page can always scroll the current cards to the centre. */
+.layout {
+	position: relative;
+	display: grid;
+	justify-items: center;
+	padding: 0 20px;
+}
+
+.lines {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	fill: none;
+	stroke: #1d1d1b;
+	stroke-width: 1.5;
+	pointer-events: none;
+}
+
+/* the clicked cards, stacked up from the centre; scroll up to see them all */
+.past {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	align-items: center;
+	gap: 48px;
+	min-height: 50vh;
+	padding: 60px 0 48px;
+}
+
+.past .card {
+	cursor: default;
+}
+
+.past .card:hover {
+	background: #fffdf8;
+	box-shadow: none;
+}
+
+.below {
+	min-height: 50vh;
+	padding-top: 24px;
+}
+
+.link {
+	position: fixed; /* stays put while the path scrolls */
+	top: 14px;
+	right: 20px;
+	z-index: 1; /* above the layout, so it stays clickable */
+	font-size: 12px;
+	color: #1d1d1b;
+}
+
+.cards {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 16px;
+	max-width: 1000px;
+}
+
+.card {
+	position: relative; /* above the lines */
+	flex-shrink: 0;
+	width: 200px;
+	padding: 14px;
+	border: 1.5px solid #1d1d1b;
+	background: #fffdf8;
+	color: inherit;
+	font: inherit;
+	text-align: left;
+	cursor: pointer;
+}
+
+.card:hover {
+	background: #fff;
+	box-shadow: 4px 4px 0 #1d1d1b;
+}
+
+.card h2 {
+	margin: 0 0 6px;
+	font-size: 15px;
+}
+
+.photo {
+	display: block;
+	margin: 0 auto 10px;
+}
+
+.signature {
+	margin: 0;
+	font-size: 11px;
+	line-height: 1.4;
+	opacity: 0.7;
+}
+
+.large {
+	width: 360px;
+	cursor: default;
+}
+
+.large:hover {
+	background: #fffdf8;
+	box-shadow: none;
+}
+
+.large h2 {
+	font-size: 22px;
+}
+
+.large .signature {
+	font-size: 13px;
+}
+
+.back {
+	padding: 10px 18px;
+	border: 1.5px solid #1d1d1b;
+	background: #1d1d1b;
+	color: #efece4;
+	font: inherit;
+	cursor: pointer;
+}
