@@ -7,6 +7,7 @@ import {
 	plant,
 	step,
 	stats,
+	isRestDay,
 	traitsOf,
 	type Farm,
 	type Bat,
@@ -78,7 +79,8 @@ function drawFarmer(ctx: CanvasRenderingContext2D, farm: Farm, farmer: Farmer) {
 	ctx.save();
 	ctx.translate(farmer.x, farmer.y);
 	ctx.rotate(farmer.angle);
-	if (farmer.task === "resting") ctx.globalAlpha = 0.5;
+	const off = farmer.task === "resting" || isRestDay(farm);
+	if (off) ctx.globalAlpha = 0.5;
 
 	// Feet: one ahead, one behind, swapping every few steps while walking.
 	const stride = walking ? Math.sin(farmer.walked * 0.5) * 5 : 0;
@@ -121,7 +123,7 @@ function drawFarmer(ctx: CanvasRenderingContext2D, farm: Farm, farmer: Farmer) {
 		);
 		ctx.fill();
 	}
-	if (farmer.task === "resting") {
+	if (off) {
 		ctx.fillStyle = colors.hat;
 		ctx.font = "10px monospace";
 		ctx.fillText("z", farmer.x + 7, farmer.y - 7);
@@ -353,7 +355,7 @@ export default function MangoFarm() {
 			const s = stats(farm);
 			const t = s.trees;
 			setInfo(
-				`day ${s.day} · seeds ${t.seed} · seedlings ${t.seedling} · saplings ${t.sapling} · mature ${t.mature} · fruiting ${t.fruiting} · senescent ${t.senescent} · harvested ${s.harvested} · farmer grafts ${s.grafts} · eaten by bats ${s.batEaten} · farmers ${farm.farmers.map((f) => TASK_NAMES[f.task]).join(", ")}`,
+				`day ${s.day}${isRestDay(farm) ? " (farmers' day off)" : ""} · seeds ${t.seed} · seedlings ${t.seedling} · saplings ${t.sapling} · mature ${t.mature} · fruiting ${t.fruiting} · senescent ${t.senescent} · harvested ${s.harvested} · farmer grafts ${s.grafts} · eaten by bats ${s.batEaten} · farmers ${farm.farmers.map((f) => TASK_NAMES[f.task]).join(", ")}`,
 			);
 			setCounts(s.varieties);
 			const selected = farm.trees.find(

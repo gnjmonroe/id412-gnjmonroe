@@ -412,7 +412,13 @@ function walk(farmer: Farmer, x: number, y: number, dt: number) {
 	return false;
 }
 
+// Every seventh day is the farmers' day off.
+export function isRestDay(farm: Farm) {
+	return Math.floor(farm.day) % 7 === 6;
+}
+
 function workFarmer(farm: Farm, farmer: Farmer, dt: number) {
+	if (isRestDay(farm)) return; // farmers stop where they are and carry on the next day
 	const tree = farm.trees.find((t) => t.id === farmer.treeId);
 	if (farmer.task === "idle") {
 		const target = pickTree(farm);
