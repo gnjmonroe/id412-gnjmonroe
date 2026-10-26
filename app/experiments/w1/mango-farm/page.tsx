@@ -250,14 +250,16 @@ function draw(
 	farm: Farm,
 	selectedId: number | null,
 ) {
-	// Lines from each tree to the tree it came from: solid for seed, dashed for graft.
-	ctx.lineWidth = 1;
+	// Lines from each tree to the tree it came from. Seed: thin, solid, in the link colour.
+	// Graft: thicker, dashed, in the variety's own colour, so each grafted family is easy to follow.
 	for (const tree of farm.trees) {
 		const parent = farm.trees.find((other) => other.id === tree.parentId);
 		if (!parent) continue;
-		ctx.globalAlpha = 0.4;
-		ctx.strokeStyle = settings.colors.link;
-		ctx.setLineDash(tree.origin === "graft" ? [4, 4] : []);
+		const grafted = tree.origin === "graft";
+		ctx.globalAlpha = grafted ? 0.8 : 0.4;
+		ctx.strokeStyle = grafted ? traitsOf(tree).leaf : settings.colors.link;
+		ctx.lineWidth = grafted ? 2.5 : 1;
+		ctx.setLineDash(grafted ? [6, 4] : []);
 		ctx.beginPath();
 		ctx.moveTo(parent.x, parent.y);
 		ctx.lineTo(tree.x, tree.y);
