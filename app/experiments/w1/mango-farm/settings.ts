@@ -16,7 +16,7 @@ export const settings = {
 		vigorJitter: 0.2, // how much a true seed tree can differ from its parent (vigor 1 = normal)
 		seedlingVariation: 0.4, // how far a new seedling variety's traits may stray from its mother
 		offTypeChance: 0.1, // chance that a true-seed variety still grows a new seedling variety
-		daysPerSecond: 20, // normal speed
+		daysPerSecond: 0.5, // at 1×: one day and night every 2 seconds
 		farmerSpeed: 60, // farm units a farmer walks per day
 		graftDays: 5, // days a farmer spends taking a cutting
 		farmerRestDays: 30, // days a farmer rests after each graft
@@ -24,9 +24,9 @@ export const settings = {
 		startTrees: 4, // used when the farm restarts
 		farmers: 2, // used when the farm restarts
 		bats: 3, // used when the farm restarts
-		batSpeed: 250, // farm units a bat flies per day
-		batEatDays: 2, // days a bat spends eating one fruit
-		batAwayDays: 20, // days a bat stays at its roost between visits
+		batSpeed: 1500, // farm units a bat flies per day (crosses the farm in about a third of a night)
+		batEatDays: 0.1, // days a bat spends eating one fruit (about 2 hours)
+		batAwayDays: 3, // days a bat stays at its roost between visits; it only sets out at night
 		batSeedChance: 0.2, // chance a bat carries the seed off and drops it somewhere new
 		seed: 412, // random seed, so every run is the same; used when the farm restarts
 	},
@@ -109,6 +109,7 @@ export const settings = {
 		farmer: "#efece4",
 		hat: "#1d1d1b",
 		bat: "#5a2d82", // violet
+		night: "#1f2a5a", // laid over the farm at night with a multiply blend
 	},
 };
 

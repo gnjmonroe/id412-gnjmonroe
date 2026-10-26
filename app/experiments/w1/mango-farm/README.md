@@ -4,7 +4,7 @@ A top-down mango farm that runs by itself: seeds sprout, trees grow, flower, fru
 
 - Route: /experiments/w1/mango-farm
 - Week: W1 · Tech: Canvas
-- Inputs: time, farmers, fruit bats, mouse clicks (plant, graft), play/pause and speed buttons, admin panel (A key)
+- Inputs: time and time of day, farmers, fruit bats, mouse clicks (plant, graft), play/pause and speed buttons, admin panel (A key)
 - Parameters: stage lengths, fruit per tree, harvest share, seed chance, spacing (all in `settings.ts`, editable live in the admin panel)
 
 ## How it works
@@ -15,6 +15,7 @@ A top-down mango farm that runs by itself: seeds sprout, trees grow, flower, fru
 - Propagation: by seed (random vigor, starts as a seed) or by graft (exact copy, starts as a sapling). Dashed line = graft, solid = seed.
 - Farmers (hat seen from above) keep Keitt, Kent and Alphonso alive: each picks a grown tree of the rarest of them, walks over, takes a cutting, walks to free ground nearby and grafts a sapling, then rests. Without farmers those three die out. They also graft promising seedling varieties (fruit ≥ `promisingFruit`), the way real growers find new cultivars. On screen: feet step while walking, a dotted trail shows where they are headed, a green wedge fills while cutting, a sprig is carried to the spot, a pale disc pulses where a graft lands, and resting farmers fade with a "z".
 - Fruit bats (violet, wings beating) roost off the farm, fly in to a tree with ripe fruit, eat one and fly off. Sometimes they carry the seed away and drop it on free ground, planting a new seedling far from its parent: pest and seed spreader at once.
+- Day and night: at 1× a day lasts 2 seconds (10× and 100× for watching trees grow). Night (18:00–06:00) lays a deep blue over the farm; bats only feed at night and leave at dawn, farmers sleep at night. At high speed the night shade settles to a steady half-dark instead of flickering.
 - `AdminPanel.tsx` (press A or the admin button) has sliders for the rules and stage days and pickers for every colour. Changes apply at once; start trees and random seed apply on restart. Reset values restores `settings.ts`.
 - `page.tsx` only draws the farm and handles clicks. The random generator is seeded, so every run is the same.
 

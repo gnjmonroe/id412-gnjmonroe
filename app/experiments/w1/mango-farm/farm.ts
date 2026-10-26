@@ -263,9 +263,10 @@ export function graft(farm: Farm, parentId: number, x: number, y: number) {
 }
 
 // Advance the farm by a number of days.
+// Small steps (a tenth of a day at most) so night and day each take several steps.
 export function step(farm: Farm, days: number) {
 	while (days > 0) {
-		const dt = Math.min(1, days);
+		const dt = Math.min(0.1, days);
 		tick(farm, dt);
 		days -= dt;
 	}
@@ -404,7 +405,24 @@ function walk(farmer: Farmer, x: number, y: number, dt: number) {
 	return false;
 }
 
+// Time of day. A day starts at midnight: day 3.5 is noon on day 3.
+export function hourOf(farm: Farm) {
+	return (farm.day % 1) * 24;
+}
+
+// Darkness from 0 (noon) to 1 (midnight), rising and falling smoothly.
+export function darkness(farm: Farm) {
+	return (Math.cos((farm.day % 1) * Math.PI * 2) + 1) / 2;
+}
+
+// Night runs from 18:00 to 06:00.
+export function isNight(farm: Farm) {
+	const hour = hourOf(farm);
+	return hour < 6 || hour >= 18;
+}
+
 function workFarmer(farm: Farm, farmer: Farmer, dt: number) {
+	if (isNight(farm)) return; // farmers sleep at night and pick up where they left off
 	const tree = farm.trees.find((t) => t.id === farmer.treeId);
 	if (farmer.task === "idle") {
 		const target = pickTree(farm);
@@ -476,9 +494,12 @@ const hasRipe = (tree: Tree) =>
 
 function workBat(farm: Farm, bat: Bat, dt: number) {
 	const tree = farm.trees.find((t) => t.id === bat.treeId);
+	// Fruit bats feed at night. At dawn, any bat still on the farm heads home.
+	if (!isNight(farm) && (bat.task === "toTree" || bat.task === "eating"))
+		return leave(farm, bat);
 	if (bat.task === "away") {
 		bat.timer -= dt;
-		if (bat.timer > 0) return;
+		if (bat.timer > 0 || !isNight(farm)) return;
 		const ripe = farm.trees.filter(hasRipe);
 		if (ripe.length === 0) {
 			bat.timer = 1; // nothing to eat yet; look again tomorrow
@@ -548,6 +569,8 @@ export function stats(farm: Farm) {
 	}
 	return {
 		day: Math.floor(farm.day),
+		hour: Math.floor(hourOf(farm)),
+		night: isNight(farm),
 		trees,
 		varieties,
 		harvested: farm.harvested,
