@@ -56,10 +56,30 @@ export type Farmer = {
 	walked: number; // total distance walked, for drawing footsteps
 };
 
+// A fruit bat lives at a roost off the farm. It flies in to a tree with ripe fruit, eats one,
+// and flies off again. Sometimes it carries the seed away and drops it, which plants a new tree.
+// away → fly to a tree → eat → fly off (maybe dropping a seed) → away
+export type Bat = {
+	id: number;
+	x: number;
+	y: number;
+	task: "away" | "toTree" | "eating" | "leaving";
+	treeId?: number;
+	seedFrom?: Tree; // the tree whose seed it carries, if any
+	exitX: number; // where it leaves the farm
+	exitY: number;
+	timer: number; // days left eating or away
+	angle: number; // direction of flight, for drawing
+	flown: number; // distance flown since it started leaving
+	flaps: number; // total distance flown, for drawing the wing beat
+};
+
 export type Farm = {
 	day: number;
 	trees: Tree[];
 	farmers: Farmer[];
+	bats: Bat[];
+	batEaten: number; // fruit eaten by bats
 	harvested: number;
 	grafts: number; // grafts made by farmers
 	graftLog: { x: number; y: number; day: number }[]; // recent farmer grafts, for drawing
@@ -106,6 +126,8 @@ export function createFarm(): Farm {
 		day: 0,
 		trees: [],
 		farmers: [],
+		bats: [],
+		batEaten: 0,
 		harvested: 0,
 		grafts: 0,
 		graftLog: [],
@@ -138,6 +160,20 @@ export function createFarm(): Farm {
 			timer: 0,
 			angle: 0,
 			walked: 0,
+		});
+	}
+	for (let i = 0; i < settings.rules.bats; i++) {
+		farm.bats.push({
+			id: i + 1,
+			x: 0,
+			y: 0,
+			task: "away",
+			exitX: 0,
+			exitY: 0,
+			timer: random(farm) * settings.rules.batAwayDays, // so they don't all arrive at once
+			angle: 0,
+			flown: 0,
+			flaps: 0,
 		});
 	}
 	return farm;
@@ -239,6 +275,7 @@ function tick(farm: Farm, dt: number) {
 	farm.day += dt;
 	farm.graftLog = farm.graftLog.filter((entry) => farm.day - entry.day < 20);
 	for (const farmer of farm.farmers) workFarmer(farm, farmer, dt);
+	for (const bat of farm.bats) workBat(farm, bat, dt);
 	for (const tree of [...farm.trees]) {
 		growTree(tree, dt);
 		growFruits(farm, tree, dt);
@@ -406,6 +443,96 @@ function workFarmer(farm: Farm, farmer: Farmer, dt: number) {
 	}
 }
 
+// A random point just outside the farm, where bats come from and go to.
+function edgePoint(farm: Farm) {
+	const t = random(farm);
+	const side = Math.floor(random(farm) * 4);
+	if (side === 0) return { x: t * WIDTH, y: -40 };
+	if (side === 1) return { x: t * WIDTH, y: HEIGHT + 40 };
+	if (side === 2) return { x: -40, y: t * HEIGHT };
+	return { x: WIDTH + 40, y: t * HEIGHT };
+}
+
+// Move a bat toward a point. Returns true once there.
+function fly(bat: Bat, x: number, y: number, dt: number) {
+	const dx = x - bat.x;
+	const dy = y - bat.y;
+	const distance = Math.hypot(dx, dy);
+	const reach = settings.rules.batSpeed * dt;
+	if (distance > 0) bat.angle = Math.atan2(dy, dx);
+	bat.flaps += Math.min(distance, reach);
+	if (distance <= reach) {
+		bat.x = x;
+		bat.y = y;
+		return true;
+	}
+	bat.x += (dx / distance) * reach;
+	bat.y += (dy / distance) * reach;
+	return false;
+}
+
+const hasRipe = (tree: Tree) =>
+	tree.fruits.some((fruit) => fruit.stage === "ripe");
+
+function workBat(farm: Farm, bat: Bat, dt: number) {
+	const tree = farm.trees.find((t) => t.id === bat.treeId);
+	if (bat.task === "away") {
+		bat.timer -= dt;
+		if (bat.timer > 0) return;
+		const ripe = farm.trees.filter(hasRipe);
+		if (ripe.length === 0) {
+			bat.timer = 1; // nothing to eat yet; look again tomorrow
+			return;
+		}
+		const start = edgePoint(farm);
+		bat.x = start.x;
+		bat.y = start.y;
+		bat.treeId = ripe[Math.floor(random(farm) * ripe.length)].id;
+		bat.task = "toTree";
+	} else if (bat.task === "toTree") {
+		// The fruit may be picked, or the tree gone, before the bat gets there.
+		if (!tree || !hasRipe(tree)) {
+			const other = farm.trees.filter(hasRipe);
+			if (other.length === 0) return leave(farm, bat);
+			bat.treeId = other[Math.floor(random(farm) * other.length)].id;
+		} else if (fly(bat, tree.x, tree.y, dt)) {
+			bat.task = "eating";
+			bat.timer = settings.rules.batEatDays;
+		}
+	} else if (bat.task === "eating") {
+		bat.timer -= dt;
+		if (bat.timer > 0) return;
+		const fruit = tree?.fruits.find((f) => f.stage === "ripe");
+		if (tree && fruit) {
+			tree.fruits.splice(tree.fruits.indexOf(fruit), 1);
+			farm.batEaten++;
+			if (random(farm) < settings.rules.batSeedChance) bat.seedFrom = tree;
+		}
+		leave(farm, bat);
+	} else if (bat.task === "leaving") {
+		// Drop the seed once well away from the tree, on the first free ground it passes.
+		if (bat.seedFrom && bat.flown > settings.rules.minSpacing * 2) {
+			if (plant(farm, bat.x, bat.y, bat.seedFrom)) bat.seedFrom = undefined;
+		}
+		const before = bat.flaps;
+		const out = fly(bat, bat.exitX, bat.exitY, dt);
+		bat.flown += bat.flaps - before;
+		if (out) {
+			bat.task = "away";
+			bat.seedFrom = undefined; // a seed not dropped on the farm is lost
+			bat.timer = settings.rules.batAwayDays * (0.5 + random(farm));
+		}
+	}
+}
+
+function leave(farm: Farm, bat: Bat) {
+	const exit = edgePoint(farm);
+	bat.exitX = exit.x;
+	bat.exitY = exit.y;
+	bat.flown = 0;
+	bat.task = "leaving";
+}
+
 export function stats(farm: Farm) {
 	const trees = Object.fromEntries(STAGES.map((stage) => [stage, 0])) as Record<
 		Stage,
@@ -425,5 +552,6 @@ export function stats(farm: Farm) {
 		varieties,
 		harvested: farm.harvested,
 		grafts: farm.grafts,
+		batEaten: farm.batEaten,
 	};
 }

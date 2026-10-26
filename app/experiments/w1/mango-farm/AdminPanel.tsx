@@ -44,6 +44,43 @@ const SLIDERS: { title: string; items: Slider[] }[] = [
 		],
 	},
 	{
+		title: "Bats",
+		items: [
+			{
+				label: "flight speed",
+				group: rules,
+				key: "batSpeed",
+				min: 20,
+				max: 600,
+				step: 10,
+			},
+			{
+				label: "eat days",
+				group: rules,
+				key: "batEatDays",
+				min: 0.5,
+				max: 20,
+				step: 0.5,
+			},
+			{
+				label: "days away",
+				group: rules,
+				key: "batAwayDays",
+				min: 1,
+				max: 200,
+				step: 1,
+			},
+			{
+				label: "seed carry chance",
+				group: rules,
+				key: "batSeedChance",
+				min: 0,
+				max: 1,
+				step: 0.05,
+			},
+		],
+	},
+	{
 		title: "Farmers",
 		items: [
 			{
@@ -163,6 +200,7 @@ const SLIDERS: { title: string; items: Slider[] }[] = [
 	{
 		title: "On restart",
 		items: [
+			{ label: "bats", group: rules, key: "bats", min: 0, max: 20, step: 1 },
 			{
 				label: "farmers",
 				group: rules,

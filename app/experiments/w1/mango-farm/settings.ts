@@ -23,6 +23,11 @@ export const settings = {
 		promisingFruit: 8, // a seedling variety with at least this much fruit is worth grafting
 		startTrees: 4, // used when the farm restarts
 		farmers: 2, // used when the farm restarts
+		bats: 3, // used when the farm restarts
+		batSpeed: 250, // farm units a bat flies per day
+		batEatDays: 2, // days a bat spends eating one fruit
+		batAwayDays: 20, // days a bat stays at its roost between visits
+		batSeedChance: 0.2, // chance a bat carries the seed off and drops it somewhere new
 		seed: 412, // random seed, so every run is the same; used when the farm restarts
 	},
 	// Days a tree spends in each stage before moving to the next one.
@@ -103,6 +108,7 @@ export const settings = {
 		link: "#1d1d1b", // lines from a tree to its parent, and the selection ring
 		farmer: "#efece4",
 		hat: "#1d1d1b",
+		bat: "#5a2d82", // violet
 	},
 };
 

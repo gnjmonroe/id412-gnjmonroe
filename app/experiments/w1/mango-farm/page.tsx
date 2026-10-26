@@ -9,6 +9,7 @@ import {
 	stats,
 	traitsOf,
 	type Farm,
+	type Bat,
 	type Farmer,
 	type Tree,
 } from "./farm";
@@ -136,6 +137,43 @@ function drawFarmer(ctx: CanvasRenderingContext2D, farm: Farm, farmer: Farmer) {
 	}
 }
 
+// A fruit bat seen from above: a body with two wings that beat as it flies.
+// Eating: wings folded, perched on the tree, with the fruit it is eating.
+// Carrying a seed: a small dot of the fruit's colour held ahead of it.
+function drawBat(ctx: CanvasRenderingContext2D, farm: Farm, bat: Bat) {
+	if (bat.task === "away") return;
+	const tree = farm.trees.find((t) => t.id === bat.treeId);
+	ctx.save();
+	ctx.translate(bat.x, bat.y);
+	ctx.rotate(bat.angle);
+	ctx.fillStyle = settings.colors.bat;
+
+	// Wings: each a triangle from the body out to a tip that swings forward and back.
+	const span = bat.task === "eating" ? 5 : 13;
+	const beat = bat.task === "eating" ? 0 : Math.sin(bat.flaps * 0.3) * 5;
+	for (const side of [-1, 1]) {
+		ctx.beginPath();
+		ctx.moveTo(3, 0);
+		ctx.lineTo(beat - 2, side * span);
+		ctx.lineTo(beat * 0.5 - 1, side * span * 0.6); // notch in the trailing edge
+		ctx.lineTo(-5, side * span * 0.5);
+		ctx.lineTo(-3, 0);
+		ctx.fill();
+	}
+	ctx.beginPath();
+	ctx.ellipse(0, 0, 5, 2.5, 0, 0, Math.PI * 2);
+	ctx.fill();
+
+	const carrying = bat.task === "eating" ? tree : bat.seedFrom;
+	if (carrying) {
+		ctx.fillStyle = traitsOf(carrying).ripe;
+		ctx.beginPath();
+		ctx.arc(7, 0, 2.5, 0, Math.PI * 2);
+		ctx.fill();
+	}
+	ctx.restore();
+}
+
 // A fresh farmer graft: a pale disc that grows and fades over 20 days.
 function drawGraftPulses(ctx: CanvasRenderingContext2D, farm: Farm) {
 	for (const entry of farm.graftLog) {
@@ -206,6 +244,7 @@ function draw(
 	for (const tree of farm.trees) drawTree(ctx, tree);
 	ctx.globalCompositeOperation = "source-over";
 	for (const farmer of farm.farmers) drawFarmer(ctx, farm, farmer);
+	for (const bat of farm.bats) drawBat(ctx, farm, bat);
 
 	const selected = farm.trees.find((tree) => tree.id === selectedId);
 	if (selected) {
@@ -308,7 +347,7 @@ export default function MangoFarm() {
 			const s = stats(farm);
 			const t = s.trees;
 			setInfo(
-				`day ${s.day} · seeds ${t.seed} · seedlings ${t.seedling} · saplings ${t.sapling} · mature ${t.mature} · fruiting ${t.fruiting} · senescent ${t.senescent} · harvested ${s.harvested} · farmer grafts ${s.grafts} · farmers ${farm.farmers.map((f) => TASK_NAMES[f.task]).join(", ")}`,
+				`day ${s.day} · seeds ${t.seed} · seedlings ${t.seedling} · saplings ${t.sapling} · mature ${t.mature} · fruiting ${t.fruiting} · senescent ${t.senescent} · harvested ${s.harvested} · farmer grafts ${s.grafts} · eaten by bats ${s.batEaten} · farmers ${farm.farmers.map((f) => TASK_NAMES[f.task]).join(", ")}`,
 			);
 			setCounts(s.varieties);
 			const selected = farm.trees.find(
