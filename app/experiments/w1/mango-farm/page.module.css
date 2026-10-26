@@ -104,12 +104,9 @@
 	gap: 12px;
 }
 
-.legend i {
-	display: inline-block;
-	width: 10px;
-	height: 10px;
+.legend svg {
+	width: 14px;
+	height: 14px;
 	margin-right: 4px;
-	border: 2px solid;
-	border-radius: 50%;
-	vertical-align: -2px;
+	vertical-align: -3px;
 }

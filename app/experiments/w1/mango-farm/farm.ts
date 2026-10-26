@@ -130,7 +130,7 @@ function seedlingTraits(farm: Farm, mother: Traits): Traits {
 		alternate: random(farm) < 0.5 ? 1 : 0,
 		trueSeed: 0,
 		lobes: Math.max(0, mother.lobes + Math.round((random(farm) - 0.5) * 4)),
-		leaf: shiftColor(farm, mother.leaf, 30),
+		leaf: shiftColor(farm, mother.leaf, 60),
 		ripe: shiftColor(farm, mother.ripe, 70),
 	};
 }

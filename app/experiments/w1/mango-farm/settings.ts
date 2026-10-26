@@ -33,7 +33,7 @@ export const settings = {
 	//   fruit: fruit per season          growth: how fast it ages (1 = normal)
 	//   ripenDays: green → ripe          alternate: 1 = heavy and light years take turns
 	//   trueSeed: 1 = its seeds grow the same variety (polyembryonic), 0 = each seed is a new seedling variety
-	//   lobes: canopy outline (0 = round)   leaf, ripe: canopy and ripe fruit colour
+	//   lobes: canopy outline (0 = round)   leaf: canopy fill colour   ripe: ripe fruit colour
 	varieties: {
 		Keitt: {
 			fruit: 4,
@@ -42,7 +42,7 @@ export const settings = {
 			alternate: 0,
 			trueSeed: 0,
 			lobes: 0,
-			leaf: "#2f7d32",
+			leaf: "#2e7d32",
 			ripe: "#a4d65e",
 		},
 		Kent: {
@@ -52,7 +52,7 @@ export const settings = {
 			alternate: 0,
 			trueSeed: 0,
 			lobes: 5,
-			leaf: "#3d8c3a",
+			leaf: "#7a8f1f",
 			ripe: "#d9482b",
 		},
 		Alphonso: {
@@ -62,7 +62,7 @@ export const settings = {
 			alternate: 1,
 			trueSeed: 0,
 			lobes: 9,
-			leaf: "#22603a",
+			leaf: "#13665e",
 			ripe: "#f29d0c",
 		},
 		Ataulfo: {
@@ -72,7 +72,7 @@ export const settings = {
 			alternate: 0,
 			trueSeed: 1,
 			lobes: 3,
-			leaf: "#4f9a3c",
+			leaf: "#a8c43a",
 			ripe: "#f7d21e",
 		},
 		Carabao: {
@@ -82,7 +82,7 @@ export const settings = {
 			alternate: 0,
 			trueSeed: 1,
 			lobes: 6,
-			leaf: "#5d8a2a",
+			leaf: "#14402a",
 			ripe: "#ffe98a",
 		},
 	},

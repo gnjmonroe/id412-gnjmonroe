@@ -28,25 +28,16 @@ const RADIUS = {
 	senescent: 18,
 };
 
-// Canopy outline: a circle, or a wavy shape with `lobes` bumps.
-function canopy(
-	ctx: CanvasRenderingContext2D,
-	x: number,
-	y: number,
-	r: number,
-	lobes: number,
-) {
-	ctx.beginPath();
-	if (lobes < 1) {
-		ctx.arc(x, y, r, 0, Math.PI * 2);
-		return;
+// Canopy outline as an SVG path: a circle, or a wavy shape with `lobes` bumps.
+// The canvas draws it with Path2D and the legend draws it with <svg>, so both look the same.
+function canopyPath(x: number, y: number, r: number, lobes: number) {
+	let path = "";
+	for (let i = 0; i < 72; i++) {
+		const angle = (i / 72) * Math.PI * 2;
+		const radius = lobes < 1 ? r : r * (0.8 + 0.2 * Math.cos(angle * lobes));
+		path += `${i === 0 ? "M" : "L"}${(x + Math.cos(angle) * radius).toFixed(2)} ${(y + Math.sin(angle) * radius).toFixed(2)}`;
 	}
-	for (let i = 0; i <= 60; i++) {
-		const angle = (i / 60) * Math.PI * 2;
-		const radius = r * (0.85 + 0.15 * Math.cos(angle * lobes));
-		ctx.lineTo(x + Math.cos(angle) * radius, y + Math.sin(angle) * radius);
-	}
-	ctx.closePath();
+	return path + "Z";
 }
 
 function drawTree(ctx: CanvasRenderingContext2D, tree: Tree) {
@@ -61,12 +52,7 @@ function drawTree(ctx: CanvasRenderingContext2D, tree: Tree) {
 		return;
 	}
 	ctx.fillStyle = tree.stage === "senescent" ? colors.oldLeaf : variety.leaf;
-	canopy(ctx, tree.x, tree.y, r, variety.lobes);
-	ctx.fill();
-	// A ring in the ripe colour shows the variety even when the tree has no fruit.
-	ctx.strokeStyle = variety.ripe;
-	ctx.lineWidth = 1.5;
-	ctx.stroke();
+	ctx.fill(new Path2D(canopyPath(tree.x, tree.y, r, variety.lobes)));
 
 	tree.fruits.forEach((fruit, i) => {
 		const angle = (i / tree.fruits.length) * Math.PI * 2;
@@ -240,23 +226,19 @@ export default function MangoFarm() {
 				<div className={styles.legend}>
 					{VARIETIES.map((name) => (
 						<span key={name}>
-							<i
-								style={{
-									background: settings.varieties[name].leaf,
-									borderColor: settings.varieties[name].ripe,
-								}}
-							/>
+							<svg viewBox="-8 -8 16 16">
+								<path
+									d={canopyPath(0, 0, 8, settings.varieties[name].lobes)}
+									fill={settings.varieties[name].leaf}
+								/>
+							</svg>
 							{name} {counts[name] ?? 0}
 						</span>
 					))}
 					<span>
-						<i
-							style={{
-								background: "transparent",
-								borderColor: "white",
-								borderStyle: "dashed",
-							}}
-						/>
+						<svg viewBox="-8 -8 16 16">
+							<path d={canopyPath(0, 0, 8, 4)} fill="#9e9e9e" />
+						</svg>
 						seedlings {counts.seedlings ?? 0}
 					</span>
 				</div>
