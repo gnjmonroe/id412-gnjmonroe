@@ -1,5 +1,12 @@
 // The mango farm as plain data. No React, no canvas: page.tsx only reads this and draws it.
-import { HEIGHT, settings, VARIETIES, WIDTH, type Variety } from "./settings";
+import {
+	HEIGHT,
+	settings,
+	VARIETIES,
+	WIDTH,
+	type Traits,
+	type Variety,
+} from "./settings";
 
 // Life of a tree, in order. A senescent tree is removed when its time is up.
 export const STAGES = [
@@ -26,7 +33,8 @@ export type Tree = {
 	age: number; // days spent in this stage
 	origin: "start" | "seed" | "graft"; // how this tree began
 	parentId?: number;
-	variety: Variety;
+	variety: string; // a named variety, or "seedling #id" for a new one grown from seed
+	traits?: Traits; // only seedling varieties carry their own traits; named ones use settings
 	vigor: number; // this tree's own growth speed, on top of its variety's
 	rest: number; // days since the last fruit season
 	seasons: number; // fruit seasons so far
@@ -105,8 +113,44 @@ function randomVariety(farm: Farm) {
 	return VARIETIES[Math.floor(random(farm) * VARIETIES.length)];
 }
 
+// The traits a tree grows by: its own if it is a seedling variety, otherwise its named variety's.
+export function traitsOf(tree: Tree): Traits {
+	return tree.traits ?? settings.varieties[tree.variety as Variety];
+}
+
+// A new seedling variety: the mother's traits, each nudged by chance. Like real mango seedlings,
+// most yield a little less than their mother, and a few turn out better.
+function seedlingTraits(farm: Farm, mother: Traits): Traits {
+	const v = settings.rules.seedlingVariation;
+	const nudge = (value: number) => value * (1 + (random(farm) - 0.5) * 2 * v);
+	return {
+		fruit: Math.max(1, Math.round(nudge(mother.fruit) * 0.85)),
+		growth: Math.max(0.3, Number(nudge(mother.growth).toFixed(2))),
+		ripenDays: Math.max(10, Math.round(nudge(mother.ripenDays))),
+		alternate: random(farm) < 0.5 ? 1 : 0,
+		trueSeed: 0,
+		lobes: Math.max(0, mother.lobes + Math.round((random(farm) - 0.5) * 4)),
+		leaf: shiftColor(farm, mother.leaf, 30),
+		ripe: shiftColor(farm, mother.ripe, 70),
+	};
+}
+
+// Move each of a "#rrggbb" colour's channels by up to `amount`.
+function shiftColor(farm: Farm, hex: string, amount: number) {
+	let out = "#";
+	for (let i = 1; i < 7; i += 2) {
+		const channel =
+			parseInt(hex.slice(i, i + 2), 16) + (random(farm) - 0.5) * 2 * amount;
+		out += Math.round(Math.min(255, Math.max(0, channel)))
+			.toString(16)
+			.padStart(2, "0");
+	}
+	return out;
+}
+
 // Propagation by seed: a new tree starts as a seed, with a vigor a little different from its parent.
-// A true-seed variety grows the same variety; any other seed may become any variety and varies twice as much.
+// A true-seed (polyembryonic) variety mostly grows a copy of itself. Any other seed, and the odd
+// off-type true seed, grows a new seedling variety of its own.
 export function plant(farm: Farm, x: number, y: number, parent?: Tree) {
 	if (!isFree(farm, x, y)) return null;
 	if (!parent)
@@ -114,13 +158,23 @@ export function plant(farm: Farm, x: number, y: number, parent?: Tree) {
 			origin: "seed",
 			variety: randomVariety(farm),
 		});
-	const trueSeed = settings.varieties[parent.variety].trueSeed === 1;
-	const jitter = settings.rules.vigorJitter * (trueSeed ? 1 : 2);
+	const mother = traitsOf(parent);
+	if (mother.trueSeed === 1 && random(farm) >= settings.rules.offTypeChance) {
+		const jitter = settings.rules.vigorJitter;
+		return addTree(farm, x, y, {
+			origin: "seed",
+			parentId: parent.id,
+			variety: parent.variety,
+			traits: parent.traits,
+			vigor: Math.max(0.5, parent.vigor + (random(farm) - 0.5) * 2 * jitter),
+		});
+	}
+	const id = farm.nextId;
 	return addTree(farm, x, y, {
 		origin: "seed",
 		parentId: parent.id,
-		variety: trueSeed ? parent.variety : randomVariety(farm),
-		vigor: Math.max(0.5, parent.vigor + (random(farm) - 0.5) * 2 * jitter),
+		variety: `seedling #${id}`,
+		traits: seedlingTraits(farm, mother),
 	});
 }
 
@@ -133,6 +187,7 @@ export function graft(farm: Farm, parentId: number, x: number, y: number) {
 		origin: "graft",
 		parentId,
 		variety: parent.variety,
+		traits: parent.traits, // a graft is a clone, so a seedling variety spreads unchanged
 		vigor: parent.vigor,
 	});
 }
@@ -161,7 +216,7 @@ function tick(farm: Farm, dt: number) {
 }
 
 function growTree(tree: Tree, dt: number) {
-	tree.age += dt * tree.vigor * settings.varieties[tree.variety].growth;
+	tree.age += dt * tree.vigor * traitsOf(tree).growth;
 	const next = STAGES[STAGES.indexOf(tree.stage) + 1];
 	if (next && tree.age >= settings.stageDays[tree.stage]) {
 		tree.stage = next;
@@ -170,7 +225,7 @@ function growTree(tree: Tree, dt: number) {
 }
 
 function growFruits(farm: Farm, tree: Tree, dt: number) {
-	const variety = settings.varieties[tree.variety];
+	const variety = traitsOf(tree);
 	if (tree.stage === "fruiting" && tree.fruits.length === 0) {
 		tree.rest += dt;
 		if (tree.rest >= settings.rules.restDays) {
@@ -230,10 +285,11 @@ export function stats(farm: Farm) {
 	>;
 	const varieties = Object.fromEntries(
 		VARIETIES.map((name) => [name, 0]),
-	) as Record<Variety, number>;
+	) as Record<string, number>;
+	varieties.seedlings = 0;
 	for (const tree of farm.trees) {
 		trees[tree.stage]++;
-		varieties[tree.variety]++;
+		varieties[tree.traits ? "seedlings" : tree.variety]++;
 	}
 	return {
 		day: Math.floor(farm.day),

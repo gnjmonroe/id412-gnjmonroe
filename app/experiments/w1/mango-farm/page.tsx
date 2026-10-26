@@ -7,6 +7,7 @@ import {
 	plant,
 	step,
 	stats,
+	traitsOf,
 	type Farm,
 	type Tree,
 } from "./farm";
@@ -51,7 +52,7 @@ function canopy(
 function drawTree(ctx: CanvasRenderingContext2D, tree: Tree) {
 	const r = RADIUS[tree.stage];
 	const { colors } = settings;
-	const variety = settings.varieties[tree.variety];
+	const variety = traitsOf(tree);
 	if (tree.stage === "seed") {
 		ctx.fillStyle = colors.seed;
 		ctx.beginPath();
@@ -126,6 +127,7 @@ export default function MangoFarm() {
 	const [paused, setPaused] = useState(false);
 	const [info, setInfo] = useState("");
 	const [counts, setCounts] = useState<Record<string, number>>({});
+	const [selectedInfo, setSelectedInfo] = useState("");
 	const [adminOpen, setAdminOpen] = useState(false);
 
 	// Press A to show or hide the admin panel.
@@ -209,6 +211,15 @@ export default function MangoFarm() {
 				`day ${s.day} · seeds ${t.seed} · seedlings ${t.seedling} · saplings ${t.sapling} · mature ${t.mature} · fruiting ${t.fruiting} · senescent ${t.senescent} · harvested ${s.harvested}`,
 			);
 			setCounts(s.varieties);
+			const selected = farm.trees.find(
+				(tree) => tree.id === selectedRef.current,
+			);
+			const traits = selected && traitsOf(selected);
+			setSelectedInfo(
+				selected && traits
+					? `selected: ${selected.variety} · fruit ${traits.fruit} · growth ${traits.growth} · ripen ${traits.ripenDays} d · ${traits.alternate ? "alternate bearing" : "steady"} · ${traits.trueSeed ? "true seed" : "seeds vary"}`
+					: "",
+			);
 			frame = requestAnimationFrame(loop);
 		}
 		frame = requestAnimationFrame(loop);
@@ -224,6 +235,7 @@ export default function MangoFarm() {
 		<main className={styles.container}>
 			<canvas ref={canvasRef} className={styles.canvas} />
 			<div className={styles.panel}>
+				{selectedInfo && <div>{selectedInfo}</div>}
 				<div>{info}</div>
 				<div className={styles.legend}>
 					{VARIETIES.map((name) => (
@@ -237,6 +249,16 @@ export default function MangoFarm() {
 							{name} {counts[name] ?? 0}
 						</span>
 					))}
+					<span>
+						<i
+							style={{
+								background: "transparent",
+								borderColor: "white",
+								borderStyle: "dashed",
+							}}
+						/>
+						seedlings {counts.seedlings ?? 0}
+					</span>
 				</div>
 				<div className={styles.controls}>
 					<button

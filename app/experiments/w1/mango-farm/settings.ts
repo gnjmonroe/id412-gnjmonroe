@@ -13,7 +13,9 @@ export const settings = {
 		harvestShare: 0.8, // share of ripe fruit that is picked; the rest falls
 		seedChance: 0.3, // chance that a fallen fruit grows a new seed
 		seedDistance: 70, // how far a fallen seed may land from its parent
-		vigorJitter: 0.2, // how much a seed tree can differ from its parent (vigor 1 = normal)
+		vigorJitter: 0.2, // how much a true seed tree can differ from its parent (vigor 1 = normal)
+		seedlingVariation: 0.4, // how far a new seedling variety's traits may stray from its mother
+		offTypeChance: 0.1, // chance that a true-seed variety still grows a new seedling variety
 		daysPerSecond: 20, // normal speed
 		startTrees: 4, // used when the farm restarts
 		seed: 412, // random seed, so every run is the same; used when the farm restarts
@@ -30,7 +32,7 @@ export const settings = {
 	// Mango varieties. Each one grows, fruits and spreads differently, and looks different.
 	//   fruit: fruit per season          growth: how fast it ages (1 = normal)
 	//   ripenDays: green → ripe          alternate: 1 = heavy and light years take turns
-	//   trueSeed: 1 = its seeds grow the same variety (polyembryonic), 0 = a seedling may be any variety
+	//   trueSeed: 1 = its seeds grow the same variety (polyembryonic), 0 = each seed is a new seedling variety
 	//   lobes: canopy outline (0 = round)   leaf, ripe: canopy and ripe fruit colour
 	varieties: {
 		Keitt: {
@@ -96,6 +98,7 @@ export const settings = {
 };
 
 export type Variety = keyof typeof settings.varieties;
+export type Traits = (typeof settings.varieties)[Variety];
 export const VARIETIES = Object.keys(settings.varieties) as Variety[];
 
 const defaults = structuredClone(settings);
