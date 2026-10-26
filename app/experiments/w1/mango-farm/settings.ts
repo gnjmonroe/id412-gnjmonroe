@@ -17,7 +17,11 @@ export const settings = {
 		seedlingVariation: 0.4, // how far a new seedling variety's traits may stray from its mother
 		offTypeChance: 0.1, // chance that a true-seed variety still grows a new seedling variety
 		daysPerSecond: 20, // normal speed
+		farmerSpeed: 60, // farm units a farmer walks per day
+		graftDays: 5, // days a farmer spends taking a cutting
+		farmerRestDays: 30, // days a farmer rests after each graft
 		startTrees: 4, // used when the farm restarts
+		farmers: 2, // used when the farm restarts
 		seed: 412, // random seed, so every run is the same; used when the farm restarts
 	},
 	// Days a tree spends in each stage before moving to the next one.
@@ -94,6 +98,8 @@ export const settings = {
 		green: "#9bc53d",
 		fallen: "#8a5a2b",
 		link: "#ffffff", // lines from a tree to its parent
+		farmer: "#f4d9a6",
+		hat: "#d8b04a",
 	},
 };
 

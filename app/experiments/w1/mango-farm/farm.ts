@@ -41,10 +41,25 @@ export type Tree = {
 	fruits: Fruit[];
 };
 
+// A farmer keeps the non-true-seed varieties alive by grafting them, since their seeds won't.
+// idle → walk to a grown tree → take a cutting → walk to free ground → graft a sapling → rest → idle
+export type Farmer = {
+	id: number;
+	x: number;
+	y: number;
+	task: "idle" | "toTree" | "cutting" | "toSpot" | "resting";
+	treeId?: number; // the tree the cutting comes from
+	spotX: number; // where the graft will go
+	spotY: number;
+	timer: number; // days left cutting or resting
+};
+
 export type Farm = {
 	day: number;
 	trees: Tree[];
+	farmers: Farmer[];
 	harvested: number;
+	grafts: number; // grafts made by farmers
 	nextId: number;
 	random: number; // state of the random number generator
 };
@@ -87,7 +102,9 @@ export function createFarm(): Farm {
 	const farm: Farm = {
 		day: 0,
 		trees: [],
+		farmers: [],
 		harvested: 0,
+		grafts: 0,
 		nextId: 1,
 		random: settings.rules.seed,
 	};
@@ -104,6 +121,17 @@ export function createFarm(): Farm {
 			stage: "mature",
 			origin: "start",
 			variety: VARIETIES[farm.trees.length % VARIETIES.length],
+		});
+	}
+	for (let i = 0; i < settings.rules.farmers; i++) {
+		farm.farmers.push({
+			id: i + 1,
+			x: random(farm) * WIDTH,
+			y: random(farm) * HEIGHT,
+			task: "idle",
+			spotX: 0,
+			spotY: 0,
+			timer: 0,
 		});
 	}
 	return farm;
@@ -203,6 +231,7 @@ export function step(farm: Farm, days: number) {
 
 function tick(farm: Farm, dt: number) {
 	farm.day += dt;
+	for (const farmer of farm.farmers) workFarmer(farm, farmer, dt);
 	for (const tree of [...farm.trees]) {
 		growTree(tree, dt);
 		growFruits(farm, tree, dt);
@@ -278,6 +307,89 @@ function growFruits(farm: Farm, tree: Tree, dt: number) {
 	}
 }
 
+// Farmers work on named varieties that don't breed true (trueSeed 0), rarest variety first,
+// so the ones closest to dying out get grafted before the common ones.
+function pickTree(farm: Farm) {
+	const grown = farm.trees.filter(
+		(tree) =>
+			!tree.traits &&
+			settings.varieties[tree.variety as Variety].trueSeed === 0 &&
+			(tree.stage === "mature" || tree.stage === "fruiting"),
+	);
+	if (grown.length === 0) return undefined;
+	const count = (name: string) =>
+		farm.trees.filter((tree) => tree.variety === name).length;
+	const fewest = Math.min(...grown.map((tree) => count(tree.variety)));
+	const rarest = grown.filter((tree) => count(tree.variety) === fewest);
+	return rarest[Math.floor(random(farm) * rarest.length)];
+}
+
+// Look for free ground near a tree, at most 20 tries.
+function findSpot(farm: Farm, tree: Tree) {
+	for (let i = 0; i < 20; i++) {
+		const angle = random(farm) * Math.PI * 2;
+		const distance =
+			settings.rules.minSpacing + random(farm) * settings.rules.seedDistance;
+		const x = tree.x + Math.cos(angle) * distance;
+		const y = tree.y + Math.sin(angle) * distance;
+		if (isFree(farm, x, y)) return { x, y };
+	}
+	return undefined;
+}
+
+// Move a farmer toward a point. Returns true once there.
+function walk(farmer: Farmer, x: number, y: number, dt: number) {
+	const dx = x - farmer.x;
+	const dy = y - farmer.y;
+	const distance = Math.hypot(dx, dy);
+	const reach = settings.rules.farmerSpeed * dt;
+	if (distance <= reach) {
+		farmer.x = x;
+		farmer.y = y;
+		return true;
+	}
+	farmer.x += (dx / distance) * reach;
+	farmer.y += (dy / distance) * reach;
+	return false;
+}
+
+function workFarmer(farm: Farm, farmer: Farmer, dt: number) {
+	const tree = farm.trees.find((t) => t.id === farmer.treeId);
+	if (farmer.task === "idle") {
+		const target = pickTree(farm);
+		const spot = target && findSpot(farm, target);
+		if (target && spot) {
+			farmer.task = "toTree";
+			farmer.treeId = target.id;
+			farmer.spotX = spot.x;
+			farmer.spotY = spot.y;
+		}
+	} else if (farmer.task === "toTree") {
+		if (!tree) farmer.task = "idle"; // the tree died on the way
+		else if (walk(farmer, tree.x, tree.y, dt)) {
+			farmer.task = "cutting";
+			farmer.timer = settings.rules.graftDays;
+		}
+	} else if (farmer.task === "cutting") {
+		farmer.timer -= dt;
+		if (farmer.timer <= 0) farmer.task = "toSpot";
+	} else if (farmer.task === "toSpot") {
+		if (walk(farmer, farmer.spotX, farmer.spotY, dt)) {
+			// The spot may have filled up meanwhile; then the cutting is lost.
+			if (
+				farmer.treeId &&
+				graft(farm, farmer.treeId, farmer.spotX, farmer.spotY)
+			)
+				farm.grafts++;
+			farmer.task = "resting";
+			farmer.timer = settings.rules.farmerRestDays;
+		}
+	} else if (farmer.task === "resting") {
+		farmer.timer -= dt;
+		if (farmer.timer <= 0) farmer.task = "idle";
+	}
+}
+
 export function stats(farm: Farm) {
 	const trees = Object.fromEntries(STAGES.map((stage) => [stage, 0])) as Record<
 		Stage,
@@ -296,5 +408,6 @@ export function stats(farm: Farm) {
 		trees,
 		varieties,
 		harvested: farm.harvested,
+		grafts: farm.grafts,
 	};
 }

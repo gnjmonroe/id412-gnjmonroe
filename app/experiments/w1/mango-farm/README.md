@@ -4,7 +4,7 @@ A top-down mango farm that runs by itself: seeds sprout, trees grow, flower, fru
 
 - Route: /experiments/w1/mango-farm
 - Week: W1 · Tech: Canvas
-- Inputs: time, mouse clicks (plant, graft), play/pause and speed buttons, admin panel (A key)
+- Inputs: time, farmers, mouse clicks (plant, graft), play/pause and speed buttons, admin panel (A key)
 - Parameters: stage lengths, fruit per tree, harvest share, seed chance, spacing (all in `settings.ts`, editable live in the admin panel)
 
 ## How it works
@@ -13,6 +13,7 @@ A top-down mango farm that runs by itself: seeds sprout, trees grow, flower, fru
 - `step(farm, days)` ages every tree and fruit. Ripe fruit is mostly harvested (counted), the rest falls and may grow a new seed nearby.
 - Five varieties (Keitt, Kent, Alphonso, Ataulfo, Carabao) in `settings.varieties`, each with its own fruit count, growth speed, ripening time, alternate bearing and seed type. True-seed (polyembryonic) varieties mostly breed true. Any other seed grows a new one-off "seedling #id" variety with its mother's traits nudged by chance (usually a bit worse) and its own colours; grafting copies it exactly. Click a grown tree to see its traits. Each is told apart by canopy shape and fill colour only; the legend shows counts.
 - Propagation: by seed (random vigor, starts as a seed) or by graft (exact copy, starts as a sapling). Dashed line = graft, solid = seed.
+- Farmers (hat seen from above) keep Keitt, Kent and Alphonso alive: each picks a grown tree of the rarest of them, walks over, takes a cutting, walks to free ground nearby and grafts a sapling, then rests. Without farmers those three die out.
 - `AdminPanel.tsx` (press A or the admin button) has sliders for the rules and stage days and pickers for every colour. Changes apply at once; start trees and random seed apply on restart. Reset values restores `settings.ts`.
 - `page.tsx` only draws the farm and handles clicks. The random generator is seeded, so every run is the same.
 

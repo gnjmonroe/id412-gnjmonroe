@@ -44,6 +44,35 @@ const SLIDERS: { title: string; items: Slider[] }[] = [
 		],
 	},
 	{
+		title: "Farmers",
+		items: [
+			{
+				label: "walk speed",
+				group: rules,
+				key: "farmerSpeed",
+				min: 5,
+				max: 300,
+				step: 5,
+			},
+			{
+				label: "graft days",
+				group: rules,
+				key: "graftDays",
+				min: 1,
+				max: 60,
+				step: 1,
+			},
+			{
+				label: "farmer rest days",
+				group: rules,
+				key: "farmerRestDays",
+				min: 0,
+				max: 200,
+				step: 5,
+			},
+		],
+	},
+	{
 		title: "Fruit and propagation",
 		items: [
 			{
@@ -126,6 +155,14 @@ const SLIDERS: { title: string; items: Slider[] }[] = [
 	{
 		title: "On restart",
 		items: [
+			{
+				label: "farmers",
+				group: rules,
+				key: "farmers",
+				min: 0,
+				max: 10,
+				step: 1,
+			},
 			{
 				label: "start trees",
 				group: rules,

@@ -9,6 +9,7 @@ import {
 	stats,
 	traitsOf,
 	type Farm,
+	type Farmer,
 	type Tree,
 } from "./farm";
 import styles from "./page.module.css";
@@ -38,6 +39,22 @@ function canopyPath(x: number, y: number, r: number, lobes: number) {
 		path += `${i === 0 ? "M" : "L"}${(x + Math.cos(angle) * radius).toFixed(2)} ${(y + Math.sin(angle) * radius).toFixed(2)}`;
 	}
 	return path + "Z";
+}
+
+// A farmer seen from above: a wide hat around a small head. Carries a green cutting when it has one.
+function drawFarmer(ctx: CanvasRenderingContext2D, farmer: Farmer) {
+	ctx.fillStyle = settings.colors.hat;
+	ctx.beginPath();
+	ctx.arc(farmer.x, farmer.y, 7, 0, Math.PI * 2);
+	ctx.fill();
+	ctx.fillStyle = settings.colors.farmer;
+	ctx.beginPath();
+	ctx.arc(farmer.x, farmer.y, 3.5, 0, Math.PI * 2);
+	ctx.fill();
+	if (farmer.task === "toSpot") {
+		ctx.fillStyle = settings.colors.green;
+		ctx.fillRect(farmer.x + 6, farmer.y - 2, 6, 4);
+	}
 }
 
 function drawTree(ctx: CanvasRenderingContext2D, tree: Tree) {
@@ -92,6 +109,7 @@ function draw(
 	ctx.setLineDash([]);
 
 	for (const tree of farm.trees) drawTree(ctx, tree);
+	for (const farmer of farm.farmers) drawFarmer(ctx, farmer);
 
 	const selected = farm.trees.find((tree) => tree.id === selectedId);
 	if (selected) {
@@ -194,7 +212,7 @@ export default function MangoFarm() {
 			const s = stats(farm);
 			const t = s.trees;
 			setInfo(
-				`day ${s.day} · seeds ${t.seed} · seedlings ${t.seedling} · saplings ${t.sapling} · mature ${t.mature} · fruiting ${t.fruiting} · senescent ${t.senescent} · harvested ${s.harvested}`,
+				`day ${s.day} · seeds ${t.seed} · seedlings ${t.seedling} · saplings ${t.sapling} · mature ${t.mature} · fruiting ${t.fruiting} · senescent ${t.senescent} · harvested ${s.harvested} · farmer grafts ${s.grafts}`,
 			);
 			setCounts(s.varieties);
 			const selected = farm.trees.find(
