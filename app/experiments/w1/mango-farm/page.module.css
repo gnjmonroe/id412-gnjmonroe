@@ -21,13 +21,6 @@
 	font-family: ui-monospace, Menlo, monospace;
 	font-size: 12px;
 	color: #1d1d1b;
-	padding: 8px 10px;
-	background: rgba(
-		239,
-		236,
-		228,
-		0.9
-	); /* paper, so the text stays readable at night */
 }
 
 .controls {

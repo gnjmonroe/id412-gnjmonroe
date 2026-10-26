@@ -7,8 +7,6 @@ import {
 	plant,
 	step,
 	stats,
-	darkness,
-	isNight,
 	traitsOf,
 	type Farm,
 	type Bat,
@@ -22,7 +20,7 @@ import { HEIGHT, settings, VARIETIES, WIDTH } from "./settings";
 // The mango farm from farm.ts, drawn top-down on a canvas.
 // Click empty ground to plant a seed. Click a grown tree, then empty ground, to graft a copy.
 
-const SPEEDS = [1, 10, 100]; // 1× = a day every 2 seconds; 100× = 50 days a second
+const SPEEDS = [1, 4, 16];
 const TASK_NAMES = {
 	idle: "looking",
 	toTree: "walking to tree",
@@ -89,7 +87,7 @@ function drawFarmer(ctx: CanvasRenderingContext2D, farm: Farm, farmer: Farmer) {
 	ctx.save();
 	ctx.translate(farmer.x, farmer.y);
 	ctx.rotate(farmer.angle);
-	if (farmer.task === "resting" || isNight(farm)) ctx.globalAlpha = 0.5;
+	if (farmer.task === "resting") ctx.globalAlpha = 0.5;
 
 	// Feet: one ahead, one behind, swapping every few steps while walking.
 	const stride = walking ? Math.sin(farmer.walked * 0.5) * 5 : 0;
@@ -176,18 +174,6 @@ function drawBat(ctx: CanvasRenderingContext2D, farm: Farm, bat: Bat) {
 	ctx.restore();
 }
 
-// Night: a deep blue laid over the farm (multiply, like another ink). When time runs so fast that
-// days would flicker, `blur` (0 to 1) blends toward a steady half-dark, like a long exposure.
-function drawNight(ctx: CanvasRenderingContext2D, farm: Farm, blur: number) {
-	const dark = darkness(farm) * (1 - blur) + 0.5 * blur;
-	ctx.save();
-	ctx.setTransform(1, 0, 0, 1, 0, 0);
-	ctx.globalAlpha = dark * 0.75;
-	ctx.fillStyle = settings.colors.night;
-	ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-	ctx.restore();
-}
-
 // A fresh farmer graft: a pale disc that grows and fades over 20 days.
 function drawGraftPulses(ctx: CanvasRenderingContext2D, farm: Farm) {
 	for (const entry of farm.graftLog) {
@@ -235,7 +221,6 @@ function draw(
 	ctx: CanvasRenderingContext2D,
 	farm: Farm,
 	selectedId: number | null,
-	blur: number,
 ) {
 	// Lines from each tree to the tree it came from: solid for seed, dashed for graft.
 	ctx.lineWidth = 1;
@@ -257,7 +242,6 @@ function draw(
 	ctx.globalCompositeOperation = "multiply";
 	drawGraftPulses(ctx, farm);
 	for (const tree of farm.trees) drawTree(ctx, tree);
-	drawNight(ctx, farm, blur);
 	ctx.globalCompositeOperation = "source-over";
 	for (const farmer of farm.farmers) drawFarmer(ctx, farm, farmer);
 	for (const bat of farm.bats) drawBat(ctx, farm, bat);
@@ -358,14 +342,12 @@ export default function MangoFarm() {
 			ctx!.fillStyle = settings.colors.soil;
 			ctx?.fillRect(0, 0, canvas!.width, canvas!.height);
 			ctx?.restore();
-			const daysPerSecond = settings.rules.daysPerSecond * speedRef.current;
-			const blur = Math.min(1, Math.max(0, (daysPerSecond - 1) / 3));
-			draw(ctx!, farm, selectedRef.current, blur);
+			draw(ctx!, farm, selectedRef.current);
 
 			const s = stats(farm);
 			const t = s.trees;
 			setInfo(
-				`day ${s.day} ${String(s.hour).padStart(2, "0")}:00 ${s.night ? "night" : "day"} · seeds ${t.seed} · seedlings ${t.seedling} · saplings ${t.sapling} · mature ${t.mature} · fruiting ${t.fruiting} · senescent ${t.senescent} · harvested ${s.harvested} · farmer grafts ${s.grafts} · eaten by bats ${s.batEaten} · farmers ${farm.farmers.map((f) => TASK_NAMES[f.task]).join(", ")}`,
+				`day ${s.day} · seeds ${t.seed} · seedlings ${t.seedling} · saplings ${t.sapling} · mature ${t.mature} · fruiting ${t.fruiting} · senescent ${t.senescent} · harvested ${s.harvested} · farmer grafts ${s.grafts} · eaten by bats ${s.batEaten} · farmers ${farm.farmers.map((f) => TASK_NAMES[f.task]).join(", ")}`,
 			);
 			setCounts(s.varieties);
 			const selected = farm.trees.find(
