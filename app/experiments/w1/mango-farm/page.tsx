@@ -11,7 +11,8 @@ import {
 	type Tree,
 } from "./farm";
 import styles from "./page.module.css";
-import { CULTIVARS, DAYS_PER_SECOND, HEIGHT, WIDTH } from "./settings";
+import { AdminPanel } from "./AdminPanel";
+import { HEIGHT, settings, WIDTH } from "./settings";
 
 // The mango farm from farm.ts, drawn top-down on a canvas.
 // Click empty ground to plant a seed. Click a grown tree, then empty ground, to graft a copy.
@@ -25,14 +26,14 @@ const RADIUS = {
 	fruiting: 22,
 	senescent: 18,
 };
-const FRUIT_COLOR = { flower: "#f7b6d2", green: "#9bc53d", fallen: "#8a5a2b" };
 
 function drawTree(ctx: CanvasRenderingContext2D, tree: Tree) {
 	const r = RADIUS[tree.stage];
+	const { colors } = settings;
 	if (tree.stage === "seed") {
-		ctx.fillStyle = "#5b3a1e";
+		ctx.fillStyle = colors.seed;
 	} else {
-		ctx.fillStyle = tree.stage === "senescent" ? "#8a7a4a" : "#2f7d32";
+		ctx.fillStyle = tree.stage === "senescent" ? colors.oldLeaf : colors.leaf;
 	}
 	ctx.beginPath();
 	ctx.arc(tree.x, tree.y, r, 0, Math.PI * 2);
@@ -43,8 +44,8 @@ function drawTree(ctx: CanvasRenderingContext2D, tree: Tree) {
 		const reach = fruit.stage === "fallen" ? r + 8 : r * 0.6;
 		ctx.fillStyle =
 			fruit.stage === "ripe"
-				? CULTIVARS[tree.cultivar].ripe
-				: FRUIT_COLOR[fruit.stage];
+				? colors[tree.cultivar as keyof typeof colors]
+				: colors[fruit.stage];
 		ctx.beginPath();
 		ctx.arc(
 			tree.x + Math.cos(angle) * reach,
@@ -67,13 +68,15 @@ function draw(
 	for (const tree of farm.trees) {
 		const parent = farm.trees.find((other) => other.id === tree.parentId);
 		if (!parent) continue;
-		ctx.strokeStyle = "rgba(255, 255, 255, 0.35)";
+		ctx.globalAlpha = 0.4;
+		ctx.strokeStyle = settings.colors.link;
 		ctx.setLineDash(tree.origin === "graft" ? [4, 4] : []);
 		ctx.beginPath();
 		ctx.moveTo(parent.x, parent.y);
 		ctx.lineTo(tree.x, tree.y);
 		ctx.stroke();
 	}
+	ctx.globalAlpha = 1;
 	ctx.setLineDash([]);
 
 	for (const tree of farm.trees) drawTree(ctx, tree);
@@ -97,6 +100,17 @@ export default function MangoFarm() {
 	const [speed, setSpeed] = useState(1);
 	const [paused, setPaused] = useState(false);
 	const [info, setInfo] = useState("");
+	const [adminOpen, setAdminOpen] = useState(false);
+
+	// Press A to show or hide the admin panel.
+	useEffect(() => {
+		function onKey(event: KeyboardEvent) {
+			if (event.target instanceof HTMLInputElement) return;
+			if (event.key === "a") setAdminOpen((open) => !open);
+		}
+		window.addEventListener("keydown", onKey);
+		return () => window.removeEventListener("keydown", onKey);
+	}, []);
 
 	useEffect(() => {
 		const canvas = canvasRef.current;
@@ -154,11 +168,11 @@ export default function MangoFarm() {
 			last = now;
 			const farm = farmRef.current;
 			if (!pausedRef.current)
-				step(farm, dt * DAYS_PER_SECOND * speedRef.current);
+				step(farm, dt * settings.rules.daysPerSecond * speedRef.current);
 
 			ctx?.save();
 			ctx?.setTransform(1, 0, 0, 1, 0, 0);
-			ctx!.fillStyle = "#6b4f33";
+			ctx!.fillStyle = settings.colors.soil;
 			ctx?.fillRect(0, 0, canvas!.width, canvas!.height);
 			ctx?.restore();
 			draw(ctx!, farm, selectedRef.current);
@@ -205,9 +219,18 @@ export default function MangoFarm() {
 							{value}×
 						</button>
 					))}
+					<button onClick={() => setAdminOpen(!adminOpen)}>admin (A)</button>
 					<span>click ground: plant · click tree then ground: graft</span>
 				</div>
 			</div>
+			{adminOpen && (
+				<AdminPanel
+					onRestart={() => {
+						farmRef.current = createFarm();
+						selectedRef.current = null;
+					}}
+				/>
+			)}
 		</main>
 	);
 }

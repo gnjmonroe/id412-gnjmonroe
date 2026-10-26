@@ -1,22 +1,5 @@
 // The mango farm as plain data. No React, no canvas: page.tsx only reads this and draws it.
-import {
-	CULTIVARS,
-	FLOWER_DAYS,
-	FRUIT_PER_TREE,
-	GREEN_DAYS,
-	HARVEST_SHARE,
-	HEIGHT,
-	MIN_SPACING,
-	REST_DAYS,
-	RIPE_DAYS,
-	SEED,
-	SEED_CHANCE,
-	SEED_DISTANCE,
-	STAGE_DAYS,
-	START_TREES,
-	VIGOR_JITTER,
-	WIDTH,
-} from "./settings";
+import { CULTIVARS, HEIGHT, settings, WIDTH } from "./settings";
 
 // Life of a tree, in order. A senescent tree is removed when its time is up.
 export const STAGES = [
@@ -43,7 +26,7 @@ export type Tree = {
 	age: number; // days spent in this stage
 	origin: "start" | "seed" | "graft"; // how this tree began
 	parentId?: number;
-	cultivar: string; // a key of CULTIVARS
+	cultivar: string; // one of CULTIVARS
 	vigor: number;
 	rest: number; // days since the last fruit season
 	fruits: Fruit[];
@@ -57,7 +40,7 @@ export type Farm = {
 	random: number; // state of the random number generator
 };
 
-// Small seeded random number generator (mulberry32): the same SEED gives the same farm.
+// Small seeded random number generator (mulberry32): the same seed gives the same farm.
 function random(farm: Farm) {
 	farm.random = (farm.random + 0x6d2b79f5) | 0;
 	let t = Math.imul(farm.random ^ (farm.random >>> 15), 1 | farm.random);
@@ -68,7 +51,7 @@ function random(farm: Farm) {
 function isFree(farm: Farm, x: number, y: number) {
 	if (x < 0 || y < 0 || x > WIDTH || y > HEIGHT) return false;
 	return farm.trees.every(
-		(tree) => Math.hypot(tree.x - x, tree.y - y) >= MIN_SPACING,
+		(tree) => Math.hypot(tree.x - x, tree.y - y) >= settings.rules.minSpacing,
 	);
 }
 
@@ -82,7 +65,7 @@ function addTree(farm: Farm, x: number, y: number, fields: Partial<Tree>) {
 		origin: "seed",
 		cultivar: "Keitt",
 		vigor: 1,
-		rest: REST_DAYS,
+		rest: settings.rules.restDays,
 		fruits: [],
 		...fields,
 	};
@@ -96,12 +79,13 @@ export function createFarm(): Farm {
 		trees: [],
 		harvested: 0,
 		nextId: 1,
-		random: SEED,
+		random: settings.rules.seed,
 	};
-	const names = Object.keys(CULTIVARS);
+	const names = CULTIVARS;
 	for (
 		let i = 0;
-		i < START_TREES * 20 && farm.trees.length < START_TREES;
+		i < settings.rules.startTrees * 20 &&
+		farm.trees.length < settings.rules.startTrees;
 		i++
 	) {
 		const x = random(farm) * WIDTH;
@@ -119,9 +103,9 @@ export function createFarm(): Farm {
 // Propagation by seed: a new tree starts as a seed, with a vigor a little different from its parent.
 export function plant(farm: Farm, x: number, y: number, parent?: Tree) {
 	if (!isFree(farm, x, y)) return null;
-	const names = Object.keys(CULTIVARS);
+	const names = CULTIVARS;
 	const vigor = parent
-		? parent.vigor + (random(farm) - 0.5) * 2 * VIGOR_JITTER
+		? parent.vigor + (random(farm) - 0.5) * 2 * settings.rules.vigorJitter
 		: 1;
 	return addTree(farm, x, y, {
 		origin: "seed",
@@ -160,7 +144,10 @@ function tick(farm: Farm, dt: number) {
 	for (const tree of [...farm.trees]) {
 		growTree(tree, dt);
 		growFruits(farm, tree, dt);
-		if (tree.stage === "senescent" && tree.age >= STAGE_DAYS.senescent) {
+		if (
+			tree.stage === "senescent" &&
+			tree.age >= settings.stageDays.senescent
+		) {
 			farm.trees.splice(farm.trees.indexOf(tree), 1);
 		}
 	}
@@ -169,7 +156,7 @@ function tick(farm: Farm, dt: number) {
 function growTree(tree: Tree, dt: number) {
 	tree.age += dt * tree.vigor;
 	const next = STAGES[STAGES.indexOf(tree.stage) + 1];
-	if (next && tree.age >= STAGE_DAYS[tree.stage]) {
+	if (next && tree.age >= settings.stageDays[tree.stage]) {
 		tree.stage = next;
 		tree.age = 0;
 	}
@@ -178,9 +165,9 @@ function growTree(tree: Tree, dt: number) {
 function growFruits(farm: Farm, tree: Tree, dt: number) {
 	if (tree.stage === "fruiting" && tree.fruits.length === 0) {
 		tree.rest += dt;
-		if (tree.rest >= REST_DAYS) {
+		if (tree.rest >= settings.rules.restDays) {
 			tree.rest = 0;
-			for (let i = 0; i < FRUIT_PER_TREE; i++)
+			for (let i = 0; i < settings.rules.fruitPerTree; i++)
 				tree.fruits.push({ stage: "flower", age: 0 });
 		}
 	}
@@ -189,14 +176,20 @@ function growFruits(farm: Farm, tree: Tree, dt: number) {
 		if (tree.stage !== "fruiting" && fruit.stage !== "fallen") {
 			fruit.stage = "fallen"; // the tree is done, fruit drops
 			fruit.age = 0;
-		} else if (fruit.stage === "flower" && fruit.age >= FLOWER_DAYS) {
+		} else if (
+			fruit.stage === "flower" &&
+			fruit.age >= settings.rules.flowerDays
+		) {
 			fruit.stage = "green";
 			fruit.age = 0;
-		} else if (fruit.stage === "green" && fruit.age >= GREEN_DAYS) {
+		} else if (
+			fruit.stage === "green" &&
+			fruit.age >= settings.rules.greenDays
+		) {
 			fruit.stage = "ripe";
 			fruit.age = 0;
-		} else if (fruit.stage === "ripe" && fruit.age >= RIPE_DAYS) {
-			if (random(farm) < HARVEST_SHARE) {
+		} else if (fruit.stage === "ripe" && fruit.age >= settings.rules.ripeDays) {
+			if (random(farm) < settings.rules.harvestShare) {
 				farm.harvested++;
 				tree.fruits.splice(tree.fruits.indexOf(fruit), 1);
 			} else {
@@ -205,9 +198,11 @@ function growFruits(farm: Farm, tree: Tree, dt: number) {
 			}
 		} else if (fruit.stage === "fallen" && fruit.age >= 5) {
 			tree.fruits.splice(tree.fruits.indexOf(fruit), 1);
-			if (random(farm) < SEED_CHANCE) {
+			if (random(farm) < settings.rules.seedChance) {
 				const angle = random(farm) * Math.PI * 2;
-				const distance = MIN_SPACING + random(farm) * SEED_DISTANCE;
+				const distance =
+					settings.rules.minSpacing +
+					random(farm) * settings.rules.seedDistance;
 				plant(
 					farm,
 					tree.x + Math.cos(angle) * distance,
